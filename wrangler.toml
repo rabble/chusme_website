@@ -1,0 +1,21 @@
+name = "invite-gateway"
+main = "src/index.ts"
+compatibility_date = "2024-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare account details
+account_id = "c84e7a9bf7ed99cb41b8e73566568c75"
+# zone_id will be determined from routes
+
+# Bind KV namespace
+kv_namespaces = [
+  { binding = "INVITES", id = "57a39408dd6e4fbc91ae423b82293f43" }
+]
+
+# Routes (adjust as needed)
+routes = [
+  "rabble.community/*"
+]
+
+# Secrets (set via Wrangler or CF dashboard)
+# env.INVITE_TOKEN is your shared secret for creating invites 
