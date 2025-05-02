@@ -173,21 +173,21 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
   ${avatarUrl ? `<meta property="og:image" content="${avatarUrl}">` : ''}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700;800&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #55407B;
-      --secondary: #FFF8F7;
-      --accent: #E3D8F5;
-      --highlight: #FFF8F7;
-      --surface: #FFFFFF;
-      --surface-alt: #F8F6FD;
-      --text-primary: #1A1A1A;
-      --text-secondary: #666666;
-      --font-family: 'Inter', sans-serif;
+      --primary: #000000;
+      --secondary: #F5F1E9;
+      --accent: #5E452A;
+      --highlight: #FFFDF7;
+      --surface: #F9F6F0;
+      --surface-alt: #EDEAE0;
+      --text-primary: #000000;
+      --text-secondary: #3D3D3D;
+      --font-family: 'Alegreya', 'Crimson Pro', 'Georgia', serif;
       --spacing: 8px;
-      --radius: 16px;
-      --shadow: 0 4px 20px rgba(85, 64, 123, 0.08);
+      --radius: 0px;
+      --shadow: none;
     }
     
     * {
@@ -201,6 +201,7 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
       color: var(--text-primary);
       line-height: 1.6;
       background-color: var(--surface);
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%235e452a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
       display: flex;
       flex-direction: column;
       min-height: 100vh;
@@ -210,6 +211,7 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
       background-color: var(--primary);
       color: white;
       padding: 1rem 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
     
     .container {
@@ -219,10 +221,21 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
     }
     
     .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 1.75rem;
+      font-weight: 800;
       color: white;
       text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo::before {
+      content: "✊";
+      display: inline-block;
+      font-size: 1.75rem;
+      margin-right: 0.75rem;
     }
     
     .content {
@@ -233,12 +246,11 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
     }
     
     .invite-card {
-      background-color: white;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      background-color: var(--surface);
       padding: 2rem;
       text-align: center;
       width: 100%;
+      border: 3px solid var(--primary);
     }
     
     .group-info {
@@ -246,36 +258,42 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
     }
     
     .group-avatar {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
+      width: 100px;
+      height: 100px;
       background-color: var(--primary);
-      margin: 0 auto 1rem;
+      margin: 0 auto 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 2.5rem;
+      font-weight: 800;
       background-size: cover;
       background-position: center;
+      border: 3px solid var(--primary);
     }
     
     .description {
       max-width: 400px;
       margin: 0 auto;
-      font-size: 0.9rem;
+      font-size: 1.125rem;
       color: var(--text-secondary);
+      line-height: 1.7;
     }
     
     h1 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
     }
     
     p {
       margin-bottom: 1.5rem;
       color: var(--text-secondary);
+      font-size: 1.125rem;
     }
     
     .button-primary {
@@ -284,51 +302,68 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
       color: white;
       text-decoration: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
+      border: 2px solid var(--primary);
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       margin-bottom: 1rem;
       width: 100%;
       transition: background-color 0.2s;
     }
     
     .button-primary:hover {
-      background-color: #473569;
+      background-color: transparent;
+      color: var(--primary);
     }
     
     .button-secondary {
       display: inline-block;
-      background-color: white;
+      background-color: transparent;
       color: var(--primary);
       text-decoration: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      border: 1px solid var(--primary);
+      border: 2px solid var(--primary);
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       margin-bottom: 1rem;
       width: 100%;
       transition: background-color 0.2s;
     }
     
     .button-secondary:hover {
-      background-color: var(--surface-alt);
+      background-color: var(--primary);
+      color: white;
     }
     
     .footer {
-      background-color: #2C2141;
+      background-color: var(--primary);
       color: white;
       padding: 2rem 0;
-      font-size: 0.875rem;
+      font-size: 1rem;
       text-align: center;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
     
     .footer a {
       color: white;
-      opacity: 0.8;
       text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s;
     }
     
     .footer a:hover {
-      opacity: 1;
+      border-bottom: 1px solid rgba(255,255,255,1);
+    }
+    
+    /* Woodcut style decorative divider */
+    .woodcut-divider {
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6 L40 6 M3 3 L3 9 M8 2 L8 10 M13 1 L13 11 M18 2 L18 10 M23 3 L23 9 M28 2 L28 10 M33 1 L33 11 M38 3 L38 9' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      margin: 1.5rem 0;
     }
     
     small {
@@ -362,8 +397,10 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
           ${invite.description ? `<p class="description">${invite.description}</p>` : ''}
         </div>
         
+        <div class="woodcut-divider"></div>
+        
         <a href="plur://join-community?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-primary" id="open-app">Open in Plur App</a>
-        <a href="https://play.google.com/store/apps/details?id=app.verse.prototype.plur" class="button-secondary" id="get-android">Get on Android</a>
+        <a href="https://play.google.com/store/apps/details?id=app.rabble.community" class="button-secondary" id="get-android">Get on Android</a>
         <a href="https://apps.apple.com/app/plur/id1234567890" class="button-secondary" id="get-ios">Get on iOS</a>
         <a href="/app?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-secondary" id="open-web">Continue in Browser</a>
         
@@ -374,7 +411,7 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
   
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Verse PBC · All rights reserved</p>
+      <p>&copy; 2025 rabble.community · All rights reserved</p>
     </div>
   </footer>
   

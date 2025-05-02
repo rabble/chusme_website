@@ -117,7 +117,7 @@ After deployment:
 The invite gateway now serves multiple website pages:
 
 1. **Landing Page**: `/` - Main site landing page
-2. **About Page**: `/about` - Information about Rabble and Verse PBC
+2. **About Page**: `/about` - Information about Rabble.community
 3. **Design Principles**: `/design-principles` - Product design principles and non-negotiables
 4. **FAQ**: `/faq` - Frequently asked questions
 5. **Roadmap**: `/roadmap` - Product roadmap

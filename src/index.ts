@@ -133,7 +133,7 @@ const STATIC_FILES: Record<string, { content: string; contentType: string }> = {
       relation: ['delegate_permission/common.handle_all_urls'],
       target: {
         namespace: 'android_app',
-        package_name: 'app.verse.prototype.plur',
+        package_name: 'app.rabble.community',
         sha256_cert_fingerprints: ['YOUR_APP_FINGERPRINT_HERE']
       }
     }]),
@@ -144,14 +144,14 @@ const STATIC_FILES: Record<string, { content: string; contentType: string }> = {
       applinks: {
         apps: [],
         details: [{
-          appID: 'GZCZBKH7MY.app.verse.prototype.plur',
+          appID: 'GZCZBKH7MY.app.rabble.community',
           paths: [
             '/i/*', 
             '/join/*', 
             '/join-community*',
             '/g/*'
           ],
-          appIDs: ['GZCZBKH7MY.app.verse.prototype.plur'],
+          appIDs: ['GZCZBKH7MY.app.rabble.community'],
           components: [
             {
               "/": "/i/*",
@@ -173,7 +173,7 @@ const STATIC_FILES: Record<string, { content: string; contentType: string }> = {
         }]
       },
       webcredentials: {
-        apps: ["GZCZBKH7MY.app.verse.prototype.plur"]
+        apps: ["GZCZBKH7MY.app.rabble.community"]
       }
     }),
     contentType: 'application/json'
@@ -183,23 +183,23 @@ const STATIC_FILES: Record<string, { content: string; contentType: string }> = {
 // Design tokens and CSS variables
 const DESIGN_TOKENS = {
   colors: {
-    primary: "#55407B",      // Soft purple (main brand color)
-    secondary: "#FFF8F7",    // Light pink-ish background
-    accent: "#E3D8F5",       // Lavender accent
-    highlight: "#FFF8F7",    // Soft highlight
-    surface: "#FFFFFF",      // White surface
-    surfaceAlt: "#F8F6FD",   // Very light purple background
-    textPrimary: "#1A1A1A",  // Dark text
-    textSecondary: "#666666" // Medium gray text
+    primary: "#000000",      // Black (main color for woodcut style)
+    secondary: "#F5F1E9",    // Off-white paper texture background
+    accent: "#5E452A",       // Wood brown accent
+    highlight: "#FFFDF7",    // Cream highlight
+    surface: "#F9F6F0",      // Natural paper surface
+    surfaceAlt: "#EDEAE0",   // Slightly darker paper background
+    textPrimary: "#000000",  // Black text
+    textSecondary: "#3D3D3D" // Dark gray text
   },
   typography: {
-    fontFamily: "'Clarity City', 'Inter', sans-serif", 
-    h1: { size: 48, weight: 700, lineHeight: 58 },
-    body: { size: 16, weight: 400, lineHeight: 26 }
+    fontFamily: "'Alegreya', 'Crimson Pro', 'Georgia', serif", 
+    h1: { size: 48, weight: 800, lineHeight: 58 },
+    body: { size: 18, weight: 400, lineHeight: 28 }
   },
   spacing: 8,
-  radius: 16,
-  shadow: "0 4px 20px rgba(85, 64, 123, 0.08)"
+  radius: 0,                // Sharp edges for woodcut style
+  shadow: "none"            // No shadows for a flatter woodcut look
 };
 
 // Create a page layout with the provided content
@@ -218,7 +218,8 @@ function createPage(title: string, description: string, content: string, image?:
   <meta property="og:site_name" content="Rabble Community">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700;800&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <style>
     :root {
       --primary: ${DESIGN_TOKENS.colors.primary};
@@ -246,13 +247,14 @@ function createPage(title: string, description: string, content: string, image?:
       color: var(--text-primary);
       line-height: 1.6;
       background-color: var(--surface);
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%235e452a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
     }
     
     .header {
-      background-color: #FFFFFF;
+      background-color: var(--surface);
       color: var(--text-primary);
       padding: 1.25rem 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-bottom: 2px solid var(--primary);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -278,22 +280,21 @@ function createPage(title: string, description: string, content: string, image?:
     }
     
     .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 1.75rem;
+      font-weight: 800;
       color: var(--primary);
       text-decoration: none;
       display: flex;
       align-items: center;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     .logo::before {
-      content: "";
+      content: "✊";
       display: inline-block;
-      width: 1.75rem;
-      height: 1.75rem;
-      background: var(--primary);
-      border-radius: 50%;
-      margin-right: 0.5rem;
+      font-size: 1.75rem;
+      margin-right: 0.75rem;
     }
     
     .nav-links {
@@ -308,7 +309,17 @@ function createPage(title: string, description: string, content: string, image?:
     .nav-links a {
       color: var(--primary);
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding-bottom: 3px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    
+    .nav-links a:hover {
+      border-bottom: 2px solid var(--primary);
     }
     
     .button-primary {
@@ -317,28 +328,36 @@ function createPage(title: string, description: string, content: string, image?:
       color: white;
       text-decoration: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: opacity 0.2s;
+      border: 2px solid var(--primary);
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.2s;
     }
     
     .button-primary:hover {
-      opacity: 0.9;
+      background-color: transparent;
+      color: var(--primary);
     }
     
     .button-secondary {
       display: inline-block;
-      background-color: var(--accent);
+      background-color: transparent;
       color: var(--primary);
       text-decoration: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: opacity 0.2s;
+      border: 2px solid var(--primary);
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background-color 0.2s;
     }
     
     .button-secondary:hover {
-      opacity: 0.9;
+      background-color: var(--primary);
+      color: white;
     }
     
     .hero {
@@ -346,20 +365,55 @@ function createPage(title: string, description: string, content: string, image?:
       color: white;
       padding: 5rem 0;
       text-align: center;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
     
     .hero h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       margin-bottom: 1.5rem;
       line-height: 1.2;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
     }
     
     .hero p {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
       margin-left: auto;
       margin-right: auto;
+      line-height: 1.5;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    /* Special styling for buttons in hero section */
+    .hero .button-primary {
+      background-color: white;
+      color: var(--primary);
+      border-color: white;
+    }
+    
+    .hero .button-primary:hover {
+      background-color: transparent;
+      color: white;
+    }
+    
+    .hero .button-secondary {
+      border-color: white;
+      color: white;
+    }
+    
+    .hero .button-secondary:hover {
+      background-color: white;
+      color: var(--primary);
     }
     
     .content {
@@ -367,42 +421,273 @@ function createPage(title: string, description: string, content: string, image?:
     }
     
     .content h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-size: 2.25rem;
+      margin-bottom: 1.5rem;
       color: var(--primary);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 3px solid var(--primary);
+      display: inline-block;
+      padding-bottom: 0.5rem;
     }
     
     .content p {
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
+      font-size: 1.125rem;
+      line-height: 1.7;
     }
     
     .content ul {
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
+      margin-bottom: 2rem;
+      padding-left: 1.25rem;
+      list-style-type: none;
     }
     
     .content li {
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
+      font-size: 1.125rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .content li::before {
+      content: "✊";
+      position: absolute;
+      left: 0;
+      top: 0;
     }
     
     .footer {
-      background-color: var(--surfaceAlt);
+      background-color: var(--primary);
       padding: 3rem 0;
-      color: var(--textSecondary);
+      color: white;
       text-align: center;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
     
     .footer p {
       margin-bottom: 1rem;
+      font-size: 1rem;
     }
     
     .footer a {
-      color: var(--primary);
+      color: white;
       text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s;
     }
     
     .footer a:hover {
-      text-decoration: underline;
+      border-bottom: 1px solid rgba(255,255,255,1);
+    }
+    
+    /* Woodcut style decorative elements */
+    .woodcut-divider {
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6 L40 6 M3 3 L3 9 M8 2 L8 10 M13 1 L13 11 M18 2 L18 10 M23 3 L23 9 M28 2 L28 10 M33 1 L33 11 M38 3 L38 9' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      margin: 2rem 0;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .feature-item {
+      padding: 1.5rem;
+      border: 2px solid var(--primary);
+      background-color: var(--surface);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .feature-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+    
+    .feature-item p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-image {
+      margin-top: auto;
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .screenshot {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid var(--primary);
+      box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+      max-height: 400px;
+    }
+    
+    .feature-highlight {
+      margin: 3rem 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2rem;
+      border: 2px solid var(--primary);
+      background-color: var(--surface);
+    }
+    
+    .feature-highlight-text h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+      padding-bottom: 0.5rem;
+    }
+    
+    .feature-highlight-image {
+      text-align: center;
+    }
+    
+    .screenshot-large {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid var(--primary);
+      box-shadow: 5px 5px 0 rgba(0,0,0,0.2);
+    }
+    
+    /* Open Source banner */
+    .open-source-banner {
+      margin: 2.5rem 0;
+      padding: 2rem;
+      border: 3px solid var(--primary);
+      background-color: var(--surface);
+      position: relative;
+      box-shadow: 7px 7px 0 rgba(0,0,0,0.1);
+    }
+    
+    .open-source-banner:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0L10 10L20 0L10 20Z' fill='%235e452a' fill-opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    
+    .open-source-banner h3 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 0.5rem;
+    }
+    
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.125rem;
+    }
+    
+    .github-button i {
+      font-size: 1.5rem;
+    }
+    
+    /* Manifesto quote */
+    .manifesto {
+      font-size: 1.5rem;
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.5;
+      margin: 2rem 0;
+      padding: 1.5rem 2rem;
+      border-left: 5px solid var(--accent);
+      background-color: var(--surface);
+      position: relative;
+    }
+    
+    .manifesto:before {
+      content: """;
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      font-size: 5rem;
+      font-family: Georgia, serif;
+      color: var(--accent);
+      opacity: 0.3;
+      line-height: 1;
+    }
+    
+    @media (max-width: 768px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .feature-highlight {
+        grid-template-columns: 1fr;
+      }
+      
+      .feature-highlight-text {
+        order: 1;
+      }
+      
+      .feature-highlight-image {
+        order: 2;
+      }
+    }
+    
+    /* Notification form styles */
+    .notification-form {
+      max-width: 600px;
+      margin: 2rem 0;
+      padding: 2rem;
+      border: 2px solid var(--primary);
+      background-color: var(--surface);
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      font-family: var(--font-family);
+      font-size: 1rem;
+      border: 2px solid var(--primary);
+      background-color: var(--highlight);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+      background-color: white;
     }
     
     /* Responsive adjustments */
@@ -412,11 +697,11 @@ function createPage(title: string, description: string, content: string, image?:
       }
       
       .hero h1 {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
       }
       
       .hero p {
-        font-size: 1.125rem;
+        font-size: 1.25rem;
       }
       
       .nav-links {
@@ -431,9 +716,9 @@ function createPage(title: string, description: string, content: string, image?:
       <nav class="nav">
         <a href="/" class="logo">Rabble</a>
         <ul class="nav-links">
-          <li><a href="/blog">Blog</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/community">Community</a></li>
+          <li><a href="https://app.rabble.community" target="_blank">Open App</a></li>
         </ul>
       </nav>
     </div>
@@ -449,7 +734,7 @@ function createPage(title: string, description: string, content: string, image?:
   
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Verse PBC · All rights reserved</p>
+      <p>&copy; 2025 rabble.community · All rights reserved</p>
       <p>
         <a href="/terms">Terms</a> · 
         <a href="/privacy">Privacy</a> · 
@@ -493,9 +778,156 @@ export default {
       });
     }
     
+    // Handle local assets in development mode
+    if (path.startsWith('/local-assets/')) {
+      const fileName = path.split('/').pop() || '';
+      const localPath = `static/assets/${fileName}`;
+      
+      // This part will only work if you add binary content handling to your worker
+      // It's just a placeholder for now - in reality, you'd need to use Blob, ArrayBuffer,
+      // or a streaming approach to serve the binary files
+      return new Response(`Local static file would be served from: ${localPath}`, {
+        headers: {
+          'Content-Type': 'text/plain',
+          'Cache-Control': 'no-cache'
+        }
+      });
+    }
+    
     // Handle static asset paths
-    if (path.startsWith('/assets/') || path.startsWith('/static/')) {
-      return new Response("Not found", { status: 404 });
+    if (path.startsWith('/static/assets/')) {
+      const fileName = path.split('/').pop() || '';
+      
+      // Map for real PNG images in Cloudflare Images
+      // Format: fileName -> Cloudflare Image ID
+      const cloudflareImagesMap: Record<string, string> = {
+        // Use the image IDs for the files actually referenced in the HTML
+        // Map our actual uploaded images to the filenames used in HTML
+        'community-focused.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00', // Reusing asks_offers image
+        'user-control.png': '0de45bbc-c804-4ef1-9a5b-df668a4a1e00',     // Reusing chat image
+        'privacy-first.png': 'c14148d3-18eb-44a9-133b-48f883ad3500',     // Reusing events image
+        'not-entertainment.png': '2857264c-f538-492a-c0a3-657012ecb000', // Reusing posting_event image
+        'not-product.png': '510cc54c-cd4a-40b2-bce3-effb502d2000',       // Reusing posts image
+        'authentic-connections.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00', // Reusing asks_offers image again
+        
+        // Keep the original mappings too in case they're needed elsewhere
+        'asks_offers.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00',
+        'chat.png': '0de45bbc-c804-4ef1-9a5b-df668a4a1e00',
+        'events.png': 'c14148d3-18eb-44a9-133b-48f883ad3500',
+        'posting_event.png': '2857264c-f538-492a-c0a3-657012ecb000',
+        'posts.png': '510cc54c-cd4a-40b2-bce3-effb502d2000'
+      };
+      
+      // If we have a Cloudflare Image for this file, redirect to it
+      if (cloudflareImagesMap[fileName]) {
+        // Check if running in production (simple check - not foolproof)
+        const isProduction = !request.url.includes('localhost');
+        
+        if (isProduction) {
+          const accountHash = 'U9c1NKydsjSHWVgWsUp4Yg'; // Your Cloudflare account hash
+          const imageId = cloudflareImagesMap[fileName];
+          const imageVariant = 'public'; // Default variant
+          
+          return Response.redirect(`https://imagedelivery.net/${accountHash}/${imageId}/${imageVariant}`, 302);
+        } else {
+          // In local development, try to serve the local file
+          try {
+            // Redirect to static file handler on the same server
+            return Response.redirect(`/local-assets/${fileName}`, 302);
+          } catch (error) {
+            console.error(`Error serving local file ${fileName}:`, error);
+            // Fall through to SVG placeholder
+          }
+        }
+      }
+      
+      // For files that don't have real images, use SVG placeholders
+      // Create stylish SVG placeholders
+      const baseBgColor = '#5d4037'; // Brown base color from the rabble.community palette
+      
+      // Determine appropriate icon and accent color based on image name
+      let icon = '◆';
+      let mainColor = baseBgColor;
+      
+      if (fileName.includes('posts')) {
+        icon = '📱';
+        mainColor = '#7856FF';
+      } else if (fileName.includes('chat')) {
+        icon = '💬';
+        mainColor = '#00A3FF';
+      } else if (fileName.includes('asks') || fileName.includes('offers')) {
+        icon = '🤝';
+        mainColor = '#FF9500';
+      } else if (fileName.includes('events')) {
+        icon = '📅';
+        mainColor = '#00C781';
+      } else if (fileName.includes('community')) {
+        icon = '👥';
+        mainColor = '#8d6e63';
+      } else if (fileName.includes('user-control')) {
+        icon = '🛡️';
+        mainColor = '#3e2723';
+      } else if (fileName.includes('privacy')) {
+        icon = '🔒';
+        mainColor = '#5d4037';
+      } else if (fileName.includes('authentic')) {
+        icon = '✨';
+        mainColor = '#8d6e63';
+      } else if (fileName.includes('not-entertainment')) {
+        icon = '🎯';
+        mainColor = '#3e2723';
+      } else if (fileName.includes('not-product')) {
+        icon = '👤';
+        mainColor = '#5d4037';
+      } else if (fileName.includes('posting')) {
+        icon = '✏️';
+        mainColor = '#8d6e63';
+      }
+      
+      // Create an aesthetically pleasing SVG that fits the rabble.community design theme
+      const svgPlaceholder = `<svg width="300" height="500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="pattern-wood" patternUnits="userSpaceOnUse" width="100" height="100" patternTransform="scale(0.5)">
+            <rect width="100%" height="100%" fill="${mainColor}" opacity="0.05"/>
+            <path d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z" fill="${mainColor}" opacity="0.2"/>
+          </pattern>
+        </defs>
+        
+        <!-- Background with wood-inspired pattern -->
+        <rect width="100%" height="100%" fill="url(#pattern-wood)" />
+        
+        <!-- Header bar -->
+        <rect width="100%" height="60" fill="${mainColor}" />
+        
+        <!-- Main content area with feature title -->
+        <rect x="50" y="100" width="200" height="200" fill="${mainColor}" opacity="0.1" rx="8" ry="8" />
+        
+        <!-- Feature icon -->
+        <text x="150" y="180" font-family="Arial" font-size="72" text-anchor="middle" dominant-baseline="middle">
+          ${icon}
+        </text>
+        
+        <!-- Feature name -->
+        <text x="150" y="300" font-family="Arial" font-size="18" font-weight="bold" fill="${mainColor}" text-anchor="middle">
+          ${fileName.replace(/[-_]/g, ' ').replace('.png', '').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+        </text>
+        
+        <!-- Woodcut-style decorative elements -->
+        <path d="M20 350 L280 350" stroke="${mainColor}" stroke-width="2" />
+        <path d="M50 370 L250 370" stroke="${mainColor}" stroke-width="1.5" />
+        
+        <!-- Footer with app name -->
+        <text x="150" y="450" font-family="Arial" font-size="14" fill="${mainColor}" text-anchor="middle">
+          rabble.community
+        </text>
+      </svg>`;
+      
+      return new Response(svgPlaceholder, {
+        headers: {
+          'Content-Type': 'image/svg+xml',
+          'Cache-Control': 'public, max-age=3600' // 1 hour cache for placeholders
+        }
+      });
     }
     
     // API endpoints
@@ -733,43 +1165,458 @@ export default {
     
     // Handle home page and other static content
     if (path === '/' || path === '/index.html') {
-      const homepageContent = `
-        <div class="hero">
-          <div class="hero-container">
-            <h1>Private spaces for your community</h1>
-            <p>Rabble helps you create private, ad-free spaces where you set the rules.</p>
-            <a href="#download" class="button-primary">Get Started</a>
-          </div>
-        </div>
+      // Use the content directly from index.html
+      return new Response(`<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rabble.community - A Community App Built on Open Protocol</title>
+    <style>
+        :root {
+            --primary-color: #5d4037;
+            --secondary-color: #3e2723;
+            --accent-color: #8d6e63;
+            --text-color: #3e2723;
+            --light-bg: #efebe9;
+            --dark-bg: #3e2723;
+        }
         
-        <div class="content">
-          <div class="container">
-            <h2>About Rabble</h2>
-            <p>Rabble is a simple, privacy-focused platform for community conversations.</p>
-            <ul>
-              <li>Create private groups for your community</li>
-              <li>Share invite links with friends and colleagues</li>
-              <li>No ads, no tracking, no algorithms</li>
-              <li>You own your data</li>
-            </ul>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            position: relative;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            position: relative;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--accent-color),
+                var(--accent-color) 15px,
+                transparent 15px,
+                transparent 30px
+            );
+        }
+        
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 2px solid var(--secondary-color);
+            border-radius: 0;
+            padding: 2rem;
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Remove the diagonal line pattern to make images clearer */
+            background: none;
+            pointer-events: none;
+        }
+        
+        .feature-image {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--secondary-color);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .bill-of-rights {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+            border-top: 3px solid var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .bill-of-rights::before, .bill-of-rights::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background-image: 
+                linear-gradient(45deg, var(--accent-color) 25%, transparent 25%),
+                linear-gradient(-45deg, var(--accent-color) 25%, transparent 25%);
+            background-size: 20px 20px;
+        }
+        
+        .bill-of-rights::before {
+            top: -15px;
+        }
+        
+        .bill-of-rights::after {
+            bottom: -15px;
+        }
+        
+        .rights-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .rights-list li {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .rights-list li:before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1.2em;
+        }
+        
+        .mission-section {
+            background-color: var(--light-bg);
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .mission-statement {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        
+        .cta {
+            background: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 5px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--accent-color),
+                var(--accent-color) 15px,
+                transparent 15px,
+                transparent 30px
+            );
+        }
+        
+        .cta h2 {
+            color: white;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: 2px solid white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background-color: white;
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
             
-            <h2 id="download">Download Rabble</h2>
-            <p>Rabble is available on iOS and Android.</p>
-            <p>
-              <a href="https://apps.apple.com/app/plur/id1234567890" class="button-primary">Download for iOS</a>
-              <a href="https://play.google.com/store/apps/details?id=app.verse.prototype.plur" class="button-secondary" style="margin-left: 1rem;">Download for Android</a>
-            </p>
-          </div>
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                margin-bottom: 2rem;
+            }
+            
+            header::after, .cta::before, .bill-of-rights::before, .bill-of-rights::after {
+                background-size: 15px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>rabble.community</h1>
+            <p>Signal for Facebook Groups</p>
+            <a href="https://app.rabble.community" style="display: inline-block; margin-top: 15px; background-color: white; color: var(--secondary-color); padding: 8px 20px; text-decoration: none; font-weight: bold; border: none;">Launch Rabble App</a>
         </div>
-      `;
-      
-      const html = createPage(
-        "Rabble Community",
-        "Private, ad-free spaces where you set the rules.",
-        homepageContent
-      );
-      
-      return new Response(html, {
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Authentic Communities Built on Care and Connection</h1>
+            <p>rabble.community is a communities app being built on the open Nostr protocol, putting users in control of their online social experience.</p>
+            <div style="margin-top: 30px;">
+                <a href="https://app.rabble.community" style="display: inline-block; background-color: var(--accent-color); color: white; padding: 12px 25px; font-size: 1.2rem; text-decoration: none; font-weight: bold; border: 2px solid var(--accent-color);">Try Rabble Now</a>
+                <p style="margin-top: 10px; font-size: 0.9rem;">Web app available now. iOS and Android apps coming soon.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="mission-section">
+        <div class="container">
+            <h2>Our Mission</h2>
+            <p class="mission-statement">Our mission is to enable authentic, online communities built on care, connection, and sustainable relationships.</p>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2>Why Rabble?</h2>
+            <p>We believe in a future where communities everywhere are empowered to organize and create positive social change. Following the successful launch of Nos and Planetary apps on the Nostr protocol, we're now focusing on the needs of communities and groups looking for alternatives to Facebook Groups, WhatsApp, and Slack.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <img src="static/assets/community-focused.png" alt="Community-Focused" class="feature-image">
+                    <h3>Community-Focused</h3>
+                    <p>rabble.community is a social app, not a social media app. We focus on active engagement with other people versus passive consumption of content.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <img src="static/assets/user-control.png" alt="User Control" class="feature-image">
+                    <h3>User Control</h3>
+                    <p>You own your followers and can interact with them in any app on the protocol. You decide what content you see and from whom.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <img src="static/assets/privacy-first.png" alt="Privacy First" class="feature-image">
+                    <h3>Privacy First</h3>
+                    <p>Think Signal-like privacy for community groups. Your social online experiences should leave you feeling fulfilled and positive.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section style="background-color: #f9f6f0; padding: 4rem 0;">
+        <div class="container">
+            <h2>Community Features</h2>
+            <p style="text-align: center; margin-bottom: 3rem;">Rabble provides comprehensive tools for communities to connect, coordinate, and collaborate:</p>
+            
+            <div class="feature-highlight" style="margin-bottom: 3rem;">
+                <div class="feature-highlight-text">
+                    <h3>Social Posts</h3>
+                    <p>Share updates, articles, and media with your community through familiar social media style posts and discussions.</p>
+                </div>
+                <div class="feature-highlight-image">
+                    <img src="static/assets/posts.png" alt="Rabble posts interface" class="screenshot-large">
+                </div>
+            </div>
+            
+            <div class="feature-highlight" style="margin-bottom: 3rem;">
+                <div class="feature-highlight-image">
+                    <img src="static/assets/chat.png" alt="Rabble chat interface" class="screenshot-large">
+                </div>
+                <div class="feature-highlight-text">
+                    <h3>Threaded Chat</h3>
+                    <p>Engage in real-time conversations with organized threading to keep discussions focused and accessible.</p>
+                </div>
+            </div>
+            
+            <div class="feature-highlight" style="margin-bottom: 3rem;">
+                <div class="feature-highlight-text">
+                    <h3>Asks & Offers</h3>
+                    <p>Request help or offer support to meet your community's needs—from rides to protests to sharing resources.</p>
+                </div>
+                <div class="feature-highlight-image">
+                    <img src="static/assets/asks_offers.png" alt="Rabble asks and offers interface" class="screenshot-large">
+                </div>
+            </div>
+            
+            <div class="feature-highlight" style="margin-bottom: 3rem;">
+                <div class="feature-highlight-image">
+                    <img src="static/assets/events.png" alt="Rabble events interface" class="screenshot-large">
+                </div>
+                <div class="feature-highlight-text">
+                    <h3>Community Events</h3>
+                    <p>Organize, promote, and coordinate events with integrated RSVP and reminder functionality.</p>
+                </div>
+            </div>
+            
+            <div class="feature-highlight">
+                <div class="feature-highlight-text">
+                    <h3>Easily Create Content</h3>
+                    <p>Rabble makes it simple to create events, posts, and other content to share with your community.</p>
+                </div>
+                <div class="feature-highlight-image">
+                    <img src="static/assets/posting_event.png" alt="Creating an event in Rabble" class="screenshot-large">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="bill-of-rights">
+        <div class="container">
+            <h2>A Bill of Rights for Social Media</h2>
+            <ul class="rights-list">
+                <li><strong>The right to privacy and security</strong> - End-to-end encryption and granular privacy settings</li>
+                <li><strong>The right to own and control your identity</strong> - Decentralized identity ownership, handles, and profile portability</li>
+                <li><strong>The right to choose and understand algorithms</strong> - Algorithm control panel, multiple feed views</li>
+                <li><strong>The right to community self-governance</strong> - Community-led governance, fair and transparent moderation tools</li>
+                <li><strong>The right to full portability</strong> - Permissionless and open protocol, export options, interoperability</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2>Our Approach</h2>
+            <p>We use an open, decentralized protocol - Nostr - to put users in control of their online social experience, feed, and personal communities. We're eliminating the ad-driven model—which is predicated on likes and engagement—and instead put users in control of what they see, and from whom.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <img src="static/assets/not-entertainment.png" alt="Not Entertainment" class="feature-image">
+                    <h3>Not a Source of Entertainment</h3>
+                    <p>There are many other options for entertainment. We are focused on being 'pro social' and fostering authentic community.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <img src="static/assets/not-product.png" alt="Not the Product" class="feature-image">
+                    <h3>You Are Not the Product</h3>
+                    <p>The flow of communications is decentralized and not controlled by a corporation. Our business model is designed to put your interests first.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <img src="static/assets/authentic-connections.png" alt="Authentic Connections" class="feature-image">
+                    <h3>Authentic Connections</h3>
+                    <p>rabble.community leaves behind the negative impacts of social media (loneliness, toxic content, FOMO) and instead offers the benefits of positive connections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2>Join Us in Building a Better Social Experience</h2>
+            <p>rabble.community is available now! We're working to create a platform where communities, not corporations, hold the power over online communication.</p>
+            <a href="https://app.rabble.community" class="btn">Use Rabble Now</a>
+            <p style="margin-top: 20px; font-size: 1.1rem;">Access the web app at <a href="https://app.rabble.community" style="color: white; text-decoration: underline;">app.rabble.community</a> — iOS and Android apps coming soon!</p>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 rabble.community. All rights reserved.</p>
+            <p>Built on the open Nostr protocol.</p>
+        </div>
+    </footer>
+</body>
+</html>`, {
         headers: { 'Content-Type': 'text/html' }
       });
     }
