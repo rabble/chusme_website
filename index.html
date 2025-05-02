@@ -6,12 +6,12 @@
     <title>Plur - A Community App Built on Open Protocol</title>
     <style>
         :root {
-            --primary-color: #6a5acd;
-            --secondary-color: #4b0082;
-            --accent-color: #9370db;
-            --text-color: #333;
-            --light-bg: #f8f9fa;
-            --dark-bg: #343a40;
+            --primary-color: #5d4037;
+            --secondary-color: #3e2723;
+            --accent-color: #8d6e63;
+            --text-color: #3e2723;
+            --light-bg: #efebe9;
+            --dark-bg: #3e2723;
         }
         
         * {
@@ -21,10 +21,15 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--light-bg);
+            background-image: url('woodcut-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+            position: relative;
         }
         
         .container {
@@ -35,10 +40,28 @@
         }
         
         header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--secondary-color);
             color: white;
             padding: 2rem 0;
             text-align: center;
+            border-bottom: 5px solid var(--accent-color);
+            position: relative;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--accent-color),
+                var(--accent-color) 15px,
+                transparent 15px,
+                transparent 30px
+            );
         }
         
         .hero {
@@ -91,15 +114,36 @@
         }
         
         .feature-card {
-            background-color: white;
-            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 2px solid var(--secondary-color);
+            border-radius: 0;
             padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(93, 64, 55, 0.05),
+                rgba(93, 64, 55, 0.05) 2px,
+                transparent 2px,
+                transparent 8px
+            );
+            pointer-events: none;
         }
         
         .feature-card h3 {
@@ -110,6 +154,29 @@
             background-color: var(--dark-bg);
             color: white;
             padding: 3rem 0;
+            position: relative;
+            border-top: 3px solid var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+        }
+        
+        .bill-of-rights::before, .bill-of-rights::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background-image: 
+                linear-gradient(45deg, var(--accent-color) 25%, transparent 25%),
+                linear-gradient(-45deg, var(--accent-color) 25%, transparent 25%);
+            background-size: 20px 20px;
+        }
+        
+        .bill-of-rights::before {
+            top: -15px;
+        }
+        
+        .bill-of-rights::after {
+            bottom: -15px;
         }
         
         .rights-list {
@@ -124,10 +191,11 @@
         }
         
         .rights-list li:before {
-            content: "✓";
+            content: "★";
             position: absolute;
             left: 0;
             color: var(--accent-color);
+            font-size: 1.2em;
         }
         
         .mission-section {
@@ -144,10 +212,28 @@
         }
         
         .cta {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: var(--secondary-color);
             color: white;
             text-align: center;
             padding: 4rem 0;
+            border-top: 5px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .cta::before {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--accent-color),
+                var(--accent-color) 15px,
+                transparent 15px,
+                transparent 30px
+            );
         }
         
         .cta h2 {
@@ -156,20 +242,23 @@
         
         .btn {
             display: inline-block;
-            background-color: white;
-            color: var(--primary-color);
+            background-color: var(--accent-color);
+            color: white;
             padding: 0.8rem 2rem;
-            border-radius: 30px;
+            border: 2px solid white;
             text-decoration: none;
             font-weight: bold;
             margin-top: 1.5rem;
             transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
         }
         
         .btn:hover {
-            background-color: var(--accent-color);
-            color: white;
-            transform: scale(1.05);
+            background-color: white;
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
         }
         
         footer {
@@ -190,6 +279,14 @@
             
             .features {
                 grid-template-columns: 1fr;
+            }
+            
+            .feature-card {
+                margin-bottom: 2rem;
+            }
+            
+            header::after, .cta::before, .bill-of-rights::before, .bill-of-rights::after {
+                background-size: 15px 15px;
             }
         }
     </style>
