@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plur - A Community App Built on Open Protocol</title>
+    <style>
+        :root {
+            --primary-color: #6a5acd;
+            --secondary-color: #4b0082;
+            --accent-color: #9370db;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .wip-banner {
+            background-color: #ffc107;
+            color: #333;
+            text-align: center;
+            padding: 0.5rem;
+            font-weight: bold;
+        }
+        
+        section {
+            padding: 3rem 0;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+        
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .bill-of-rights {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .rights-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+        
+        .rights-list li {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .rights-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        .mission-section {
+            background-color: var(--light-bg);
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .mission-statement {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        
+        .cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .cta h2 {
+            color: white;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary-color);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wip-banner">
+        🚧 This site is a work in progress 🚧
+    </div>
+    
+    <header>
+        <div class="container">
+            <h1>Plur</h1>
+            <p>Signal for Facebook Groups</p>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Authentic Communities Built on Care and Connection</h1>
+            <p>Plur is a communities app being built on the open Nostr protocol, putting users in control of their online social experience.</p>
+        </div>
+    </section>
+    
+    <section class="mission-section">
+        <div class="container">
+            <h2>Our Mission</h2>
+            <p class="mission-statement">Our mission is to enable authentic, online communities built on care, connection, and sustainable relationships.</p>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2>Why Plur?</h2>
+            <p>We believe in a future where communities everywhere are empowered to organize and create positive social change. Following the successful launch of Nos and Planetary apps on the Nostr protocol, we're now focusing on the needs of communities and groups looking for alternatives to Facebook Groups, WhatsApp, and Slack.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Community-Focused</h3>
+                    <p>Plur is a social app, not a social media app. We focus on active engagement with other people versus passive consumption of content.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>User Control</h3>
+                    <p>You own your followers and can interact with them in any app on the protocol. You decide what content you see and from whom.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Privacy First</h3>
+                    <p>Think Signal-like privacy for community groups. Your social online experiences should leave you feeling fulfilled and positive.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="bill-of-rights">
+        <div class="container">
+            <h2>A Bill of Rights for Social Media</h2>
+            <ul class="rights-list">
+                <li><strong>The right to privacy and security</strong> - End-to-end encryption and granular privacy settings</li>
+                <li><strong>The right to own and control your identity</strong> - Decentralized identity ownership, handles, and profile portability</li>
+                <li><strong>The right to choose and understand algorithms</strong> - Algorithm control panel, multiple feed views</li>
+                <li><strong>The right to community self-governance</strong> - Community-led governance, fair and transparent moderation tools</li>
+                <li><strong>The right to full portability</strong> - Permissionless and open protocol, export options, interoperability</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <h2>Our Approach</h2>
+            <p>We use an open, decentralized protocol - Nostr - to put users in control of their online social experience, feed, and personal communities. We're eliminating the ad-driven model—which is predicated on likes and engagement—and instead put users in control of what they see, and from whom.</p>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <h3>Not a Source of Entertainment</h3>
+                    <p>There are many other options for entertainment. We are focused on being 'pro social' and fostering authentic community.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>You Are Not the Product</h3>
+                    <p>The flow of communications is decentralized and not controlled by a corporation. Our business model is designed to put your interests first.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Authentic Connections</h3>
+                    <p>Plur leaves behind the negative impacts of social media (loneliness, toxic content, FOMO) and instead offers the benefits of positive connections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2>Join Us in Building a Better Social Experience</h2>
+            <p>Plur is currently under development. We're working to create a platform where communities, not corporations, hold the power over online communication.</p>
+            <a href="#" class="btn">Stay Updated</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Plur. All rights reserved.</p>
+            <p>Built on the open Nostr protocol.</p>
+        </div>
+    </footer>
+</body>
+</html>
