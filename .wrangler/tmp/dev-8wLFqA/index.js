@@ -1,157 +1,422 @@
-/// <reference types="@cloudflare/workers-types" />
-import {
-  createInvite,
-  createWebInvite,
-  createWebInvitePage,
-  createShortUrlInvite,
-  getInvite,
-  getWebInvite,
-  resolveShortCode,
-  InviteData,
-  WebInviteData
-} from './invite-handler';
+var __defProp = Object.defineProperty;
+var __name = (target, value) => __defProp(target, "name", { value, configurable: true });
 
-export interface Env {
-  INVITES: KVNamespace;
-  INVITE_TOKEN: string;
-}
-
-interface PageMetadata {
-  title: string;
-  description: string;
-  image?: string;
-}
-
-// Simple markdown to HTML converter
-function markdownToHtml(markdown: string): { content: string, metadata: PageMetadata } {
-  const metadata: PageMetadata = {
-    title: "Rabble Community",
-    description: "Private, ad-free spaces where you set the rules."
-  };
-
-  // Extract front matter
-  let content = markdown;
-  if (markdown.startsWith('---')) {
-    const endOfFrontMatter = markdown.indexOf('---', 3);
-    if (endOfFrontMatter !== -1) {
-      const frontMatter = markdown.substring(3, endOfFrontMatter).trim();
-      content = markdown.substring(endOfFrontMatter + 3).trim();
-      
-      // Parse front matter
-      const titleMatch = frontMatter.match(/title:\s*"([^"]*)"/);
-      if (titleMatch) metadata.title = titleMatch[1];
-      
-      const descMatch = frontMatter.match(/description:\s*"([^"]*)"/);
-      if (descMatch) metadata.description = descMatch[1];
-      
-      const imageMatch = frontMatter.match(/image:\s*"([^"]*)"/);
-      if (imageMatch) metadata.image = imageMatch[1];
+// .wrangler/tmp/bundle-alrEtx/checked-fetch.js
+var urls = /* @__PURE__ */ new Set();
+function checkURL(request, init) {
+  const url = request instanceof URL ? request : new URL(
+    (typeof request === "string" ? new Request(request, init) : request).url
+  );
+  if (url.port && url.port !== "443" && url.protocol === "https:") {
+    if (!urls.has(url.toString())) {
+      urls.add(url.toString());
+      console.warn(
+        `WARNING: known issue with \`fetch()\` requests to custom HTTPS ports in published Workers:
+ - ${url.toString()} - the custom port will be ignored when the Worker is published using the \`wrangler deploy\` command.
+`
+      );
     }
   }
-
-  // Convert markdown to HTML
-  // Headers
-  content = content.replace(/^### (.*$)/gm, '<h3>$1</h3>');
-  content = content.replace(/^## (.*$)/gm, '<h2>$1</h2>');
-  content = content.replace(/^# (.*$)/gm, '<h1>$1</h1>');
-  
-  // Emphasis
-  content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-  content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
-  
-  // Links
-  content = content.replace(/\[([^\]]+)\]\(([^)]+)\)(?:{\.([^}]+)})?/g, (match, text, url, className) => {
-    if (className) {
-      return `<a href="${url}" class="${className}">${text}</a>`;
-    }
-    return `<a href="${url}">${text}</a>`;
-  });
-  
-  // Lists
-  content = content.replace(/^\s*-\s*(.*$)/gm, '<li>$1</li>');
-  content = content.replace(/(<li>.*<\/li>\n)+/g, function(match) {
-    return '<ul>' + match + '</ul>';
-  });
-  
-  // Tables
-  content = content.replace(/^\|(.*)\|$/gm, '<tr>$1</tr>');
-  content = content.replace(/<tr>(.*)<\/tr>/g, (match, content) => {
-    const cells = content.split('|').map((cell: string) => cell.trim());
-    let row = '<tr>';
-    for (const cell of cells) {
-      if (cell) {
-        // Allow <br> tags in table cells
-        row += `<td>${cell}</td>`;
-      }
-    }
-    row += '</tr>';
-    return row;
-  });
-  content = content.replace(/(<tr>.*<\/tr>\n)+/g, function(match) {
-    return '<table>' + match + '</table>';
-  });
-  
-  // Code blocks
-  content = content.replace(/```([^`]*)\n([^`]*)```/g, '<pre><code class="language-$1">$2</code></pre>');
-  content = content.replace(/`([^`]*)`/g, '<code>$1</code>');
-  
-  // Sections
-  content = content.replace(/<section id="([^"]+)">(.*?)<\/section>/gs, '<section id="$1">$2</section>');
-  
-  // Details/summary
-  content = content.replace(/<details>\s*<summary>(.*?)<\/summary>(.*?)<\/details>/gs, '<details><summary>$1</summary>$2</details>');
-  
-  // Quotes
-  content = content.replace(/:::(quote|info|warning)\n([\s\S]*?):::/g, '<blockquote class="$1">$2</blockquote>');
-  content = content.replace(/^>\s*(.*$)/gm, '<blockquote>$1</blockquote>');
-  
-  // Horizontal rule
-  content = content.replace(/^---$/gm, '<hr>');
-  
-  // Paragraphs - handle after other conversions
-  content = content.replace(/^([^<].*[^>])$/gm, '<p>$1</p>');
-  
-  // Remove empty paragraphs
-  content = content.replace(/<p><\/p>/g, '');
-  
-  return { content, metadata };
 }
+__name(checkURL, "checkURL");
+globalThis.fetch = new Proxy(globalThis.fetch, {
+  apply(target, thisArg, argArray) {
+    const [request, init] = argArray;
+    checkURL(request, init);
+    return Reflect.apply(target, thisArg, argArray);
+  }
+});
 
-const ALPHANUM = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-function generateCode(length = 8): string {
-  let result = '';
+// src/invite-handler.ts
+var ALPHANUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+function generateCode(length = 8) {
+  let result = "";
   for (let i = 0; i < length; i++) {
     result += ALPHANUM[Math.floor(Math.random() * ALPHANUM.length)];
   }
   return result;
 }
+__name(generateCode, "generateCode");
+function generateShortCode() {
+  return generateCode(4);
+}
+__name(generateShortCode, "generateShortCode");
+async function createInvite(env, groupId, relay) {
+  const code = generateCode();
+  const inviteData = {
+    groupId,
+    relay
+  };
+  await env.INVITES.put(code, JSON.stringify(inviteData));
+  return {
+    code,
+    url: `https://rabble.community/i/${code}`
+  };
+}
+__name(createInvite, "createInvite");
+async function createWebInvite(env, groupId, relay, metadata) {
+  const code = generateCode();
+  const webInviteData = {
+    groupId,
+    relay,
+    name: metadata.name,
+    description: metadata.description,
+    avatar: metadata.avatar,
+    creatorPubkey: metadata.creatorPubkey,
+    createdAt: Date.now()
+  };
+  await env.INVITES.put(`web:${code}`, JSON.stringify(webInviteData));
+  return {
+    code,
+    url: `https://rabble.community/join/${code}`
+  };
+}
+__name(createWebInvite, "createWebInvite");
+async function createShortUrlInvite(env, code) {
+  const shortCode = generateShortCode();
+  const shortcodeMapping = {
+    code
+  };
+  await env.INVITES.put(`short:${shortCode}`, JSON.stringify(shortcodeMapping));
+  return {
+    shortCode,
+    url: `https://rabble.community/j/${shortCode}`
+  };
+}
+__name(createShortUrlInvite, "createShortUrlInvite");
+async function getInvite(env, code) {
+  const data = await env.INVITES.get(code);
+  if (!data) return null;
+  try {
+    return JSON.parse(data);
+  } catch (e) {
+    console.error("Failed to parse invite data", e);
+    return null;
+  }
+}
+__name(getInvite, "getInvite");
+async function getWebInvite(env, code) {
+  const data = await env.INVITES.get(`web:${code}`);
+  if (!data) return null;
+  try {
+    return JSON.parse(data);
+  } catch (e) {
+    console.error("Failed to parse web invite data", e);
+    return null;
+  }
+}
+__name(getWebInvite, "getWebInvite");
+async function resolveShortCode(env, shortCode) {
+  const data = await env.INVITES.get(`short:${shortCode}`);
+  if (!data) return null;
+  try {
+    const mapping = JSON.parse(data);
+    return mapping.code;
+  } catch (e) {
+    console.error("Failed to parse shortcode mapping", e);
+    return null;
+  }
+}
+__name(resolveShortCode, "resolveShortCode");
+function createWebInvitePage(invite, code) {
+  const groupName = invite.name || "Community Group";
+  const groupDescription = invite.description || "Join this Rabble community group";
+  const avatarUrl = invite.avatar || "";
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join ${groupName} - Rabble Community</title>
+  <meta name="description" content="${groupDescription}">
+  <meta property="og:title" content="Join ${groupName}">
+  <meta property="og:description" content="${groupDescription}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rabble Community">
+  ${avatarUrl ? `<meta property="og:image" content="${avatarUrl}">` : ""}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700;800&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #F5F1E9;
+      --accent: #5E452A;
+      --highlight: #FFFDF7;
+      --surface: #F9F6F0;
+      --surface-alt: #EDEAE0;
+      --text-primary: #000000;
+      --text-secondary: #3D3D3D;
+      --font-family: 'Alegreya', 'Crimson Pro', 'Georgia', serif;
+      --spacing: 8px;
+      --radius: 0px;
+      --shadow: none;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      color: var(--text-primary);
+      line-height: 1.6;
+      background-color: var(--surface);
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%235e452a' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .header {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .logo {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo::before {
+      content: "\u270A";
+      display: inline-block;
+      font-size: 1.75rem;
+      margin-right: 0.75rem;
+    }
+    
+    .content {
+      padding: 3rem 0;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    
+    .invite-card {
+      background-color: var(--surface);
+      padding: 2rem;
+      text-align: center;
+      width: 100%;
+      border: 3px solid var(--primary);
+    }
+    
+    .group-info {
+      margin: 2rem 0;
+    }
+    
+    .group-avatar {
+      width: 100px;
+      height: 100px;
+      background-color: var(--primary);
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2.5rem;
+      font-weight: 800;
+      background-size: cover;
+      background-position: center;
+      border: 3px solid var(--primary);
+    }
+    
+    .description {
+      max-width: 400px;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.3;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+    }
+    
+    .button-primary {
+      display: inline-block;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--primary);
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+    
+    .button-primary:hover {
+      background-color: transparent;
+      color: var(--primary);
+    }
+    
+    .button-secondary {
+      display: inline-block;
+      background-color: transparent;
+      color: var(--primary);
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border: 2px solid var(--primary);
+      font-weight: 700;
+      font-size: 1.125rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      width: 100%;
+      transition: background-color 0.2s;
+    }
+    
+    .button-secondary:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .footer {
+      background-color: var(--primary);
+      color: white;
+      padding: 2rem 0;
+      font-size: 1rem;
+      text-align: center;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    
+    .footer a {
+      color: white;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s;
+    }
+    
+    .footer a:hover {
+      border-bottom: 1px solid rgba(255,255,255,1);
+    }
+    
+    /* Woodcut style decorative divider */
+    .woodcut-divider {
+      height: 20px;
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6 L40 6 M3 3 L3 9 M8 2 L8 10 M13 1 L13 11 M18 2 L18 10 M23 3 L23 9 M28 2 L28 10 M33 1 L33 11 M38 3 L38 9' stroke='%23000' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: repeat-x;
+      margin: 1.5rem 0;
+    }
+    
+    small {
+      display: block;
+      margin-top: 1rem;
+      color: var(--text-secondary);
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo">Rabble</a>
+    </div>
+  </header>
+  
+  <main class="content">
+    <div class="container">
+      <div class="invite-card">
+        <div class="group-info">
+          ${avatarUrl ? `<div class="group-avatar" style="background-image: url('${avatarUrl}');"></div>` : `<div class="group-avatar">${groupName.charAt(0)}</div>`}
+          <h1>${groupName}</h1>
+          ${invite.description ? `<p class="description">${invite.description}</p>` : ""}
+        </div>
+        
+        <div class="woodcut-divider"></div>
+        
+        <a href="plur://join-community?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-primary" id="open-app">Open in rabble.community app</a>
+        <a href="https://play.google.com/store/apps/details?id=app.rabble.community" class="button-secondary" id="get-android">Get on Android</a>
+        <a href="https://apps.apple.com/app/plur/id1234567890" class="button-secondary" id="get-ios">Get on iOS</a>
+        <a href="/app?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-secondary" id="open-web">Continue in Browser</a>
+        
+        <small>Created on ${new Date(invite.createdAt).toLocaleDateString()}</small>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 rabble.community \xB7 All rights reserved</p>
+    </div>
+  </footer>
+  
+  <script>
+    // Platform detection for showing appropriate buttons
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isAndroid = /android/i.test(userAgent);
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    
+    // Show/hide appropriate download buttons
+    document.getElementById('get-android').style.display = isAndroid ? 'inline-block' : 'none';
+    document.getElementById('get-ios').style.display = isIOS ? 'inline-block' : 'none';
+  <\/script>
+</body>
+</html>`;
+}
+__name(createWebInvitePage, "createWebInvitePage");
 
-// Static files for app-linking
-const STATIC_FILES: Record<string, { content: string; contentType: string }> = {
-  '/.well-known/assetlinks.json': {
+// src/index.ts
+var STATIC_FILES = {
+  "/.well-known/assetlinks.json": {
     content: JSON.stringify([{
-      relation: ['delegate_permission/common.handle_all_urls'],
+      relation: ["delegate_permission/common.handle_all_urls"],
       target: {
-        namespace: 'android_app',
-        package_name: 'app.rabble.community',
-        sha256_cert_fingerprints: ['YOUR_APP_FINGERPRINT_HERE']
+        namespace: "android_app",
+        package_name: "app.rabble.community",
+        sha256_cert_fingerprints: ["YOUR_APP_FINGERPRINT_HERE"]
       }
     }]),
-    contentType: 'application/json'
+    contentType: "application/json"
   },
-  '/apple-app-site-association': {
+  "/apple-app-site-association": {
     content: JSON.stringify({
       applinks: {
         apps: [],
         details: [{
-          appID: 'GZCZBKH7MY.app.rabble.community',
+          appID: "GZCZBKH7MY.app.rabble.community",
           paths: [
-            '/i/*', 
-            '/join/*', 
-            '/join-community*',
-            '/g/*'
+            "/i/*",
+            "/join/*",
+            "/join-community*",
+            "/g/*"
           ],
-          appIDs: ['GZCZBKH7MY.app.rabble.community'],
+          appIDs: ["GZCZBKH7MY.app.rabble.community"],
           components: [
             {
               "/": "/i/*",
@@ -176,34 +441,40 @@ const STATIC_FILES: Record<string, { content: string; contentType: string }> = {
         apps: ["GZCZBKH7MY.app.rabble.community"]
       }
     }),
-    contentType: 'application/json'
+    contentType: "application/json"
   }
 };
-
-// Design tokens and CSS variables
-const DESIGN_TOKENS = {
+var DESIGN_TOKENS = {
   colors: {
-    primary: "#000000",      // Black (main color for woodcut style)
-    secondary: "#F5F1E9",    // Off-white paper texture background
-    accent: "#5E452A",       // Wood brown accent
-    highlight: "#FFFDF7",    // Cream highlight
-    surface: "#F9F6F0",      // Natural paper surface
-    surfaceAlt: "#EDEAE0",   // Slightly darker paper background
-    textPrimary: "#000000",  // Black text
-    textSecondary: "#3D3D3D" // Dark gray text
+    primary: "#000000",
+    // Black (main color for woodcut style)
+    secondary: "#F5F1E9",
+    // Off-white paper texture background
+    accent: "#5E452A",
+    // Wood brown accent
+    highlight: "#FFFDF7",
+    // Cream highlight
+    surface: "#F9F6F0",
+    // Natural paper surface
+    surfaceAlt: "#EDEAE0",
+    // Slightly darker paper background
+    textPrimary: "#000000",
+    // Black text
+    textSecondary: "#3D3D3D"
+    // Dark gray text
   },
   typography: {
-    fontFamily: "'Alegreya', 'Crimson Pro', 'Georgia', serif", 
+    fontFamily: "'Alegreya', 'Crimson Pro', 'Georgia', serif",
     h1: { size: 48, weight: 800, lineHeight: 58 },
     body: { size: 18, weight: 400, lineHeight: 28 }
   },
   spacing: 8,
-  radius: 0,                // Sharp edges for woodcut style
-  shadow: "none"            // No shadows for a flatter woodcut look
+  radius: 0,
+  // Sharp edges for woodcut style
+  shadow: "none"
+  // No shadows for a flatter woodcut look
 };
-
-// Create a page layout with the provided content
-function createPage(title: string, description: string, content: string, image?: string): string {
+function createPage(title, description, content, image) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,7 +482,7 @@ function createPage(title: string, description: string, content: string, image?:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title} - Rabble Community</title>
   <meta name="description" content="${description}">
-  ${image ? `<meta property="og:image" content="${image}">` : ''}
+  ${image ? `<meta property="og:image" content="${image}">` : ""}
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:type" content="website">
@@ -291,7 +562,7 @@ function createPage(title: string, description: string, content: string, image?:
     }
     
     .logo::before {
-      content: "✊";
+      content: "\u270A";
       display: inline-block;
       font-size: 1.75rem;
       margin-right: 0.75rem;
@@ -452,7 +723,7 @@ function createPage(title: string, description: string, content: string, image?:
     }
     
     .content li::before {
-      content: "✊";
+      content: "\u270A";
       position: absolute;
       left: 0;
       top: 0;
@@ -734,10 +1005,10 @@ function createPage(title: string, description: string, content: string, image?:
   
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 rabble.community · All rights reserved</p>
+      <p>&copy; 2025 rabble.community \xB7 All rights reserved</p>
       <p>
-        <a href="/terms">Terms</a> · 
-        <a href="/privacy">Privacy</a> · 
+        <a href="/terms">Terms</a> \xB7 
+        <a href="/privacy">Privacy</a> \xB7 
         <a href="/contact">Contact</a>
       </p>
     </div>
@@ -745,9 +1016,8 @@ function createPage(title: string, description: string, content: string, image?:
 </body>
 </html>`;
 }
-
-// Generate an HTML page for the invalid invite error
-function createErrorPage(message: string): string {
+__name(createPage, "createPage");
+function createErrorPage(message) {
   return createPage(
     "Invalid Invite",
     "This invite link is invalid or has expired.",
@@ -761,130 +1031,72 @@ function createErrorPage(message: string): string {
     </div>`
   );
 }
-
-// Main worker
-export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+__name(createErrorPage, "createErrorPage");
+var src_default = {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const path = url.pathname;
-    
-    // Handle app-linking static files from hardcoded content
     if (STATIC_FILES[path]) {
       return new Response(STATIC_FILES[path].content, {
         headers: {
-          'Content-Type': STATIC_FILES[path].contentType,
-          'Cache-Control': 'public, max-age=86400',
+          "Content-Type": STATIC_FILES[path].contentType,
+          "Cache-Control": "public, max-age=86400"
         }
       });
     }
-    
-    // Handle local assets in development mode
-    if (path.startsWith('/local-assets/')) {
-      const fileName = path.split('/').pop() || '';
-      const localPath = `static/assets/${fileName}`;
-      
-      // This part will only work if you add binary content handling to your worker
-      // It's just a placeholder for now - in reality, you'd need to use Blob, ArrayBuffer,
-      // or a streaming approach to serve the binary files
-      return new Response(`Local static file would be served from: ${localPath}`, {
-        headers: {
-          'Content-Type': 'text/plain',
-          'Cache-Control': 'no-cache'
-        }
-      });
-    }
-    
-    // Handle static asset paths
-    if (path.startsWith('/static/assets/')) {
-      const fileName = path.split('/').pop() || '';
-      
-      // Map for real PNG images in Cloudflare Images
-      // Format: fileName -> Cloudflare Image ID
-      const cloudflareImagesMap: Record<string, string> = {
-        // Use the image IDs for the files actually referenced in the HTML
-        // Map our actual uploaded images to the filenames used in HTML
-        'community-focused.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00', // Reusing asks_offers image
-        'user-control.png': '0de45bbc-c804-4ef1-9a5b-df668a4a1e00',     // Reusing chat image
-        'privacy-first.png': 'c14148d3-18eb-44a9-133b-48f883ad3500',     // Reusing events image
-        'not-entertainment.png': '2857264c-f538-492a-c0a3-657012ecb000', // Reusing posting_event image
-        'not-product.png': '510cc54c-cd4a-40b2-bce3-effb502d2000',       // Reusing posts image
-        'authentic-connections.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00', // Reusing asks_offers image again
-        
-        // Keep the original mappings too in case they're needed elsewhere
-        'asks_offers.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00',
-        'chat.png': '0de45bbc-c804-4ef1-9a5b-df668a4a1e00',
-        'events.png': 'c14148d3-18eb-44a9-133b-48f883ad3500',
-        'posting_event.png': '2857264c-f538-492a-c0a3-657012ecb000',
-        'posts.png': '510cc54c-cd4a-40b2-bce3-effb502d2000'
+    if (path.startsWith("/static/assets/")) {
+      const fileName = path.split("/").pop() || "";
+      const cloudflareImagesMap = {
+        // These are the real PNG files that should be uploaded to Cloudflare Images
+        "asks_offers.png": "fc67aea6-a6c6-4cb9-8480-5db260218b00",
+        "chat.png": "0de45bbc-c804-4ef1-9a5b-df668a4a1e00",
+        "events.png": "c14148d3-18eb-44a9-133b-48f883ad3500",
+        "posting_event.png": "2857264c-f538-492a-c0a3-657012ecb000",
+        "posts.png": "510cc54c-cd4a-40b2-bce3-effb502d2000"
       };
-      
-      // If we have a Cloudflare Image for this file, redirect to it
       if (cloudflareImagesMap[fileName]) {
-        // Check if running in production (simple check - not foolproof)
-        const isProduction = !request.url.includes('localhost');
-        
-        if (isProduction) {
-          const accountHash = 'U9c1NKydsjSHWVgWsUp4Yg'; // Your Cloudflare account hash
-          const imageId = cloudflareImagesMap[fileName];
-          const imageVariant = 'public'; // Default variant
-          
-          return Response.redirect(`https://imagedelivery.net/${accountHash}/${imageId}/${imageVariant}`, 302);
-        } else {
-          // In local development, try to serve the local file
-          try {
-            // Redirect to static file handler on the same server
-            return Response.redirect(`/local-assets/${fileName}`, 302);
-          } catch (error) {
-            console.error(`Error serving local file ${fileName}:`, error);
-            // Fall through to SVG placeholder
-          }
-        }
+        const accountHash = "U9c1NKydsjSHWVgWsUp4Yg";
+        const imageId = cloudflareImagesMap[fileName];
+        const imageVariant = "public";
+        return Response.redirect(`https://imagedelivery.net/${accountHash}/${imageId}/${imageVariant}`, 302);
       }
-      
-      // For files that don't have real images, use SVG placeholders
-      // Create stylish SVG placeholders
-      const baseBgColor = '#5d4037'; // Brown base color from the rabble.community palette
-      
-      // Determine appropriate icon and accent color based on image name
-      let icon = '◆';
+      const baseBgColor = "#5d4037";
+      let icon = "\u25C6";
       let mainColor = baseBgColor;
-      
-      if (fileName.includes('posts')) {
-        icon = '📱';
-        mainColor = '#7856FF';
-      } else if (fileName.includes('chat')) {
-        icon = '💬';
-        mainColor = '#00A3FF';
-      } else if (fileName.includes('asks') || fileName.includes('offers')) {
-        icon = '🤝';
-        mainColor = '#FF9500';
-      } else if (fileName.includes('events')) {
-        icon = '📅';
-        mainColor = '#00C781';
-      } else if (fileName.includes('community')) {
-        icon = '👥';
-        mainColor = '#8d6e63';
-      } else if (fileName.includes('user-control')) {
-        icon = '🛡️';
-        mainColor = '#3e2723';
-      } else if (fileName.includes('privacy')) {
-        icon = '🔒';
-        mainColor = '#5d4037';
-      } else if (fileName.includes('authentic')) {
-        icon = '✨';
-        mainColor = '#8d6e63';
-      } else if (fileName.includes('not-entertainment')) {
-        icon = '🎯';
-        mainColor = '#3e2723';
-      } else if (fileName.includes('not-product')) {
-        icon = '👤';
-        mainColor = '#5d4037';
-      } else if (fileName.includes('posting')) {
-        icon = '✏️';
-        mainColor = '#8d6e63';
+      if (fileName.includes("posts")) {
+        icon = "\u{1F4F1}";
+        mainColor = "#7856FF";
+      } else if (fileName.includes("chat")) {
+        icon = "\u{1F4AC}";
+        mainColor = "#00A3FF";
+      } else if (fileName.includes("asks") || fileName.includes("offers")) {
+        icon = "\u{1F91D}";
+        mainColor = "#FF9500";
+      } else if (fileName.includes("events")) {
+        icon = "\u{1F4C5}";
+        mainColor = "#00C781";
+      } else if (fileName.includes("community")) {
+        icon = "\u{1F465}";
+        mainColor = "#8d6e63";
+      } else if (fileName.includes("user-control")) {
+        icon = "\u{1F6E1}\uFE0F";
+        mainColor = "#3e2723";
+      } else if (fileName.includes("privacy")) {
+        icon = "\u{1F512}";
+        mainColor = "#5d4037";
+      } else if (fileName.includes("authentic")) {
+        icon = "\u2728";
+        mainColor = "#8d6e63";
+      } else if (fileName.includes("not-entertainment")) {
+        icon = "\u{1F3AF}";
+        mainColor = "#3e2723";
+      } else if (fileName.includes("not-product")) {
+        icon = "\u{1F464}";
+        mainColor = "#5d4037";
+      } else if (fileName.includes("posting")) {
+        icon = "\u270F\uFE0F";
+        mainColor = "#8d6e63";
       }
-      
-      // Create an aesthetically pleasing SVG that fits the rabble.community design theme
       const svgPlaceholder = `<svg width="300" height="500" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <pattern id="pattern-wood" patternUnits="userSpaceOnUse" width="100" height="100" patternTransform="scale(0.5)">
@@ -909,7 +1121,7 @@ export default {
         
         <!-- Feature name -->
         <text x="150" y="300" font-family="Arial" font-size="18" font-weight="bold" fill="${mainColor}" text-anchor="middle">
-          ${fileName.replace(/[-_]/g, ' ').replace('.png', '').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+          ${fileName.replace(/[-_]/g, " ").replace(".png", "").split(" ").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")}
         </text>
         
         <!-- Woodcut-style decorative elements -->
@@ -921,58 +1133,36 @@ export default {
           rabble.community
         </text>
       </svg>`;
-      
       return new Response(svgPlaceholder, {
         headers: {
-          'Content-Type': 'image/svg+xml',
-          'Cache-Control': 'public, max-age=3600' // 1 hour cache for placeholders
+          "Content-Type": "image/svg+xml",
+          "Cache-Control": "public, max-age=3600"
+          // 1 hour cache for placeholders
         }
       });
     }
-    
-    // API endpoints
-    if (path.startsWith('/api/')) {
-      // Extract API path without the /api/ prefix
+    if (path.startsWith("/api/")) {
       const apiPath = path.slice(5);
-      
-      // Create a standard invite
-      if (apiPath === 'invite' && request.method === 'POST') {
+      if (apiPath === "invite" && request.method === "POST") {
         try {
-          // Check authorization (simple shared token)
-          const authHeader = request.headers.get('Authorization');
-          const token = authHeader?.split(' ')[1];
-          
+          const authHeader = request.headers.get("Authorization");
+          const token = authHeader?.split(" ")[1];
           if (token !== env.INVITE_TOKEN) {
-            return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+            return new Response(JSON.stringify({ error: "Unauthorized" }), {
               status: 401,
-              headers: { 'Content-Type': 'application/json' }
+              headers: { "Content-Type": "application/json" }
             });
           }
-          
-          // Parse request body
-          const body = await request.json() as { 
-            groupId: string; 
-            relay: string;
-            name?: string;
-            description?: string;
-            avatar?: string;
-            creatorPubkey?: string;
-          };
-          
-          // Validate required fields
+          const body = await request.json();
           if (!body.groupId || !body.relay) {
-            return new Response(JSON.stringify({ error: 'Missing required fields' }), {
+            return new Response(JSON.stringify({ error: "Missing required fields" }), {
               status: 400,
-              headers: { 'Content-Type': 'application/json' }
+              headers: { "Content-Type": "application/json" }
             });
           }
-          
-          // Create invite
           let result;
           const hasMetadata = !!(body.name || body.description || body.avatar);
-          
           if (hasMetadata) {
-            // Create web invite with metadata
             result = await createWebInvite(env, body.groupId, body.relay, {
               name: body.name,
               description: body.description,
@@ -981,191 +1171,144 @@ export default {
             });
             console.log(`Created web invite: ${result.code}`);
           } else {
-            // Create standard invite
             result = await createInvite(env, body.groupId, body.relay);
             console.log(`Created invite: ${result.code}`);
           }
-          
           return new Response(JSON.stringify({
             code: result.code,
             url: result.url
           }), {
             status: 201,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { "Content-Type": "application/json" }
           });
         } catch (error) {
-          console.error('Error creating invite:', error);
-          return new Response(JSON.stringify({ error: 'Internal server error' }), {
+          console.error("Error creating invite:", error);
+          return new Response(JSON.stringify({ error: "Internal server error" }), {
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { "Content-Type": "application/json" }
           });
         }
       }
-      
-      // Create a short URL for an existing invite
-      if (apiPath === 'shorturl' && request.method === 'POST') {
+      if (apiPath === "shorturl" && request.method === "POST") {
         try {
-          // Check authorization
-          const authHeader = request.headers.get('Authorization');
-          const token = authHeader?.split(' ')[1];
-          
+          const authHeader = request.headers.get("Authorization");
+          const token = authHeader?.split(" ")[1];
           if (token !== env.INVITE_TOKEN) {
-            return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+            return new Response(JSON.stringify({ error: "Unauthorized" }), {
               status: 401,
-              headers: { 'Content-Type': 'application/json' }
+              headers: { "Content-Type": "application/json" }
             });
           }
-          
-          // Parse request body
-          const body = await request.json() as { code: string };
-          
-          // Validate required fields
+          const body = await request.json();
           if (!body.code) {
-            return new Response(JSON.stringify({ error: 'Missing invite code' }), {
+            return new Response(JSON.stringify({ error: "Missing invite code" }), {
               status: 400,
-              headers: { 'Content-Type': 'application/json' }
+              headers: { "Content-Type": "application/json" }
             });
           }
-          
-          // Check if the invite exists
           const inviteData = await getInvite(env, body.code);
           if (!inviteData) {
-            return new Response(JSON.stringify({ error: 'Invite not found' }), {
+            return new Response(JSON.stringify({ error: "Invite not found" }), {
               status: 404,
-              headers: { 'Content-Type': 'application/json' }
+              headers: { "Content-Type": "application/json" }
             });
           }
-          
-          // Create short URL
           console.log(`Generating short URL for code: ${body.code}`);
           const shortResult = await createShortUrlInvite(env, body.code);
           console.log(`createShortInviteUrl result: ${shortResult.url}`);
-          
           return new Response(JSON.stringify({
             shortCode: shortResult.shortCode,
             url: shortResult.url
           }), {
             status: 201,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { "Content-Type": "application/json" }
           });
         } catch (error) {
-          console.error('Error creating short URL:', error);
-          return new Response(JSON.stringify({ error: 'Internal server error' }), {
+          console.error("Error creating short URL:", error);
+          return new Response(JSON.stringify({ error: "Internal server error" }), {
             status: 500,
-            headers: { 'Content-Type': 'application/json' }
+            headers: { "Content-Type": "application/json" }
           });
         }
       }
-      
-      // Default API response
-      return new Response(JSON.stringify({ error: 'Not found' }), {
+      return new Response(JSON.stringify({ error: "Not found" }), {
         status: 404,
-        headers: { 'Content-Type': 'application/json' }
+        headers: { "Content-Type": "application/json" }
       });
     }
-    
-    // Handle short invite URLs (/j/)
-    if (path.startsWith('/j/')) {
+    if (path.startsWith("/j/")) {
       try {
-        const shortCode = path.slice(3); // Remove the /j/ prefix
+        const shortCode = path.slice(3);
         console.log(`Resolving short code: ${shortCode}`);
-        
         if (!shortCode) {
-          return new Response(createErrorPage('Invalid short invite URL'), {
-            headers: { 'Content-Type': 'text/html' }
+          return new Response(createErrorPage("Invalid short invite URL"), {
+            headers: { "Content-Type": "text/html" }
           });
         }
-        
-        // Resolve the short code to the full invite code
         const fullCode = await resolveShortCode(env, shortCode);
         console.log(`Short code ${shortCode} resolved to: ${fullCode}`);
-        
         if (!fullCode) {
-          return new Response(createErrorPage('This short invite link is invalid or has expired.'), {
-            headers: { 'Content-Type': 'text/html' }
+          return new Response(createErrorPage("This short invite link is invalid or has expired."), {
+            headers: { "Content-Type": "text/html" }
           });
         }
-        
-        // Redirect to the full invite URL
         return Response.redirect(`https://rabble.community/i/${fullCode}`, 302);
       } catch (error) {
-        console.error('Error handling short URL:', error);
-        return new Response(createErrorPage('An error occurred while processing this invite.'), {
-          headers: { 'Content-Type': 'text/html' }
+        console.error("Error handling short URL:", error);
+        return new Response(createErrorPage("An error occurred while processing this invite."), {
+          headers: { "Content-Type": "text/html" }
         });
       }
     }
-    
-    // Handle standard invite URLs (/i/)
-    if (path.startsWith('/i/')) {
+    if (path.startsWith("/i/")) {
       try {
-        const code = path.slice(3); // Remove the /i/ prefix
-        
+        const code = path.slice(3);
         if (!code) {
-          return new Response(createErrorPage('Invalid invite URL'), {
-            headers: { 'Content-Type': 'text/html' }
+          return new Response(createErrorPage("Invalid invite URL"), {
+            headers: { "Content-Type": "text/html" }
           });
         }
-        
-        // Get invite data from KV
         const inviteData = await getInvite(env, code);
-        
         if (!inviteData) {
-          return new Response(createErrorPage('This invite link is invalid or has expired.'), {
-            headers: { 'Content-Type': 'text/html' }
+          return new Response(createErrorPage("This invite link is invalid or has expired."), {
+            headers: { "Content-Type": "text/html" }
           });
         }
-        
-        // Construct deep link URI
         const deepLink = `plur://join-community?group-id=${inviteData.groupId}&code=${code}&relay=${encodeURIComponent(inviteData.relay)}`;
-        
-        // Redirect to Plur app/fallback
         return Response.redirect(deepLink, 302);
       } catch (error) {
-        console.error('Error handling invite:', error);
-        return new Response(createErrorPage('An error occurred while processing this invite.'), {
-          headers: { 'Content-Type': 'text/html' }
+        console.error("Error handling invite:", error);
+        return new Response(createErrorPage("An error occurred while processing this invite."), {
+          headers: { "Content-Type": "text/html" }
         });
       }
     }
-    
-    // Handle web invites (/join/)
-    if (path.startsWith('/join/')) {
+    if (path.startsWith("/join/")) {
       try {
-        const code = path.slice(6); // Remove the /join/ prefix
-        
+        const code = path.slice(6);
         if (!code) {
-          return new Response(createErrorPage('Invalid web invite URL'), {
-            headers: { 'Content-Type': 'text/html' }
+          return new Response(createErrorPage("Invalid web invite URL"), {
+            headers: { "Content-Type": "text/html" }
           });
         }
-        
-        // Get web invite data from KV
         const webInviteData = await getWebInvite(env, code);
-        
         if (!webInviteData) {
-          return new Response(createErrorPage('This web invite link is invalid or has expired.'), {
-            headers: { 'Content-Type': 'text/html' }
+          return new Response(createErrorPage("This web invite link is invalid or has expired."), {
+            headers: { "Content-Type": "text/html" }
           });
         }
-        
-        // Generate web invite page HTML
         const html = createWebInvitePage(webInviteData, code);
-        
         return new Response(html, {
-          headers: { 'Content-Type': 'text/html' }
+          headers: { "Content-Type": "text/html" }
         });
       } catch (error) {
-        console.error('Error handling web invite:', error);
-        return new Response(createErrorPage('An error occurred while processing this web invite.'), {
-          headers: { 'Content-Type': 'text/html' }
+        console.error("Error handling web invite:", error);
+        return new Response(createErrorPage("An error occurred while processing this web invite."), {
+          headers: { "Content-Type": "text/html" }
         });
       }
     }
-    
-    // Handle home page and other static content
-    if (path === '/' || path === '/index.html') {
-      // Use the content directly from index.html
+    if (path === "/" || path === "/index.html") {
       return new Response(`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1292,8 +1435,13 @@ export default {
             left: 0;
             right: 0;
             bottom: 0;
-            /* Remove the diagonal line pattern to make images clearer */
-            background: none;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(93, 64, 55, 0.05),
+                rgba(93, 64, 55, 0.05) 2px,
+                transparent 2px,
+                transparent 8px
+            );
             pointer-events: none;
         }
         
@@ -1349,7 +1497,7 @@ export default {
         }
         
         .rights-list li:before {
-            content: "★";
+            content: "\u2605";
             position: absolute;
             left: 0;
             color: var(--accent-color);
@@ -1478,7 +1626,7 @@ export default {
     
     <section>
         <div class="container">
-            <h2>Why Rabble?</h2>
+            <h2>Why build a new social app?</h2>
             <p>We believe in a future where communities everywhere are empowered to organize and create positive social change. Following the successful launch of Nos and Planetary apps on the Nostr protocol, we're now focusing on the needs of communities and groups looking for alternatives to Facebook Groups, WhatsApp, and Slack.</p>
             
             <div class="features">
@@ -1503,99 +1651,6 @@ export default {
         </div>
     </section>
     
-    <section style="background: linear-gradient(to bottom, #000, #3e2723); color: white; padding: 8rem 0 4rem; position: relative; overflow: hidden;">
-        <!-- Background decorative elements -->
-        <div style="position: absolute; top: 0; left: 0; right: 0; height: 15px; background: #8d6e63;"></div>
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23ffffff\" fill-opacity=\"0.05\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E'); opacity: 0.5;"></div>
-        
-        <div class="container" style="position: relative; z-index: 1;">
-            <div style="text-align: center; margin-bottom: 5rem;">
-                <h2 style="font-size: 3.5rem; margin-bottom: 1.5rem; color: white; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 0 rgba(0,0,0,0.5);">Community Features</h2>
-                <div style="width: 100px; height: 4px; background: #8d6e63; margin: 0 auto 2rem;"></div>
-                <p style="font-size: 1.5rem; max-width: 700px; margin: 0 auto; line-height: 1.6;">Rabble provides comprehensive tools for communities to connect, coordinate, and collaborate</p>
-            </div>
-            
-            <!-- Feature Showcase - App-like UI -->
-            <div style="position: relative; display: flex; justify-content: center; margin-bottom: 8rem;">
-                <!-- Device frame -->
-                <div style="position: relative; width: 80%; max-width: 1100px;">
-                    <!-- Main feature phone -->
-                    <div style="background: #000; border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); overflow: hidden; padding: 20px; border: 10px solid #222; position: relative; z-index: 3; transform: perspective(1000px) rotateY(0deg); width: 100%; max-width: 500px; margin: 0 auto;">
-                        <div style="position: relative; overflow: hidden; border-radius: 20px; height: 600px; background: #f5f1e9;">
-                            <div style="position: absolute; top: 0; left: 0; right: 0; height: 60px; background: #5d4037; color: white; display: flex; align-items: center; padding: 0 20px; font-weight: bold; font-size: 18px;">
-                                <span style="margin-left: 10px;">Rabble Communities</span>
-                            </div>
-                            
-                            <!-- Tabs navigation -->
-                            <div style="position: absolute; top: 60px; left: 0; right: 0; height: 50px; background: #8d6e63; display: flex; justify-content: space-around; align-items: center; color: white;">
-                                <div style="padding: 8px 12px; background: #5d4037; border-radius: 5px;">Posts</div>
-                                <div>Chat</div>
-                                <div>Events</div>
-                                <div>Asks</div>
-                            </div>
-                            
-                            <!-- Scrollable content area -->
-                            <div style="position: absolute; top: 110px; left: 0; right: 0; bottom: 0; overflow: hidden; background: #f5f1e9;">
-                                <img src="static/assets/posts.png" alt="Rabble posts interface" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Features Grid -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; margin-top: 2rem;">
-                <!-- Feature 1 -->
-                <div style="background: rgba(0,0,0,0.2); border-radius: 15px; padding: 2.5rem; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2)';">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, #8d6e63, #5d4037);"></div>
-                    <img src="static/assets/posts.png" alt="Rabble posts interface" style="width: 80px; height: 80px; object-fit: cover; border-radius: 15px; margin-bottom: 1.5rem; border: 3px solid #8d6e63;">
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: white;">Social Posts</h3>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.6;">Share updates, articles, and media with your community through familiar social media style posts and discussions.</p>
-                </div>
-                
-                <!-- Feature 2 -->
-                <div style="background: rgba(0,0,0,0.2); border-radius: 15px; padding: 2.5rem; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2)';">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, #8d6e63, #5d4037);"></div>
-                    <img src="static/assets/chat.png" alt="Rabble chat interface" style="width: 80px; height: 80px; object-fit: cover; border-radius: 15px; margin-bottom: 1.5rem; border: 3px solid #8d6e63;">
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: white;">Threaded Chat</h3>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.6;">Engage in real-time conversations with organized threading to keep discussions focused and accessible.</p>
-                </div>
-                
-                <!-- Feature 3 -->
-                <div style="background: rgba(0,0,0,0.2); border-radius: 15px; padding: 2.5rem; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2)';">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, #8d6e63, #5d4037);"></div>
-                    <img src="static/assets/asks_offers.png" alt="Rabble asks and offers interface" style="width: 80px; height: 80px; object-fit: cover; border-radius: 15px; margin-bottom: 1.5rem; border: 3px solid #8d6e63;">
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: white;">Asks & Offers</h3>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.6;">Request help or offer support to meet your community's needs—from rides to protests to sharing resources.</p>
-                </div>
-                
-                <!-- Feature 4 -->
-                <div style="background: rgba(0,0,0,0.2); border-radius: 15px; padding: 2.5rem; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2)';">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, #8d6e63, #5d4037);"></div>
-                    <img src="static/assets/events.png" alt="Rabble events interface" style="width: 80px; height: 80px; object-fit: cover; border-radius: 15px; margin-bottom: 1.5rem; border: 3px solid #8d6e63;">
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: white;">Community Events</h3>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.6;">Organize, promote, and coordinate events with integrated RSVP and reminder functionality.</p>
-                </div>
-                
-                <!-- Feature 5 -->
-                <div style="background: rgba(0,0,0,0.2); border-radius: 15px; padding: 2.5rem; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: transform 0.3s, box-shadow 0.3s; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-10px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.2)';">
-                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: linear-gradient(to right, #8d6e63, #5d4037);"></div>
-                    <img src="static/assets/posting_event.png" alt="Creating content in Rabble" style="width: 80px; height: 80px; object-fit: cover; border-radius: 15px; margin-bottom: 1.5rem; border: 3px solid #8d6e63;">
-                    <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: white;">Easily Create Content</h3>
-                    <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem; line-height: 1.6;">Rabble makes it simple to create events, posts, and other content to share with your community.</p>
-                </div>
-            </div>
-            
-            <!-- CTA Button -->
-            <div style="text-align: center; margin-top: 5rem;">
-                <a href="https://app.rabble.community" style="display: inline-block; background: linear-gradient(to right, #8d6e63, #5d4037); color: white; padding: 1rem 3rem; border-radius: 50px; font-size: 1.25rem; font-weight: bold; text-decoration: none; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='0 15px 30px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 10px 20px rgba(0,0,0,0.3)';">
-                    Try Rabble Now
-                </a>
-                <p style="color: rgba(255,255,255,0.7); margin-top: 1.5rem; font-size: 1rem;">Join thousands of communities already connecting on Rabble</p>
-            </div>
-        </div>
-    </section>
-    
     <section class="bill-of-rights">
         <div class="container">
             <h2>A Bill of Rights for Social Media</h2>
@@ -1612,7 +1667,7 @@ export default {
     <section>
         <div class="container">
             <h2>Our Approach</h2>
-            <p>We use an open, decentralized protocol - Nostr - to put users in control of their online social experience, feed, and personal communities. We're eliminating the ad-driven model—which is predicated on likes and engagement—and instead put users in control of what they see, and from whom.</p>
+            <p>We use an open, decentralized protocol - Nostr - to put users in control of their online social experience, feed, and personal communities. We're eliminating the ad-driven model\u2014which is predicated on likes and engagement\u2014and instead put users in control of what they see, and from whom.</p>
             
             <div class="features">
                 <div class="feature-card">
@@ -1641,7 +1696,7 @@ export default {
             <h2>Join Us in Building a Better Social Experience</h2>
             <p>rabble.community is available now! We're working to create a platform where communities, not corporations, hold the power over online communication.</p>
             <a href="https://app.rabble.community" class="btn">Use Rabble Now</a>
-            <p style="margin-top: 20px; font-size: 1.1rem;">Access the web app at <a href="https://app.rabble.community" style="color: white; text-decoration: underline;">app.rabble.community</a> — iOS and Android apps coming soon!</p>
+            <p style="margin-top: 20px; font-size: 1.1rem;">Access the web app at <a href="https://app.rabble.community" style="color: white; text-decoration: underline;">app.rabble.community</a> \u2014 iOS and Android apps coming soon!</p>
         </div>
     </section>
     
@@ -1653,37 +1708,29 @@ export default {
     </footer>
 </body>
 </html>`, {
-        headers: { 'Content-Type': 'text/html' }
+        headers: { "Content-Type": "text/html" }
       });
     }
-    
-    // Handle blog and other static content paths
-    if (path.startsWith('/blog/') || path === '/blog') {
-      // This would typically load from KV or another source
-      // For demo purposes, returning a simple message
+    if (path.startsWith("/blog/") || path === "/blog") {
       return new Response(createPage(
         "Blog",
         "Latest news and updates from the Rabble team",
         `<h1>Rabble Blog</h1>
         <p>This is where blog posts would be displayed...</p>`
       ), {
-        headers: { 'Content-Type': 'text/html' }
+        headers: { "Content-Type": "text/html" }
       });
     }
-    
-    // Handle "About" page
-    if (path === '/about') {
+    if (path === "/about") {
       return new Response(createPage(
         "About Rabble",
         "Learn about our mission and team",
         `<h1>About Rabble</h1>
         <p>Rabble is a privacy-first communication platform...</p>`
       ), {
-        headers: { 'Content-Type': 'text/html' }
+        headers: { "Content-Type": "text/html" }
       });
     }
-    
-    // Fallback - return 404
     return new Response(createPage(
       "Page Not Found",
       "The requested page could not be found",
@@ -1694,7 +1741,182 @@ export default {
       </div>`
     ), {
       status: 404,
-      headers: { 'Content-Type': 'text/html' }
+      headers: { "Content-Type": "text/html" }
     });
   }
 };
+
+// node_modules/wrangler/templates/middleware/middleware-ensure-req-body-drained.ts
+var drainBody = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env);
+  } finally {
+    try {
+      if (request.body !== null && !request.bodyUsed) {
+        const reader = request.body.getReader();
+        while (!(await reader.read()).done) {
+        }
+      }
+    } catch (e) {
+      console.error("Failed to drain the unused request body.", e);
+    }
+  }
+}, "drainBody");
+var middleware_ensure_req_body_drained_default = drainBody;
+
+// node_modules/wrangler/templates/middleware/middleware-miniflare3-json-error.ts
+function reduceError(e) {
+  return {
+    name: e?.name,
+    message: e?.message ?? String(e),
+    stack: e?.stack,
+    cause: e?.cause === void 0 ? void 0 : reduceError(e.cause)
+  };
+}
+__name(reduceError, "reduceError");
+var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx) => {
+  try {
+    return await middlewareCtx.next(request, env);
+  } catch (e) {
+    const error = reduceError(e);
+    return Response.json(error, {
+      status: 500,
+      headers: { "MF-Experimental-Error-Stack": "true" }
+    });
+  }
+}, "jsonError");
+var middleware_miniflare3_json_error_default = jsonError;
+
+// .wrangler/tmp/bundle-alrEtx/middleware-insertion-facade.js
+var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
+  middleware_ensure_req_body_drained_default,
+  middleware_miniflare3_json_error_default
+];
+var middleware_insertion_facade_default = src_default;
+
+// node_modules/wrangler/templates/middleware/common.ts
+var __facade_middleware__ = [];
+function __facade_register__(...args) {
+  __facade_middleware__.push(...args.flat());
+}
+__name(__facade_register__, "__facade_register__");
+function __facade_invokeChain__(request, env, ctx, dispatch, middlewareChain) {
+  const [head, ...tail] = middlewareChain;
+  const middlewareCtx = {
+    dispatch,
+    next(newRequest, newEnv) {
+      return __facade_invokeChain__(newRequest, newEnv, ctx, dispatch, tail);
+    }
+  };
+  return head(request, env, ctx, middlewareCtx);
+}
+__name(__facade_invokeChain__, "__facade_invokeChain__");
+function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
+  return __facade_invokeChain__(request, env, ctx, dispatch, [
+    ...__facade_middleware__,
+    finalMiddleware
+  ]);
+}
+__name(__facade_invoke__, "__facade_invoke__");
+
+// .wrangler/tmp/bundle-alrEtx/middleware-loader.entry.ts
+var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
+  constructor(scheduledTime, cron, noRetry) {
+    this.scheduledTime = scheduledTime;
+    this.cron = cron;
+    this.#noRetry = noRetry;
+  }
+  static {
+    __name(this, "__Facade_ScheduledController__");
+  }
+  #noRetry;
+  noRetry() {
+    if (!(this instanceof ___Facade_ScheduledController__)) {
+      throw new TypeError("Illegal invocation");
+    }
+    this.#noRetry();
+  }
+};
+function wrapExportedHandler(worker) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__ === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__.length === 0) {
+    return worker;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
+    __facade_register__(middleware);
+  }
+  const fetchDispatcher = /* @__PURE__ */ __name(function(request, env, ctx) {
+    if (worker.fetch === void 0) {
+      throw new Error("Handler does not export a fetch() function.");
+    }
+    return worker.fetch(request, env, ctx);
+  }, "fetchDispatcher");
+  return {
+    ...worker,
+    fetch(request, env, ctx) {
+      const dispatcher = /* @__PURE__ */ __name(function(type, init) {
+        if (type === "scheduled" && worker.scheduled !== void 0) {
+          const controller = new __Facade_ScheduledController__(
+            Date.now(),
+            init.cron ?? "",
+            () => {
+            }
+          );
+          return worker.scheduled(controller, env, ctx);
+        }
+      }, "dispatcher");
+      return __facade_invoke__(request, env, ctx, dispatcher, fetchDispatcher);
+    }
+  };
+}
+__name(wrapExportedHandler, "wrapExportedHandler");
+function wrapWorkerEntrypoint(klass) {
+  if (__INTERNAL_WRANGLER_MIDDLEWARE__ === void 0 || __INTERNAL_WRANGLER_MIDDLEWARE__.length === 0) {
+    return klass;
+  }
+  for (const middleware of __INTERNAL_WRANGLER_MIDDLEWARE__) {
+    __facade_register__(middleware);
+  }
+  return class extends klass {
+    #fetchDispatcher = /* @__PURE__ */ __name((request, env, ctx) => {
+      this.env = env;
+      this.ctx = ctx;
+      if (super.fetch === void 0) {
+        throw new Error("Entrypoint class does not define a fetch() function.");
+      }
+      return super.fetch(request);
+    }, "#fetchDispatcher");
+    #dispatcher = /* @__PURE__ */ __name((type, init) => {
+      if (type === "scheduled" && super.scheduled !== void 0) {
+        const controller = new __Facade_ScheduledController__(
+          Date.now(),
+          init.cron ?? "",
+          () => {
+          }
+        );
+        return super.scheduled(controller);
+      }
+    }, "#dispatcher");
+    fetch(request) {
+      return __facade_invoke__(
+        request,
+        this.env,
+        this.ctx,
+        this.#dispatcher,
+        this.#fetchDispatcher
+      );
+    }
+  };
+}
+__name(wrapWorkerEntrypoint, "wrapWorkerEntrypoint");
+var WRAPPED_ENTRY;
+if (typeof middleware_insertion_facade_default === "object") {
+  WRAPPED_ENTRY = wrapExportedHandler(middleware_insertion_facade_default);
+} else if (typeof middleware_insertion_facade_default === "function") {
+  WRAPPED_ENTRY = wrapWorkerEntrypoint(middleware_insertion_facade_default);
+}
+var middleware_loader_entry_default = WRAPPED_ENTRY;
+export {
+  __INTERNAL_WRANGLER_MIDDLEWARE__,
+  middleware_loader_entry_default as default
+};
+//# sourceMappingURL=index.js.map
