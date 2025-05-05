@@ -1,21 +1,23 @@
-name = "invite-gateway"
-main = "src/index.ts"
+# Top-level settings
 compatibility_date = "2024-06-01"
 compatibility_flags = ["nodejs_compat"]
-
-# Cloudflare account details
 account_id = "c84e7a9bf7ed99cb41b8e73566568c75"
-# zone_id will be determined from routes
 
-# Bind KV namespace
+# Configuration specific to the chus.me project environment
+[env.production]
+name = "chus-me" # Should match the Cloudflare Pages project name
 kv_namespaces = [
   { binding = "INVITES", id = "57a39408dd6e4fbc91ae423b82293f43" }
 ]
+# Define secrets/vars needed by chus.me in Cloudflare dashboard or via `wrangler secret put`
+# [vars]
+# INVITE_TOKEN = "your_secret_token_here" # Example - SET VIA CLI OR DASHBOARD
 
-# Routes (adjust as needed)
-routes = [
-  "rabble.community/*"
-]
-
-# Secrets (set via Wrangler or CF dashboard)
-# env.INVITE_TOKEN is your shared secret for creating invites 
+# Configuration specific to the chusme.social project environment
+# We use a different env name (e.g., production_social) to distinguish if needed,
+# but Pages projects often manage environments via branch deployments.
+# For Pages CLI commands, you often specify --project-name instead of relying on env here.
+[env.production_social]
+name = "chusme-social" # Should match the Cloudflare Pages project name
+# No KV needed for social page based on current code
+# [vars] # Define any vars needed by chusme.social

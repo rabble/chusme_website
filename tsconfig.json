@@ -1,12 +1,21 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "lib": ["WebWorker", "ES2020"],
+    "lib": ["ES2020"],
     "strict": true,
+    "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
+    "outDir": "./dist",
+    "rootDir": ".",
     "types": ["@cloudflare/workers-types"]
+  },
+  "include": ["./**/*.ts"],
+  "exclude": ["node_modules", "dist"],
+  "scripts": {
+    "deploy:chusme": "npm run build && wrangler pages deploy dist_final/chus.me --project-name=chus-me",
+    "build:prepare": "rm -rf dist_final && mkdir -p dist_final/chus.me dist_final/chusme.social && mv dist/chus.me/src/index.js dist_final/chus.me/_worker.js && mv dist/chus.me/src/invite-handler.js dist_final/chus.me/invite-handler.js && mv dist/chusme.social/src/index.js dist_final/chusme.social/_worker.js"
   }
 } 
