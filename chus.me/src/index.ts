@@ -219,11 +219,77 @@ function createErrorPage(message: string): string {
   );
 }
 
+const APPLE_APP_SITE_ASSOCIATION_CONTENT = `{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "GZCZBKH7MY.app.verse.prototype.plur",
+        "paths": [
+          "/i/*", 
+          "/join/*", 
+          "/j/*",
+          "/join-community*",
+          "/g/*"
+        ],
+        "components": [
+          {
+            "/": "/i/*",
+            "comment": "Matches any URL with a path that starts with /i/"
+          },
+          {
+            "/": "/join/*",
+            "comment": "Matches any URL with a path that starts with /join/"
+          },
+          {
+            "/": "/j/*",
+            "comment": "Matches any URL with a path that starts with /j/ (short URL)"
+          },
+          {
+            "/": "/join-community*",
+            "comment": "Matches any URL with a path that starts with /join-community"
+          },
+          {
+            "/": "/g/*",
+            "comment": "Matches any URL with a path that starts with /g/"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["GZCZBKH7MY.app.verse.prototype.plur"]
+  }
+}`;
+
+const ASSETLINKS_JSON_CONTENT = `[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.verse.prototype.plur",
+    "sha256_cert_fingerprints":
+    ["6F:36:C3:68:74:18:5E:03:B4:79:3D:82:EF:54:CE:34:26:ED:6E:C8:12:B7:CD:E2:F4:FA:9C:81:2F:C7:14:F4"]
+  }
+}]`;
+
 // Main worker for chus.me (invite/shortlink handling)
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
     const path = url.pathname;
+    
+    // Handle .well-known paths for app linking
+    if (path === '/.well-known/apple-app-site-association') {
+      return new Response(APPLE_APP_SITE_ASSOCIATION_CONTENT, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (path === '/.well-known/assetlinks.json') {
+      return new Response(ASSETLINKS_JSON_CONTENT, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
     
     // API endpoints
     if (path.startsWith('/api/')) {
