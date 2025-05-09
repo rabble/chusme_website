@@ -570,9 +570,74 @@ export default {
        return new Response(`Vanity URL/Nostr redirect placeholder for ${path}`, { status: 501 });
     }
 
+    // Add a method to create a fake invite directly in the URL for testing, bypassing KV
+    // This will allow testing the deep linking even if KV is not configured
+    if (path.startsWith('/create-test-invite/')) {
+      try {
+        // Format: /create-test-invite/groupId/relay
+        // Extract groupId and relay from the path
+        const segments = path.split('/').filter(s => s);
+        if (segments.length < 3) {
+          return new Response(createErrorPage('Invalid test invite URL format. Use /create-test-invite/{groupId}/{relay}'), {
+            headers: { 'Content-Type': 'text/html' }, status: 400
+          });
+        }
+        
+        const groupId = segments[1];
+        const relay = decodeURIComponent(segments[2]);
+        
+        // Generate a random code
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let code = '';
+        for (let i = 0; i < 8; i++) {
+          code += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        
+        // Construct a direct deep link for testing
+        const deepLink = `plur://join-community?group-id=${groupId}&code=${code}&relay=${encodeURIComponent(relay)}`;
+        
+        // Return a test page with info and links
+        const testPageContent = `
+          <h1>Test Invite Created</h1>
+          <p>This is a test invite that doesn't require KV storage. It's for development and testing only.</p>
+          <ul>
+            <li><strong>Group ID:</strong> ${groupId}</li>
+            <li><strong>Code:</strong> ${code}</li>
+            <li><strong>Relay:</strong> ${relay}</li>
+          </ul>
+          <div style="margin: 2rem 0;">
+            <h2>Test URLs</h2>
+            <p><strong>Deep Link URL (for testing in app):</strong><br>
+            <a href="${deepLink}">${deepLink}</a></p>
+            <p><strong>Share URL Format (what the app should generate):</strong><br>
+            https://chus.me/i/${code}</p>
+            <p><strong>Note:</strong> The share URL won't work because this test invite is not stored in KV.</p>
+          </div>
+          <a href="${deepLink}" class="button-primary">Open Test Invite in App</a>
+        `;
+        
+        return new Response(createPage('Test Invite', 'Test invite for development and debugging', testPageContent), {
+          headers: { 'Content-Type': 'text/html' }
+        });
+      } catch (error) {
+        console.error('Error creating test invite:', error);
+        return new Response(createErrorPage('An error occurred while creating the test invite.'), {
+          headers: { 'Content-Type': 'text/html' }, status: 500
+        });
+      }
+    }
+
     // Default response for chus.me (maybe a simple info page or redirect)
     if (path === '/') {
-       const rootContent = `<p>This is the short link service for <a href="https://chusme.social" target="_blank">chusme.social</a>.</p>`;
+       const rootContent = `
+         <p>This is the short link service for <a href="https://chusme.social" target="_blank">chusme.social</a>.</p>
+         <div style="margin-top: 2rem;">
+           <h2>Testing Tools</h2>
+           <p>If you're experiencing KV binding issues, you can create a test invite with this format:</p>
+           <code>/create-test-invite/{groupId}/{relay}</code>
+           <p>Example: <a href="/create-test-invite/testgroup123/wss%3A%2F%2Fcommunities.nos.social">/create-test-invite/testgroup123/wss%3A%2F%2Fcommunities.nos.social</a></p>
+         </div>
+       `;
        return new Response(createPage('Chus.me Links', 'Chusme Shortlink Service', rootContent), {
          headers: { 'Content-Type': 'text/html' }
        });
