@@ -15,6 +15,7 @@
 ### Added
 - Created `INVITE_LINK_SERVICE.md` to document the invite link service, deep linking mechanisms, and API details for Flutter app integration.
 - Configured the `chus.me` service (`chus.me/src/index.ts`) to serve `apple-app-site-association` for iOS Universal Links and `assetlinks.json` for Android App Links. Both are served from their respective `/.well-known/` paths with `application/json` content type.
+- Added a test invite creation tool at `/create-test-invite/{groupId}/{relay}` that allows generating deep links for testing without requiring KV storage access.
 
 ### Fixed
 - Ensured `apple-app-site-association` is now correctly served from the `chus.me` domain, enabling Universal Links for `https://chus.me`.
