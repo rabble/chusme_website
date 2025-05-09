@@ -431,6 +431,14 @@ export default {
           });
         }
         
+        // Check if env.INVITES exists
+        if (!env.INVITES) {
+          console.error('KV namespace INVITES is not configured');
+          return new Response(createErrorPage('Service configuration error. Please contact support.'), {
+            headers: { 'Content-Type': 'text/html' }, status: 500
+          });
+        }
+        
         const fullCode = await resolveShortCode(env, shortCode);
         console.log(`Short code ${shortCode} resolved to: ${fullCode}`);
         
@@ -472,10 +480,27 @@ export default {
             headers: { 'Content-Type': 'text/html' }, status: 400
           });
         }
+
+        // Check if env.INVITES exists
+        if (!env.INVITES) {
+          console.error('KV namespace INVITES is not configured');
+          return new Response(createErrorPage('Service configuration error. Please contact support.'), {
+            headers: { 'Content-Type': 'text/html' }, status: 500
+          });
+        }
+
+        // Check if code contains the plur:// protocol, which indicates the app is creating malformed URLs
+        if (code.includes('plur://') || code.includes('://')) {
+          console.error(`Received malformed invite code containing protocol: ${code}`);
+          return new Response(createErrorPage('Invalid invite format. The app is generating incorrect invite links.'), {
+            headers: { 'Content-Type': 'text/html' }, status: 400
+          });
+        }
         
         const inviteData = await getInvite(env, code);
         
         if (!inviteData) {
+          console.log(`Invite not found for code: ${code}`);
           return new Response(createErrorPage('This invite link is invalid or has expired.'), {
             headers: { 'Content-Type': 'text/html' }, status: 404
           });
@@ -483,6 +508,7 @@ export default {
         
         // Construct deep link URI
         const deepLink = `plur://join-community?group-id=${inviteData.groupId}&code=${code}&relay=${encodeURIComponent(inviteData.relay)}`;
+        console.log(`Redirecting to deep link: ${deepLink}`);
         
         // Redirect to Plur app
         return Response.redirect(deepLink, 302);
@@ -502,6 +528,14 @@ export default {
         if (!code) {
           return new Response(createErrorPage('Invalid web invite URL'), {
             headers: { 'Content-Type': 'text/html' }, status: 400
+          });
+        }
+        
+        // Check if env.INVITES exists
+        if (!env.INVITES) {
+          console.error('KV namespace INVITES is not configured');
+          return new Response(createErrorPage('Service configuration error. Please contact support.'), {
+            headers: { 'Content-Type': 'text/html' }, status: 500
           });
         }
         
