@@ -18,8 +18,12 @@
 
 ### Fixed
 - Ensured `apple-app-site-association` is now correctly served from the `chus.me` domain, enabling Universal Links for `https://chus.me`.
+- Fixed the invite link handler to properly check for KV namespace existence before trying to access it, resolving "Cannot read properties of undefined" errors.
+- Added detection and improved error messages for malformed invite URLs where clients try to use the full deep link as the invite code.
+- Created `PLUR_APP_INVITE_LINK_FIX.md` to document the correct invite URL format and help resolve issues in the Flutter app.
 
 - Refactor invite gateway into separate `chus.me` (shortlinks/invites) and `chusme.social` (landing page) services.
 - Update build process (`package.json`, `tsconfig.json`) to handle separate service outputs.
 - Configure `wrangler.toml` for Cloudflare Pages deployment.
 - Update URLs and branding from `rabble.community` to `chus.me`, `chusme.social`, and `chusme.app`.
+yes
