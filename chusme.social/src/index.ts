@@ -473,6 +473,77 @@ export default {
         'posts.png': '510cc54c-cd4a-40b2-bce3-effb502d2000'
       };
       
+      // Check for iOS screenshots first (jpg files)
+      if (path.startsWith('/static/assets/ios/') && fileName.endsWith('.jpg')) {
+        const isProduction = !request.url.includes('localhost'); // Simple prod check
+        
+        if (isProduction) {
+          // In production, we would use Cloudflare images or another CDN
+          return Response.redirect(`https://your-cdn-url/${fileName}`, 302);
+        } else {
+          // For local development, we'll serve a more realistic iPhone mockup SVG
+          // that shows the filename to simulate the actual screenshot
+          const screenshotName = fileName.replace(/[-_]/g, ' ').replace('.jpg', '');
+          
+          // Generate a unique color based on the filename for visual distinction
+          const getHashColor = (text: string) => {
+            let hash = 0;
+            for (let i = 0; i < text.length; i++) {
+              hash = text.charCodeAt(i) + ((hash << 5) - hash);
+            }
+            let color = '#';
+            for (let i = 0; i < 3; i++) {
+              const value = (hash >> (i * 8)) & 0xFF;
+              color += ('00' + value.toString(16)).substr(-2);
+            }
+            return color;
+          };
+          
+          const bgColor = getHashColor(fileName);
+          
+          // Create an SVG that looks like an iPhone with the screenshot name
+          const iphoneSvg = `<svg width="390" height="800" xmlns="http://www.w3.org/2000/svg">
+            <!-- iPhone frame -->
+            <rect width="390" height="800" rx="50" ry="50" fill="#111111"/>
+            
+            <!-- Screen background -->
+            <rect x="20" y="20" width="350" height="760" rx="35" ry="35" fill="#FFFFFF"/>
+            
+            <!-- Content area with unique color based on filename -->
+            <rect x="20" y="20" width="350" height="760" rx="35" ry="35" fill="${bgColor}" opacity="0.1"/>
+            
+            <!-- Notch -->
+            <path d="M120,20 L270,20 C270,20 280,20 280,30 L280,50 C280,60 270,60 270,60 L120,60 C120,60 110,60 110,50 L110,30 C110,20 120,20 120,20 Z" fill="#111111"/>
+            
+            <!-- Home indicator -->
+            <rect x="155" y="765" width="80" height="5" rx="2.5" ry="2.5" fill="#111111"/>
+            
+            <!-- iPhone buttons (side) -->
+            <rect x="0" y="150" width="5" height="60" rx="2" ry="2" fill="#333333"/>
+            <rect x="0" y="230" width="5" height="40" rx="2" ry="2" fill="#333333"/>
+            <rect x="0" y="290" width="5" height="40" rx="2" ry="2" fill="#333333"/>
+            <rect x="385" y="180" width="5" height="80" rx="2" ry="2" fill="#333333"/>
+            
+            <!-- Screenshot name -->
+            <text x="195" y="400" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#333333">${screenshotName}</text>
+            
+            <!-- App UI simulation -->
+            <rect x="35" y="70" width="320" height="50" rx="8" ry="8" fill="#F7F7F7" stroke="#E5E5E5" stroke-width="1"/>
+            <text x="55" y="103" font-family="Arial" font-size="18" fill="#333333">Chusme</text>
+            
+            <!-- Simulate content -->
+            <rect x="40" y="140" width="310" height="580" rx="8" ry="8" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1"/>
+          </svg>`;
+          
+          return new Response(iphoneSvg, {
+            headers: {
+              'Content-Type': 'image/svg+xml',
+              'Cache-Control': 'public, max-age=3600'
+            }
+          });
+        }
+      }
+      
       // If we have a Cloudflare Image, redirect to it
       if (cloudflareImagesMap[fileName]) {
         const isProduction = !request.url.includes('localhost'); // Simple prod check
@@ -888,6 +959,22 @@ export default {
       });
     }
     
+    // Handle favicon.ico request
+    if (path === '/favicon.ico') {
+      // Return a simple SVG favicon
+      const svgFavicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+        <rect width="100" height="100" fill="#5d4037" rx="20" ry="20" />
+        <text x="50" y="70" font-family="Arial" font-size="60" text-anchor="middle" fill="white">🗣️</text>
+      </svg>`;
+      
+      return new Response(svgFavicon, {
+        headers: {
+          'Content-Type': 'image/svg+xml',
+          'Cache-Control': 'public, max-age=86400'
+        }
+      });
+    }
+    
     // Handle other paths (e.g., /about, /blog, /privacy) by trying to render markdown
     // This assumes markdown files exist at the root or a known location
     // You might need to adjust the path logic based on your project structure
@@ -897,8 +984,8 @@ export default {
       let markdownContent = "";
       const pageName = path.slice(1); // Remove leading slash
       
-      // Basic security check: allow only alphanumeric paths
-      if (!/^[a-zA-Z0-9_-]+$/.test(pageName)) {
+      // Basic security check: allow only alphanumeric paths for markdown rendering
+      if (pageName !== '' && !/^[a-zA-Z0-9_-]+$/.test(pageName)) {
           throw new Error('Invalid path');
       } 
       

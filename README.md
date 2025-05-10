@@ -36,7 +36,7 @@ A Cloudflare Worker service that functions as both an invite gateway and website
    - Set the `INVITE_TOKEN` secret: `npx wrangler secret put INVITE_TOKEN`
 
 3. Configure DNS
-   - Point `rabble.community` to Cloudflare
+   - Point `chus.me` to Cloudflare
 
 4. Configure App-Linking
    - In iOS app: Enable Associated Domains with `applinks:rabble.community`

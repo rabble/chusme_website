@@ -12,6 +12,10 @@
     h1 {
       color: #5d4037;
     }
+    h2 {
+      color: #5d4037;
+      margin-top: 30px;
+    }
     .asset-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -30,12 +34,63 @@
       font-size: 14px;
       word-break: break-all;
     }
+    .iphone-frame {
+      background: #111111;
+      border-radius: 36px;
+      padding: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      position: relative;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .iphone-frame::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40%;
+      height: 25px;
+      background-color: #111111;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      z-index: 2;
+    }
+    .iphone-frame::after {
+      content: "";
+      position: absolute;
+      bottom: 7px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 5px;
+      background-color: #111111;
+      border-radius: 3px;
+      z-index: 2;
+    }
+    .iphone-frame img {
+      border-radius: 24px;
+      width: 100%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+    .iphone-screen {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background-color: #f4f4f4;
+    }
+    .iphone-notch {
+      display: none; /* No longer needed with the before/after pseudo-elements */
+    }
   </style>
 </head>
 <body>
   <h1>Rabble Community Assets</h1>
   <p>This site hosts static assets for the rabble.community website.</p>
   
+  <h2>Web Images</h2>
   <div class="asset-list">
     <div class="asset-item">
       <img src="/static/assets/asks_offers.png" alt="Asks Offers">
@@ -80,6 +135,82 @@
     <div class="asset-item">
       <img src="/static/assets/user-control.png" alt="User Control">
       <p>/static/assets/user-control.png</p>
+    </div>
+  </div>
+  
+  <h2>iOS Screenshots</h2>
+  <div class="asset-list">
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/posts_screen.jpg" alt="Posts Screen">
+        </div>
+      </div>
+      <p>/static/assets/ios/posts_screen.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/chat.jpg" alt="Chat">
+        </div>
+      </div>
+      <p>/static/assets/ios/chat.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/events.jpg" alt="Events">
+        </div>
+      </div>
+      <p>/static/assets/ios/events.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/asks_offers.jpg" alt="Asks & Offers">
+        </div>
+      </div>
+      <p>/static/assets/ios/asks_offers.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/new_offer.jpg" alt="New Offer">
+        </div>
+      </div>
+      <p>/static/assets/ios/new_offer.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/user_profile.jpg" alt="User Profile">
+        </div>
+      </div>
+      <p>/static/assets/ios/user_profile.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/group_list.jpg" alt="Group List">
+        </div>
+      </div>
+      <p>/static/assets/ios/group_list.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/dms.jpg" alt="Direct Messages">
+        </div>
+      </div>
+      <p>/static/assets/ios/dms.jpg</p>
+    </div>
+    <div class="asset-item">
+      <div class="iphone-frame">
+        <div class="iphone-screen">
+          <img src="/static/assets/ios/zaps.jpg" alt="Zaps">
+        </div>
+      </div>
+      <p>/static/assets/ios/zaps.jpg</p>
     </div>
   </div>
 </body>

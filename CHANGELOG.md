@@ -17,12 +17,16 @@
 - Configured the `chus.me` service (`chus.me/src/index.ts`) to serve `apple-app-site-association` for iOS Universal Links and `assetlinks.json` for Android App Links. Both are served from their respective `/.well-known/` paths with `application/json` content type.
 - Added a test invite creation tool at `/create-test-invite/{groupId}/{relay}` that allows generating deep links for testing without requiring KV storage access.
 - Created `CLOUDFLARE_GUIDELINES.md` with comprehensive best practices for Cloudflare Workers development based on official recommendations.
+- Added a "Common Deployment Issues" section to `CLOUDFLARE_GUIDELINES.md` focusing on KV binding issues with Pages deployments.
+- Created `FIX_KV_BINDING.md` detailing how to resolve the INVITES KV namespace binding issue in Cloudflare Pages.
+- Created `VERIFY_KV_FIX.md` with step-by-step instructions to verify that the KV binding fix is working properly.
 
 ### Fixed
 - Ensured `apple-app-site-association` is now correctly served from the `chus.me` domain, enabling Universal Links for `https://chus.me`.
 - Fixed the invite link handler to properly check for KV namespace existence before trying to access it, resolving "Cannot read properties of undefined" errors.
 - Added detection and improved error messages for malformed invite URLs where clients try to use the full deep link as the invite code.
 - Created `PLUR_APP_INVITE_LINK_FIX.md` to document the correct invite URL format and help resolve issues in the Flutter app.
+- Documented a solution for the "KV namespace INVITES is not configured" error affecting invite links like `https://chus.me/i/ZHA65MN2`.
 
 - Refactor invite gateway into separate `chus.me` (shortlinks/invites) and `chusme.social` (landing page) services.
 - Update build process (`package.json`, `tsconfig.json`) to handle separate service outputs.

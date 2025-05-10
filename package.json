@@ -3,19 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:chusme": "wrangler dev chus.me/src/index.ts --kv INVITES --port 8788",
+    "dev:chusme": "wrangler dev chus.me/src/index.ts --env production --var INVITE_TOKEN=test_token123 --port 8790",
     "dev:social": "wrangler dev chusme.social/src/index.ts --port 8789",
     "build:tsc": "tsc",
     "build:prepare": "rm -rf dist_final && mkdir -p dist_final/chus.me dist_final/chusme.social && mv dist/chus.me/src/index.js dist_final/chus.me/_worker.js && mv dist/chus.me/src/invite-handler.js dist_final/chus.me/invite-handler.js && mv dist/chusme.social/src/index.js dist_final/chusme.social/_worker.js",
     "build": "npm run build:tsc && npm run build:prepare",
+    "test:invites:local": "node test-invite-gateway.js --env=local",
+    "test:invites:prod": "node test-invite-gateway.js --env=production",
     "deploy": "echo 'Use deploy:chusme or deploy:social instead' && exit 1",
     "deploy:chusme": "npm run build && wrangler pages deploy dist_final/chus.me --project-name=chus-me",
     "deploy:social": "npm run build && wrangler pages deploy dist_final/chusme.social --project-name=chusme-social",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250422.0",
     "typescript": "^5.8.3",
+    "vitest": "^1.6.0",
     "wrangler": "^4.12.1"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
   }
 }

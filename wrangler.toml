@@ -7,7 +7,7 @@ account_id = "c84e7a9bf7ed99cb41b8e73566568c75"
 [env.production]
 name = "chus-me" # Should match the Cloudflare Pages project name
 kv_namespaces = [
-  { binding = "INVITES", id = "57a39408dd6e4fbc91ae423b82293f43" }
+  { binding = "INVITES", id = "57a39408dd6e4fbc91ae423b82293f43", preview_id = "6c947cbd83314bb1b648ea309a6e9854" }
 ]
 # Define secrets/vars needed by chus.me in Cloudflare dashboard or via `wrangler secret put`
 # [vars]
