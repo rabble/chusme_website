@@ -9,6 +9,21 @@ export default async function handler(request: Request): Promise<Response> {
     <p>They're not just early adopters.<br>
     They're co-creators of the digital infrastructure they want to use.</p>
 
+    <div class="screenshot-grid">
+      <div class="screenshot">
+        <img src="/static/assets/ios/group_list.jpg" alt="Chusme group list" class="mobile-screenshot" />
+        <p>Group Spaces</p>
+      </div>
+      <div class="screenshot">
+        <img src="/static/assets/ios/new_offer.jpg" alt="New offer interface" class="mobile-screenshot" />
+        <p>Resource Sharing</p>
+      </div>
+      <div class="screenshot">
+        <img src="/static/assets/ios/user_profile.jpg" alt="User profile interface" class="mobile-screenshot" />
+        <p>Community Profiles</p>
+      </div>
+    </div>
+
     <div class="use-case-grid">
       <div class="use-case-card">
         <div class="use-case-emoji">🏘️</div>
@@ -94,9 +109,13 @@ export default async function handler(request: Request): Promise<Response> {
 
     <h2>Built With Organizers, Not Just For Them</h2>
 
-    <p>These use cases aren't hypothetical — they come from real-world organizers who are helping us test and shape Chusme in live pilot environments.</p>
-
-    <p>We're still in early development and learning fast.</p>
+    <div class="feature-section">
+      <div class="feature-content">
+        <p>These use cases aren't hypothetical — they come from real-world organizers who are helping us test and shape Chusme in live pilot environments.</p>
+        <p>We're still in early development and learning fast.</p>
+      </div>
+      <img src="/static/assets/ios/asks_offers.jpg" alt="Asks and offers interface" class="mobile-screenshot">
+    </div>
 
     <div class="cta-box">
       <h3>Want to collaborate on a pilot?</h3>
@@ -112,7 +131,7 @@ export default async function handler(request: Request): Promise<Response> {
     <p>In the meantime, you can:</p>
 
     <div class="next-steps">
-      <a href="https://github.com/verse/chusme" class="next-step-item">
+      <a href="https://github.com/verse-pbc/plur" class="next-step-item">
         <span class="next-step-icon">🔍</span>
         <span class="next-step-text">Follow development on GitHub</span>
       </a>

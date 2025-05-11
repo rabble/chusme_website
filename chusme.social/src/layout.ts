@@ -102,6 +102,15 @@ export function renderLayout({ title, description, content }: { title: string; d
       color: #6366F1;
     }
 
+    blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      border-left: 4px solid #6366F1;
+      background-color: #f9fafb;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
     footer {
       margin-top: 3rem;
       padding: 1.5rem 0;
@@ -180,6 +189,111 @@ export function renderLayout({ title, description, content }: { title: string; d
 
     tr:nth-child(even) {
       background-color: #f9f9f9;
+    }
+
+    /* Screenshots and Images */
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .screenshot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mobile-screenshot {
+      width: 100%;
+      max-width: 220px;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      border: 1px solid #e2e8f0;
+      transition: transform 0.2s ease;
+    }
+
+    .mobile-screenshot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .screenshot p {
+      margin-top: 0.75rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .feature-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      margin: 3rem 0;
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      background-color: #f8fafc;
+      transition: background-color 0.3s ease;
+    }
+
+    .feature-section:hover {
+      background-color: #f1f5f9;
+    }
+
+    .feature-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feature-section:nth-child(odd) {
+      flex-direction: row-reverse;
+    }
+
+    .feature-section .mobile-screenshot {
+      margin: 0 auto;
+      display: block;
+      max-width: 240px;
+    }
+
+    .feature-image {
+      width: 100%;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Pricing Table Styles */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .pricing-table th {
+      background-color: #f0f4ff;
+      font-weight: 700;
+      text-align: left;
+      padding: 1rem;
+      border: 1px solid #dde6ff;
+    }
+
+    .pricing-table td {
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      vertical-align: middle;
+    }
+
+    .pricing-table tr:nth-child(even) {
+      background-color: #f9fafb;
+    }
+
+    .pricing-table tr:hover {
+      background-color: #f5f7ff;
     }
 
     /* Code formatting */
@@ -520,6 +634,22 @@ export function renderLayout({ title, description, content }: { title: string; d
         padding: 0 0.75rem 1.5rem;
       }
 
+      .screenshot-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .feature-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.25rem;
+      }
+
+      .feature-section .mobile-screenshot {
+        max-width: 200px;
+        margin-bottom: 1rem;
+      }
+
       .help-links {
         flex-direction: column;
         align-items: center;
@@ -528,6 +658,29 @@ export function renderLayout({ title, description, content }: { title: string; d
       .help-link {
         width: 100%;
         justify-content: center;
+      }
+
+      .mobile-screenshot {
+        max-width: 180px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .screenshot-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-screenshot {
+        max-width: 220px;
+      }
+
+      .feature-section {
+        padding: 1rem;
+        margin: 2rem 0;
+      }
+
+      .feature-section .mobile-screenshot {
+        max-width: 180px;
       }
     }
 
@@ -550,6 +703,7 @@ export function renderLayout({ title, description, content }: { title: string; d
         <a href="/about">About</a>
         <a href="/how-it-works">How It Works</a>
         <a href="/use-cases">Use Cases</a>
+        <a href="/pricing">Pricing</a>
         <a href="/contribute">Contribute</a>
         <a href="/use-chusme">App</a>
         <a href="/get-started" class="btn-small">Get Started</a>
@@ -564,11 +718,12 @@ export function renderLayout({ title, description, content }: { title: string; d
     <p>
       <a href="/about">About</a> ·
       <a href="/how-it-works">How It Works</a> ·
+      <a href="/pricing">Pricing</a> ·
       <a href="/contribute">Contribute</a> ·
       <a href="https://chusme.app">App</a> ·
       <a href="/get-started">Get Started</a> ·
       <a href="/use-cases">Use Cases</a> ·
-      <a href="https://github.com/verse/chusme">GitHub</a> ·
+      <a href="https://github.com/verse-pbc/plur">GitHub</a> ·
       <a href="/privacy">Privacy Policy</a>
     </p>
   </footer>

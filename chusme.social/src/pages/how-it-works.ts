@@ -11,45 +11,56 @@ export default async function handler(request: Request): Promise<Response> {
     You can use our app — or run your own. You're never locked in.</p>
     
     <hr>
-    
+
     <h2>Start a Space</h2>
-    
-    <p>Anyone can start a Chusme space. All you need is:</p>
-    
-    <ul>
-      <li>A name for your group</li>
-      <li>A group bio and welcome message</li>
-      <li>Invite links for your community members</li>
-    </ul>
-    
-    <p>Each space gets:</p>
-    <ul>
-      <li>A private discussion feed</li>
-      <li>Optional broadcast-only channels</li>
-      <li>A group fund for contributions</li>
-      <li>Tools to post updates, events, documents, and more</li>
-    </ul>
+
+    <div class="feature-section">
+      <img src="/static/assets/ios/group_list.jpg" alt="Group list screen" class="mobile-screenshot">
+      <div class="feature-content">
+        <p>Anyone can start a Chusme space. All you need is:</p>
+
+        <ul>
+          <li>A name for your group</li>
+          <li>A group bio and welcome message</li>
+          <li>Invite links for your community members</li>
+        </ul>
+
+        <p>Each space gets:</p>
+        <ul>
+          <li>A private discussion feed</li>
+          <li>Optional broadcast-only channels</li>
+          <li>A group fund for contributions</li>
+          <li>Tools to post updates, events, documents, and more</li>
+        </ul>
+      </div>
+    </div>
     
     <hr>
-    
+
     <h2>Invite and Onboard</h2>
-    
-    <p>Once your group is live, you can:</p>
-    
-    <ul>
-      <li>Share a join link via text, email, QR, or WhatsApp</li>
-      <li>Choose whether your space is open or invite-only</li>
-      <li>Ask onboarding questions (like "where are you based?" or "how do you want to contribute?")</li>
-    </ul>
-    
-    <p>Chusme supports both informal hangouts and high-trust, role-based collaboration.</p>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <p>Once your group is live, you can:</p>
+
+        <ul>
+          <li>Share a join link via text, email, QR, or WhatsApp</li>
+          <li>Choose whether your space is public, private, or encrypted</li>
+          <li>Set join requirements (open, invite-only, or approval-based)</li>
+          <li>Ask onboarding questions (like "where are you based?" or "how do you want to contribute?")</li>
+        </ul>
+
+        <p>Chusme supports both informal hangouts and high-trust, role-based collaboration.</p>
+      </div>
+      <img src="/static/assets/ios/user_profile.jpg" alt="User profile screen" class="mobile-screenshot">
+    </div>
     
     <hr>
     
     <h2>Coordinate Together</h2>
-    
+
     <p>Every Chusme group gets:</p>
-    
+
     <ul>
       <li>📣 Message boards (chat + threaded replies)</li>
       <li>📆 Events with RSVP and follow-up</li>
@@ -57,7 +68,49 @@ export default async function handler(request: Request): Promise<Response> {
       <li>✅ Member-driven moderation</li>
       <li>📂 Shared documents and media</li>
     </ul>
-    
+
+    <div class="screenshot-grid">
+      <div class="screenshot">
+        <img src="/static/assets/ios/posts_screen.jpg" alt="Chusme posts screen" class="mobile-screenshot" />
+        <p>Posts & Updates</p>
+      </div>
+      <div class="screenshot">
+        <img src="/static/assets/ios/chat.jpg" alt="Chusme chat interface" class="mobile-screenshot" />
+        <p>Group Chat</p>
+      </div>
+      <div class="screenshot">
+        <img src="/static/assets/ios/events.jpg" alt="Chusme events calendar" class="mobile-screenshot" />
+        <p>Events Calendar</p>
+      </div>
+    </div>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <h3>Community Posts</h3>
+        <p>Share updates, questions, and resources with your entire community.</p>
+        <p>Perfect for organizing mutual aid, planning events, or coordinating group projects.</p>
+      </div>
+      <img src="/static/assets/ios/posts_screen.jpg" alt="Community posts interface" class="mobile-screenshot">
+    </div>
+
+    <div class="feature-section">
+      <img src="/static/assets/ios/events.jpg" alt="Event calendar view" class="mobile-screenshot">
+      <div class="feature-content">
+        <h3>Group Events Calendar</h3>
+        <p>Create and share events with RSVPs, locations, and automated reminders.</p>
+        <p>Your community's calendar stays in sync across all members.</p>
+      </div>
+    </div>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <h3>Direct Messages</h3>
+        <p>Private, encrypted communication between members.</p>
+        <p>Keep sensitive discussions secure and coordinate one-on-one.</p>
+      </div>
+      <img src="/static/assets/ios/dms.jpg" alt="Direct messages interface" class="mobile-screenshot">
+    </div>
+
     <p>Use it like:</p>
     <ul>
       <li>A signal-boost channel</li>
@@ -69,56 +122,66 @@ export default async function handler(request: Request): Promise<Response> {
     <hr>
     
     <h2>Unlock the Tools You Need</h2>
-    
-    <p>Chusme is free to use — but you can <strong>crowdfund to unlock extra tools</strong>:</p>
-    
-    <table>
-      <tr>
-        <th>Feature</th>
-        <th>Example Use</th>
-      </tr>
-      <tr>
-        <td>📹 Video hosting</td>
-        <td>Share training or event replays</td>
-      </tr>
-      <tr>
-        <td>🧑‍💼 Custom usernames</td>
-        <td>Create identities like <code>@sofia@mygroup.chusme.social</code></td>
-      </tr>
-      <tr>
-        <td>🌐 Public website</td>
-        <td>Publish updates or join pages</td>
-      </tr>
-      <tr>
-        <td>🗳️ Proposal voting</td>
-        <td>Decide how to spend pooled funds</td>
-      </tr>
-      <tr>
-        <td>📊 Analytics</td>
-        <td>See what's working in your community</td>
-      </tr>
-    </table>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <p>Chusme is free to use — but you can <strong>crowdfund to unlock extra tools</strong>:</p>
+
+        <table>
+          <tr>
+            <th>Feature</th>
+            <th>Example Use</th>
+          </tr>
+          <tr>
+            <td>📹 Video hosting</td>
+            <td>Share training or event replays</td>
+          </tr>
+          <tr>
+            <td>🧑‍💼 Custom usernames</td>
+            <td>Create identities like <code>@sofia@mygroup.chusme.social</code></td>
+          </tr>
+          <tr>
+            <td>🌐 Public website</td>
+            <td>Publish updates or join pages</td>
+          </tr>
+          <tr>
+            <td>🗳️ Proposal voting</td>
+            <td>Decide how to spend pooled funds</td>
+          </tr>
+          <tr>
+            <td>📊 Analytics</td>
+            <td>See what's working in your community</td>
+          </tr>
+        </table>
+      </div>
+      <img src="/static/assets/ios/asks_offers.jpg" alt="Asks and offers interface" class="mobile-screenshot">
+    </div>
     
     <blockquote>Any extra funds stay with your group — and you decide how to use them.</blockquote>
     
     <hr>
-    
+
     <h2>Contribute and Decide Together</h2>
-    
-    <p>Each group has its own <strong>community fund</strong>.</p>
-    
-    <ul>
-      <li>Members can chip in monthly or as-needed</li>
-      <li>Money goes first to unlock tools</li>
-      <li>Leftover funds can pay organizers, support members, or fund events</li>
-    </ul>
-    
-    <p>Groups decide how to use funds using:</p>
-    <ul>
-      <li>Quick emoji reactions</li>
-      <li>Structured Loomio-style voting</li>
-      <li>Custom decision rules (you choose!)</li>
-    </ul>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <p>Each group has its own <strong>community fund</strong>.</p>
+
+        <ul>
+          <li>Members can chip in monthly or as-needed</li>
+          <li>Money goes first to unlock tools</li>
+          <li>Leftover funds can pay organizers, support members, or fund events</li>
+        </ul>
+
+        <p>Groups decide how to use funds using:</p>
+        <ul>
+          <li>Quick emoji reactions</li>
+          <li>Structured Loomio-style voting</li>
+          <li>Custom decision rules (you choose!)</li>
+        </ul>
+      </div>
+      <img src="/static/assets/ios/zaps.jpg" alt="Zaps and donations interface" class="mobile-screenshot">
+    </div>
     
     <hr>
     
@@ -137,23 +200,28 @@ export default async function handler(request: Request): Promise<Response> {
     
     <hr>
     
-    <h2>Strong Privacy, Optional Encryption</h2>
-    
-    <p>Chusme offers:</p>
-    
-    <ul>
-      <li>🔐 End-to-end encryption (E2EE) for 1:1 messages</li>
-      <li>🫂 Group message encryption (Signal-style) for trusted groups</li>
-      <li>🕵️ Metadata minimization: we don't track who you talk to, when, or why</li>
-      <li>🚫 No ads, no surveillance, no third-party analytics</li>
-    </ul>
-    
-    <p>You can choose:</p>
-    <ul>
-      <li>Fully open discussion (like a forum)</li>
-      <li>Private groups with onboarding gates</li>
-      <li>Locked-down encrypted coordination zones</li>
-    </ul>
+    <h2>Strong Privacy, Group-Selected Encryption</h2>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <p>Chusme offers:</p>
+
+        <ul>
+          <li>🔐 End-to-end encryption (E2EE) for 1:1 messages</li>
+          <li>🫂 Group message encryption (Signal-style) for trusted groups</li>
+          <li>🕵️ Metadata minimization: we don't track who you talk to, when, or why</li>
+          <li>🚫 No ads, no surveillance, no third-party analytics</li>
+        </ul>
+
+        <p><strong>Groups can choose their own privacy level:</strong></p>
+        <ul>
+          <li>Fully public discussions (like an open forum)</li>
+          <li>Private groups with member approvals</li>
+          <li>End-to-end encrypted spaces for sensitive coordination</li>
+        </ul>
+      </div>
+      <img src="/static/assets/ios/dms.jpg" alt="Encrypted messaging" class="mobile-screenshot">
+    </div>
     
     <p>Perfect for:</p>
     <ul>

@@ -23,16 +23,16 @@ const testimonials: Testimonial[] = [
 
 export function Testimonials() {
   return (
-    <section className="section-padding bg-background-secondary">
-      <div className="container-narrow">
-        <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 tracking-tight">What Communities Say</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <section className="section-padding bg-zinc-50 py-16">
+      <div className="container-narrow max-w-5xl mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 tracking-tight">Built for Organizers Like You</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border-border/15 bg-background">
-              <CardContent className="p-6">
+            <Card key={index} className="border border-zinc-200 shadow-sm bg-white hover:shadow-md transition-all duration-200">
+              <CardContent className="p-8">
                 <blockquote className="border-none pl-0 py-0 bg-transparent my-0">
-                  <p className="text-lg mb-4 italic text-foreground">"{testimonial.quote}"</p>
-                  <footer className="text-sm text-muted-foreground font-medium">— {testimonial.author}</footer>
+                  <p className="text-lg mb-6 italic text-zinc-800 font-medium leading-relaxed">"{testimonial.quote}"</p>
+                  <footer className="text-sm text-zinc-600 font-semibold">— {testimonial.author}</footer>
                 </blockquote>
               </CardContent>
             </Card>

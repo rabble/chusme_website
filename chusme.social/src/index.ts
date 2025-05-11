@@ -13,6 +13,7 @@ import artistsPage from './pages/use-cases/artists';
 import indigenousPage from './pages/use-cases/indigenous';
 import designPrinciplesPage from './pages/design-principles';
 import getStartedPage from './pages/get-started';
+import pricingPage from './pages/pricing';
 
 // Note: This might need access to KV if markdown files are stored there
 export interface Env {
@@ -383,8 +384,6 @@ export default {
       });
     }
 
-    // Removed external CSS file dependency, styles are now inlined
-    
     // Redirects based on the hosting plan
     if (path === '/app') {
         return Response.redirect('https://chusme.app', 301);
@@ -402,7 +401,12 @@ export default {
     if (path.startsWith('/static/assets/')) {
       const fileName = path.split('/').pop() || '';
       
-      // Map for Cloudflare Images
+      // Redirect to CDN for iOS screenshots
+      if (path.startsWith('/static/assets/ios/') && fileName.endsWith('.jpg')) {
+        return Response.redirect(`https://files.chusme.social/assets/ios/${fileName}`, 302);
+      }
+      
+      // Map for Cloudflare Images if using them for non-screenshot assets
       const cloudflareImagesMap: Record<string, string> = {
         'community-focused.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00', 
         'user-control.png': '0de45bbc-c804-4ef1-9a5b-df668a4a1e00',    
@@ -417,36 +421,28 @@ export default {
         'posts.png': '510cc54c-cd4a-40b2-bce3-effb502d2000'
       };
       
-      // Check for iOS screenshots first (jpg files)
-      if (path.startsWith('/static/assets/ios/') && fileName.endsWith('.jpg')) {
-        const isProduction = !request.url.includes('localhost'); // Simple prod check
+      // For local development, generate SVG placeholders
+      if (request.url.includes('localhost') && path.startsWith('/static/assets/ios/')) {
+        const screenshotName = fileName.replace(/[-_]/g, ' ').replace('.jpg', '');
         
-        if (isProduction) {
-          // In production, we would use Cloudflare images or another CDN
-          return Response.redirect(`https://your-cdn-url/${fileName}`, 302);
-        } else {
-          // For local development, we'll serve a more realistic iPhone mockup SVG
-          // that shows the filename to simulate the actual screenshot
-          const screenshotName = fileName.replace(/[-_]/g, ' ').replace('.jpg', '');
-          
-          // Generate a unique color based on the filename for visual distinction
-          const getHashColor = (text: string) => {
-            let hash = 0;
-            for (let i = 0; i < text.length; i++) {
-              hash = text.charCodeAt(i) + ((hash << 5) - hash);
-            }
-            let color = '#';
-            for (let i = 0; i < 3; i++) {
-              const value = (hash >> (i * 8)) & 0xFF;
-              color += ('00' + value.toString(16)).substr(-2);
-            }
-            return color;
-          };
-          
-          const bgColor = getHashColor(fileName);
-          
-          // Create an SVG that looks like an iPhone with the screenshot name
-          const iphoneSvg = `<svg width="390" height="800" xmlns="http://www.w3.org/2000/svg">
+        // Generate a unique color based on the filename for visual distinction
+        const getHashColor = (text: string) => {
+          let hash = 0;
+          for (let i = 0; i < text.length; i++) {
+            hash = text.charCodeAt(i) + ((hash << 5) - hash);
+          }
+          let color = '#';
+          for (let i = 0; i < 3; i++) {
+            const value = (hash >> (i * 8)) & 0xFF;
+            color += ('00' + value.toString(16)).substr(-2);
+          }
+          return color;
+        };
+        
+        const bgColor = getHashColor(fileName);
+        
+        // Create an SVG that looks like an iPhone with the screenshot name
+        const iphoneSvg = `<svg width="390" height="800" xmlns="http://www.w3.org/2000/svg">
             <!-- iPhone frame -->
             <rect width="390" height="800" rx="50" ry="50" fill="#111111"/>
             
@@ -478,35 +474,24 @@ export default {
             <!-- Simulate content -->
             <rect x="40" y="140" width="310" height="580" rx="8" ry="8" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1"/>
           </svg>`;
-          
-          return new Response(iphoneSvg, {
-            headers: {
-              'Content-Type': 'image/svg+xml',
-              'Cache-Control': 'public, max-age=3600'
-            }
-          });
-        }
+        
+        return new Response(iphoneSvg, {
+          headers: {
+            'Content-Type': 'image/svg+xml',
+            'Cache-Control': 'public, max-age=3600'
+          }
+        });
       }
       
-      // If we have a Cloudflare Image, redirect to it
-      if (cloudflareImagesMap[fileName]) {
-        const isProduction = !request.url.includes('localhost'); // Simple prod check
-        if (isProduction) {
-          const accountHash = 'U9c1NKydsjSHWVgWsUp4Yg'; // Your Cloudflare account hash
-          const imageId = cloudflareImagesMap[fileName];
-          const imageVariant = 'public';
-          return Response.redirect(`https://imagedelivery.net/${accountHash}/${imageId}/${imageVariant}`, 302);
-        } else {
-          // In local dev, attempt to serve from a local path (requires separate handling)
-          // return Response.redirect(`/local-assets/${fileName}`, 302); // Placeholder
-        }
+      // Redirect to CDN for PNG images
+      if (fileName.endsWith('.png')) {
+        return Response.redirect(`https://files.chusme.social/assets/${fileName}`, 302);
       }
       
-      // Fallback SVG placeholders for missing images
+      // Fallback for other images - generate SVG placeholders
       const baseBgColor = '#5d4037'; 
       let icon = '🖼️'; // Generic image icon
       let mainColor = baseBgColor;
-      // ... (icon/color logic based on fileName - can keep or simplify)
       
       const svgPlaceholder = `<svg width="300" height="500" xmlns="http://www.w3.org/2000/svg">
          <rect width="100%" height="100%" fill="${mainColor}" opacity="0.1"/>
@@ -556,8 +541,9 @@ export default {
     if (path === '/use-cases/indigenous') return indigenousPage(request);
     if (path === '/design-principles') return designPrinciplesPage(request);
     if (path === '/get-started') return getStartedPage(request);
+    if (path === '/pricing') return pricingPage(request);
 
     // If no handler found, return 404
     return new Response('Not Found', { status: 404 });
   },
-}; 
+};

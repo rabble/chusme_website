@@ -20,6 +20,8 @@
 - Added a "Common Deployment Issues" section to `CLOUDFLARE_GUIDELINES.md` focusing on KV binding issues with Pages deployments.
 - Created `FIX_KV_BINDING.md` detailing how to resolve the INVITES KV namespace binding issue in Cloudflare Pages.
 - Created `VERIFY_KV_FIX.md` with step-by-step instructions to verify that the KV binding fix is working properly.
+- Added iOS TestFlight link to the use-chusme page for beta app access.
+- Improved static asset handling with proper CDN integration.
 
 ### Fixed
 - Ensured `apple-app-site-association` is now correctly served from the `chus.me` domain, enabling Universal Links for `https://chus.me`.
@@ -27,9 +29,13 @@
 - Added detection and improved error messages for malformed invite URLs where clients try to use the full deep link as the invite code.
 - Created `PLUR_APP_INVITE_LINK_FIX.md` to document the correct invite URL format and help resolve issues in the Flutter app.
 - Documented a solution for the "KV namespace INVITES is not configured" error affecting invite links like `https://chus.me/i/ZHA65MN2`.
+- Fixed image loading by implementing proper CDN URL redirection for all static assets.
+- Removed non-functional Windows download link from the use-chusme page.
+- Updated build process to correctly include static assets in deployment.
 
+### Changed
 - Refactor invite gateway into separate `chus.me` (shortlinks/invites) and `chusme.social` (landing page) services.
 - Update build process (`package.json`, `tsconfig.json`) to handle separate service outputs.
 - Configure `wrangler.toml` for Cloudflare Pages deployment.
 - Update URLs and branding from `rabble.community` to `chus.me`, `chusme.social`, and `chusme.app`.
-yes
+- Improved image handling to use CDN URLs (https://files.chusme.social/assets/) for better performance.

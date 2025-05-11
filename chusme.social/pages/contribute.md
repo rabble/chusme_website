@@ -37,14 +37,14 @@ You can:
 
 Every group on Chusme manages its own fund — and decides how to spend it together.
 
-➡️ [Support a Group](https://chusme.app/contribute)  
-➡️ [Contribute to Chusme Development](https://opencollective.com/chusme)
+➡️ [Support a Group](https://chusme.app/contribute)
+➡️ [Contribute to Chusme Development](https://opencollective.com/aos-collective)
 
 ---
 
 ## 💻 Developers: Build With Us
 
-Chusme is [open source](https://github.com/verse/chusme) and built with interoperability in mind.
+Chusme is [open source](https://github.com/verse-pbc/plur) and built with interoperability in mind.
 
 Ways to contribute:
 - Improve core Chusme components (messaging, UI, privacy features)
@@ -54,7 +54,7 @@ Ways to contribute:
 
 We welcome contributors of all experience levels.
 
-➡️ [View the GitHub repo](https://github.com/verse/chusme)  
+➡️ [View the GitHub repo](https://github.com/verse-pbc/plur)  
 ➡️ [Join the dev chat](https://chusme.app/group/chusme-dev)
 
 ---
@@ -73,7 +73,7 @@ If you want to host a community relay:
 - You can serve just your group or many
 - You'll be contributing to the resilience of the Chusme network
 
-➡️ [Relay Hosting Guide (coming soon)](https://chusme.social/docs/relay-hosting)
+➡️ [Relay Hosting Guide with NIP-29 Support](https://github.com/fiatjaf/relay29/blob/master/README.md)
 
 ---
 

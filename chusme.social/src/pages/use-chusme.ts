@@ -9,14 +9,29 @@ export default async function handler(request: Request): Promise<Response> {
     <hr>
     
     <h2>🌐 Web App (Available Now)</h2>
-    
+
     <p>You can use Chusme directly in your browser — no download required.</p>
-    
+
     <p>
       ➡️ <strong><a href="https://chusme.app">Launch the Web App → chusme.app</a></strong><br>
       ➡️ <strong><a href="/get-started">View the Get Started Guide</a></strong>
     </p>
-    
+
+    <div class="screenshot-grid">
+      <div class="screenshot">
+        <img src="/static/assets/ios/posts_screen.jpg" alt="Chusme posts screen" class="mobile-screenshot" />
+        <p>Posts & Updates</p>
+      </div>
+      <div class="screenshot">
+        <img src="/static/assets/ios/chat.jpg" alt="Chusme chat interface" class="mobile-screenshot" />
+        <p>Group Chat</p>
+      </div>
+      <div class="screenshot">
+        <img src="/static/assets/ios/events.jpg" alt="Chusme events calendar" class="mobile-screenshot" />
+        <p>Events Calendar</p>
+      </div>
+    </div>
+
     <p>It works on desktop and mobile browsers, and supports:</p>
     <ul>
       <li>Creating and joining groups</li>
@@ -38,22 +53,40 @@ export default async function handler(request: Request): Promise<Response> {
     </ul>
     
     <p>
-      ➡️ <strong>Join our <a href="https://chusme.social#waitlist">email waitlist</a></strong> to get early access<br>
+      ➡️ <strong>iOS TestFlight: <a href="https://testflight.apple.com/join/q7JHM4qg">Get Beta Access</a></strong><br>
+      ➡️ <strong>Join our <a href="https://chusme.social#waitlist">email waitlist</a></strong> for Android early access<br>
       ➡️ <strong>Follow <a href="https://social.nos.dev/@chusme">@chusme@social.nos.dev</a></strong> for development updates
     </p>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <h3>iOS Beta Testing</h3>
+        <p>Our iOS beta is available through TestFlight. Try out the native mobile experience with push notifications and optimized performance.</p>
+        <p><a href="https://testflight.apple.com/join/q7JHM4qg" class="btn">Join iOS TestFlight</a></p>
+      </div>
+      <img src="/static/assets/ios/group_list.jpg" alt="Chusme iOS interface" class="mobile-screenshot">
+    </div>
     
     <hr>
     
     <h2>🖥️ Desktop Apps</h2>
-    
-    <p>Prefer a dedicated app on your computer? You can download the beta versions for macOS and Windows:</p>
-    
+
+    <p>Prefer a dedicated app on your computer? You can download the beta version for macOS:</p>
+
     <p>
-      - <strong><a href="https://downloads.chusme.social/Chusme.dmg">Download for macOS</a></strong><br>
-      - <strong><a href="https://downloads.chusme.social/ChusmeSetup.exe">Download for Windows</a></strong>
+      - <strong><a href="https://files.chusme.social/chusme.dmg">Download for macOS</a></strong>
     </p>
-    
-    <p>These apps offer:</p>
+
+    <div class="feature-section">
+      <div class="feature-content">
+        <h3>Mac Beta Now Available</h3>
+        <p>Our macOS beta version is ready for testing! Download the DMG file and drag the app to your Applications folder to get started.</p>
+        <p><a href="https://files.chusme.social/chusme.dmg" class="btn">Download Mac Beta</a></p>
+      </div>
+      <img src="/static/assets/ios/posts_screen.jpg" alt="Chusme desktop interface" class="mobile-screenshot">
+    </div>
+
+    <p>These desktop apps offer:</p>
     <ul>
       <li>Notification support</li>
       <li>Local data caching</li>
@@ -76,7 +109,7 @@ export default async function handler(request: Request): Promise<Response> {
     <p>If you're having trouble accessing the app, installing software, or connecting to a group, check out our:</p>
     
     <p>
-      ➡️ <a href="https://github.com/verse/chusme/wiki">Support & Docs</a><br>
+      ➡️ <a href="https://github.com/verse-pbc/plur/wiki">Support & Docs</a><br>
       ➡️ <a href="https://chusme.app/group/chusme-support">Community Chat</a><br>
       ➡️ <a href="mailto:support@chusme.social">Contact Us</a>
     </p>

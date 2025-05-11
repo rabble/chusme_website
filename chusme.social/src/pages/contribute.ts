@@ -49,14 +49,14 @@ export default async function handler(request: Request): Promise<Response> {
     
     <p>
       ➡️ <a href="https://chusme.app/contribute">Support a Group</a><br>
-      ➡️ <a href="https://opencollective.com/chusme">Contribute to Chusme Development</a>
+      ➡️ <a href="https://opencollective.com/aos-collective">Contribute to Chusme Development</a>
     </p>
     
     <hr>
     
     <h2>💻 Developers: Build With Us</h2>
     
-    <p>Chusme is <a href="https://github.com/verse/chusme">open source</a> and built with interoperability in mind.</p>
+    <p>Chusme is <a href="https://github.com/verse-pbc/plur">open source</a> and built with interoperability in mind.</p>
     
     <p>Ways to contribute:</p>
     <ul>
@@ -69,7 +69,7 @@ export default async function handler(request: Request): Promise<Response> {
     <p>We welcome contributors of all experience levels.</p>
     
     <p>
-      ➡️ <a href="https://github.com/verse/chusme">View the GitHub repo</a><br>
+      ➡️ <a href="https://github.com/verse-pbc/plur">View the GitHub repo</a><br>
       ➡️ <a href="https://chusme.app/group/chusme-dev">Join the dev chat</a>
     </p>
     
@@ -93,7 +93,7 @@ export default async function handler(request: Request): Promise<Response> {
       <li>You'll be contributing to the resilience of the Chusme network</li>
     </ul>
     
-    <p>➡️ <a href="https://chusme.social/docs/relay-hosting">Relay Hosting Guide (coming soon)</a></p>
+    <p>➡️ <a href="https://github.com/fiatjaf/relay29/blob/master/README.md">Relay Hosting Guide with NIP-29 Support</a></p>
     
     <hr>
     
