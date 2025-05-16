@@ -156,7 +156,7 @@ export async function resolveShortCode(
 // Create HTML for web invites with rich metadata
 export function createWebInvitePage(invite: WebInviteData, code: string): string {
   const groupName = invite.name || 'Community Group';
-  const groupDescription = invite.description || 'Join this Chusme community group';
+  const groupDescription = invite.description || 'Join this Holis community group';
   const avatarUrl = invite.avatar || '';
   
   return `<!DOCTYPE html>
@@ -164,12 +164,12 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Join ${groupName} - Chusme</title>
+  <title>Join ${groupName} - Holis</title>
   <meta name="description" content="${groupDescription}">
   <meta property="og:title" content="Join ${groupName}">
   <meta property="og:description" content="${groupDescription}">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Chusme">
+  <meta property="og:site_name" content="Holis">
   ${avatarUrl ? `<meta property="og:image" content="${avatarUrl}">` : ''}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -382,7 +382,7 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
 <body>
   <header class="header">
     <div class="container">
-      <a href="/" class="logo">Chusme</a>
+      <a href="/" class="logo">Holis</a>
     </div>
   </header>
   
@@ -400,8 +400,8 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
         <div class="woodcut-divider"></div>
         
         <a href="plur://join-community?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-primary" id="open-app">Open in Plur App</a>
-        <a href="https://play.google.com/store/apps/details?id=app.chusme.app" class="button-secondary" id="get-android">Get on Android</a>
-        <a href="https://apps.apple.com/app/chusme/id6738932333" class="button-secondary" id="get-ios">Get on iOS</a>
+        <a href="https://play.google.com/store/apps/details?id=app.holis.app" class="button-secondary" id="get-android">Get on Android</a>
+        <a href="https://apps.apple.com/app/holis/id6738932333" class="button-secondary" id="get-ios">Get on iOS</a>
         <a href="https://chusme.app/?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-secondary" id="open-web">Continue in Browser</a>
         
         <small>Created on ${new Date(invite.createdAt).toLocaleDateString()}</small>

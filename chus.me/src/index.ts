@@ -45,13 +45,13 @@ function createPage(title: string, description: string, content: string, image?:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title} - Chus.me Links</title> 
+  <title>${title} - Hol.is Links</title> 
   <meta name="description" content="${description}">
   ${image ? `<meta property="og:image" content="${image}">` : ''}
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Chus.me Links">
+  <meta property="og:site_name" content="Hol.is Links">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700;800&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
@@ -179,7 +179,7 @@ function createPage(title: string, description: string, content: string, image?:
   <header class="header">
     <div class="container">
       <nav class="nav">
-        <a href="/" class="logo">Chus.me</a>
+        <a href="/" class="logo">Hol.is</a>
         <!-- No nav links needed for simple link service -->
       </nav>
     </div>
@@ -195,7 +195,7 @@ function createPage(title: string, description: string, content: string, image?:
   
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Chus.me · All rights reserved</p>
+      <p>&copy; 2025 Hol.is · All rights reserved</p>
       <!-- Minimal footer for link service -->
     </div>
   </footer>
@@ -203,18 +203,71 @@ function createPage(title: string, description: string, content: string, image?:
 </html>`;
 }
 
-// Generate an HTML page for the invalid invite error
+// Generate an HTML page for the invalid invite error with helpful information about Holis
 function createErrorPage(message: string): string {
   return createPage(
-    "Invalid Link",
-    "This link is invalid or has expired.",
-    `<div style="text-align: center; padding: 3rem 0;">
-      <div style="background-color: #FFF1F0; color: #CF1124; border-radius: 8px; padding: 1rem; margin-bottom: 2rem;">
-        <h2 style="margin-bottom: 0.5rem;">Link Error</h2>
+    "Invite Link",
+    "Holis - Community messaging on your terms",
+    `<div style="padding: 2rem 0;">
+      <div style="background-color: #FFF1F0; color: #CF1124; border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+        <h2 style="margin-bottom: 0.5rem;">Invite Link Issue</h2>
         <p>${message}</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">This invite link might be expired or invalid. Please check with the person who shared it with you.</p>
       </div>
-      <p>Please check the link or contact the sender.</p>
-      <a href="/" class="button-primary" style="margin-top: 1rem;">Go Home</a>
+
+      <h2>About Holis</h2>
+      <p style="font-size: 1.1rem;">You've been invited to join a community on <strong>Holis</strong>, a messaging and coordination platform built for authentic communities.</p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0;">
+        <div style="flex: 1; min-width: 250px; background: #FAF9F7; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #5E452A;">
+          <h3>What is Holis?</h3>
+          <p>Holis is a community app that lets groups message, organize events, share resources, and coordinate - all on your own terms.</p>
+          <p style="margin-top: 1rem;"><strong>Unlike mainstream social media:</strong></p>
+          <ul style="margin-left: 1.5rem;">
+            <li>No algorithms or ads</li>
+            <li>Privacy-first design</li>
+            <li>Built on open protocols</li>
+            <li>Community controlled</li>
+          </ul>
+        </div>
+
+        <div style="flex: 1; min-width: 250px; background: #FAF9F7; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #5E452A;">
+          <h3>How to Use Holis</h3>
+          <p>To join communities on Holis:</p>
+          <ol style="margin-left: 1.5rem;">
+            <li>Download the Holis app</li>
+            <li>Create your account</li>
+            <li>Use invite links to join communities</li>
+          </ol>
+          <p style="margin-top: 1rem;">Perfect for mutual aid, tenant unions, cultural groups, neighborhood collectives, and more.</p>
+        </div>
+      </div>
+
+      <h3>Get Started with Holis</h3>
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0;">
+        <div style="flex: 1; min-width: 250px; padding: 1.5rem; border-radius: 8px; text-align: center; background: #F5F1E9;">
+          <h4>Web App</h4>
+          <p>Use Holis directly in your browser</p>
+          <p style="margin-top: 1rem;"><a href="https://holis.app" class="button-primary" style="margin-top: 1rem;">Launch Web App</a></p>
+        </div>
+
+        <div style="flex: 1; min-width: 250px; padding: 1.5rem; border-radius: 8px; text-align: center; background: #F5F1E9;">
+          <h4>iOS App</h4>
+          <p>Get the iOS app through TestFlight</p>
+          <p style="margin-top: 1rem;"><a href="https://testflight.apple.com/join/q7JHM4qg" class="button-primary" style="margin-top: 1rem;">Download for iOS</a></p>
+        </div>
+
+        <div style="flex: 1; min-width: 250px; padding: 1.5rem; border-radius: 8px; text-align: center; background: #F5F1E9;">
+          <h4>macOS App</h4>
+          <p>Get the desktop app for Mac</p>
+          <p style="margin-top: 1rem;"><a href="https://files.holis.social/holis.dmg" class="button-primary" style="margin-top: 1rem;">Download for Mac</a></p>
+        </div>
+      </div>
+
+      <p style="margin-top: 2rem; text-align: center;">
+        <a href="https://holis.social" style="margin-right: 1.5rem;">Learn More</a>
+        <a href="https://holis.social/how-it-works">How It Works</a>
+      </p>
     </div>`
   );
 }
@@ -272,7 +325,7 @@ const ASSETLINKS_JSON_CONTENT = `[{
   }
 }]`;
 
-// Main worker for chus.me (invite/shortlink handling)
+// Main worker for hol.is (invite/shortlink handling)
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
@@ -448,15 +501,15 @@ export default {
           });
         }
         
-        // Redirect to the full invite URL on chus.me domain
+        // Redirect to the full invite URL on hol.is domain
         // Decide if it should be /i/ (deep link) or /join/ (web page)
         const webInviteData = await getWebInvite(env, fullCode);
         if (webInviteData) {
-          // It's a web invite, redirect to the join page on chus.me
+          // It's a web invite, redirect to the join page on hol.is
           const redirectUrl = new URL(`/join/${fullCode}`, url.origin);
           return Response.redirect(redirectUrl.toString(), 302);
         } else {
-          // Assume it's a standard invite, redirect to the /i/ path on chus.me
+          // Assume it's a standard invite, redirect to the /i/ path on hol.is
           // This path will handle the plur:// redirect
           const redirectUrl = new URL(`/i/${fullCode}`, url.origin);
           return Response.redirect(redirectUrl.toString(), 302);
@@ -610,7 +663,7 @@ export default {
             <p><strong>Deep Link URL (for testing in app):</strong><br>
             <a href="${deepLink}">${deepLink}</a></p>
             <p><strong>Share URL Format (what the app should generate):</strong><br>
-            https://chus.me/i/${code}</p>
+            https://hol.is/i/${code}</p>
             <p><strong>Note:</strong> The share URL won't work because this test invite is not stored in KV.</p>
           </div>
           <a href="${deepLink}" class="button-primary">Open Test Invite in App</a>
@@ -627,18 +680,85 @@ export default {
       }
     }
 
-    // Default response for chus.me (maybe a simple info page or redirect)
+    // Default response for hol.is - informative page about Holis
     if (path === '/') {
        const rootContent = `
-         <p>This is the short link service for <a href="https://chusme.social" target="_blank">chusme.social</a>.</p>
-         <div style="margin-top: 2rem;">
-           <h2>Testing Tools</h2>
-           <p>If you're experiencing KV binding issues, you can create a test invite with this format:</p>
-           <code>/create-test-invite/{groupId}/{relay}</code>
-           <p>Example: <a href="/create-test-invite/testgroup123/wss%3A%2F%2Fcommunities.nos.social">/create-test-invite/testgroup123/wss%3A%2F%2Fcommunities.nos.social</a></p>
-         </div>
+        <div style="padding: 2rem 0;">
+          <h1 style="margin-bottom: 1.5rem; font-size: 2.5rem;">Holis Link Service</h1>
+          <p style="font-size: 1.1rem; margin-bottom: 2rem;">This is the invite link service for <a href="https://holis.social" target="_blank">Holis</a>, a messaging and coordination platform built for authentic communities.</p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0;">
+            <div style="flex: 1; min-width: 250px; background: #FAF9F7; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #5E452A;">
+              <h3>What is Holis?</h3>
+              <p>Holis is a community app that lets groups message, organize events, share resources, and coordinate - all on your own terms.</p>
+              <p style="margin-top: 1rem;"><strong>Unlike mainstream social media:</strong></p>
+              <ul style="margin-left: 1.5rem;">
+                <li>No algorithms or ads</li>
+                <li>Privacy-first design</li>
+                <li>Built on open protocols</li>
+                <li>Community controlled</li>
+              </ul>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; background: #FAF9F7; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #5E452A;">
+              <h3>How to Use Holis</h3>
+              <p>To join communities on Holis:</p>
+              <ol style="margin-left: 1.5rem;">
+                <li>Download the Holis app</li>
+                <li>Create your account</li>
+                <li>Use invite links to join communities</li>
+              </ol>
+              <p style="margin-top: 1rem;">Perfect for mutual aid, tenant unions, cultural groups, neighborhood collectives, and more.</p>
+            </div>
+          </div>
+
+          <h3>Get Started with Holis</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0;">
+            <div style="flex: 1; min-width: 250px; padding: 1.5rem; border-radius: 8px; text-align: center; background: #F5F1E9;">
+              <h4>Web App</h4>
+              <p>Use Holis directly in your browser</p>
+              <p style="margin-top: 1rem;"><a href="https://chusme.app" class="button-primary" style="margin-top: 1rem;">Launch Web App</a></p>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; padding: 1.5rem; border-radius: 8px; text-align: center; background: #F5F1E9;">
+              <h4>iOS App</h4>
+              <p>Get the iOS app through TestFlight</p>
+              <p style="margin-top: 1rem;"><a href="https://testflight.apple.com/join/q7JHM4qg" class="button-primary" style="margin-top: 1rem;">Download for iOS</a></p>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; padding: 1.5rem; border-radius: 8px; text-align: center; background: #F5F1E9;">
+              <h4>macOS App</h4>
+              <p>Get the desktop app for Mac</p>
+              <p style="margin-top: 1rem;"><a href="https://files.holis.social/holis.dmg" class="button-primary" style="margin-top: 1rem;">Download for Mac</a></p>
+            </div>
+          </div>
+
+          <div style="margin-top: 3rem; padding: 1.5rem; background: #F5F1E9; border-radius: 8px;">
+            <h2>Technical Information</h2>
+            <p>This service provides short links for the Holis messaging app:</p>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+              <li><strong>/i/{code}</strong> - Standard app invite links</li>
+              <li><strong>/join/{code}</strong> - Web invite links with metadata</li>
+              <li><strong>/j/{shortCode}</strong> - Shortened invite links</li>
+            </ul>
+
+            <details>
+              <summary style="cursor: pointer; font-weight: bold; margin-bottom: 1rem;">Developer Testing Tools</summary>
+              <div style="padding: 1rem; background: #FFFFFF; border-radius: 4px;">
+                <p>If you're experiencing KV binding issues, you can create a test invite with this format:</p>
+                <code>/create-test-invite/{groupId}/{relay}</code>
+                <p style="margin-top: 0.5rem;">Example: <a href="/create-test-invite/testgroup123/wss%3A%2F%2Fcommunities.nos.social">/create-test-invite/testgroup123/wss%3A%2F%2Fcommunities.nos.social</a></p>
+              </div>
+            </details>
+          </div>
+
+          <p style="margin-top: 2rem; text-align: center;">
+            <a href="https://holis.social" style="margin-right: 1.5rem;">Learn More</a>
+            <a href="https://holis.social/how-it-works">How It Works</a>
+          </p>
+        </div>
        `;
-       return new Response(createPage('Chus.me Links', 'Chusme Shortlink Service', rootContent), {
+       return new Response(createPage('Hol.is Links', 'Holis - Community messaging on your terms', rootContent), {
          headers: { 'Content-Type': 'text/html' }
        });
     }

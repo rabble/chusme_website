@@ -14,6 +14,7 @@ import indigenousPage from './pages/use-cases/indigenous';
 import designPrinciplesPage from './pages/design-principles';
 import getStartedPage from './pages/get-started';
 import pricingPage from './pages/pricing';
+import privacyPage from './pages/privacy';
 
 // Note: This might need access to KV if markdown files are stored there
 export interface Env {
@@ -542,6 +543,7 @@ export default {
     if (path === '/design-principles') return designPrinciplesPage(request);
     if (path === '/get-started') return getStartedPage(request);
     if (path === '/pricing') return pricingPage(request);
+    if (path === '/privacy') return privacyPage(request);
 
     // If no handler found, return 404
     return new Response('Not Found', { status: 404 });

@@ -42,6 +42,13 @@ export function renderLayout({ title, description, content }: { title: string; d
       font-size: 1.25rem;
       color: #000;
       text-decoration: none;
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo img {
+      height: 30px;
+      margin-right: 0.5rem;
     }
 
     .nav-links {
@@ -698,14 +705,14 @@ export function renderLayout({ title, description, content }: { title: string; d
 <body>
   <header>
     <nav>
-      <a href="/" class="logo">Chusme</a>
+      <a href="/" class="logo"><img src="/static/assets/holis_logo.png" alt="Holis logo" />Holis</a>
       <div class="nav-links">
         <a href="/about">About</a>
         <a href="/how-it-works">How It Works</a>
         <a href="/use-cases">Use Cases</a>
         <a href="/pricing">Pricing</a>
         <a href="/contribute">Contribute</a>
-        <a href="/use-chusme">App</a>
+        <a href="/use-holis">App</a>
         <a href="/get-started" class="btn-small">Get Started</a>
       </div>
     </nav>
@@ -714,7 +721,7 @@ export function renderLayout({ title, description, content }: { title: string; d
     ${content}
   </main>
   <footer>
-    <p>&copy; 2025 Chusme.social</p>
+    <p>&copy; 2025 Holis.social</p>
     <p>
       <a href="/about">About</a> ·
       <a href="/how-it-works">How It Works</a> ·
@@ -724,7 +731,7 @@ export function renderLayout({ title, description, content }: { title: string; d
       <a href="/get-started">Get Started</a> ·
       <a href="/use-cases">Use Cases</a> ·
       <a href="https://github.com/verse-pbc/plur">GitHub</a> ·
-      <a href="/privacy">Privacy Policy</a>
+      <a href="/privacy">Privacy</a>
     </p>
   </footer>
 </body>

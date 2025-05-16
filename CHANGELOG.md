@@ -22,6 +22,8 @@
 - Created `VERIFY_KV_FIX.md` with step-by-step instructions to verify that the KV binding fix is working properly.
 - Added iOS TestFlight link to the use-chusme page for beta app access.
 - Improved static asset handling with proper CDN integration.
+- Added logo to the site header for improved branding.
+- Added privacy policy page with comprehensive data practices information.
 
 ### Fixed
 - Ensured `apple-app-site-association` is now correctly served from the `chus.me` domain, enabling Universal Links for `https://chus.me`.
@@ -39,3 +41,4 @@
 - Configure `wrangler.toml` for Cloudflare Pages deployment.
 - Update URLs and branding from `rabble.community` to `chus.me`, `chusme.social`, and `chusme.app`.
 - Improved image handling to use CDN URLs (https://files.chusme.social/assets/) for better performance.
+- Updated all references from "holis.app" to "chusme.app" for consistent branding.
