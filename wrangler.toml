@@ -1,23 +1,17 @@
-# Top-level settings
+# Top-level settings for Workers
 compatibility_date = "2024-06-01"
 compatibility_flags = ["nodejs_compat"]
 account_id = "c84e7a9bf7ed99cb41b8e73566568c75"
 
-# Configuration specific to the chus.me project environment
+# Worker specific configuration for hol.is
 [env.production]
-name = "chus-me" # Should match the Cloudflare Pages project name
+name = "hol-is" 
+main = "chus.me/src/index.ts"
 kv_namespaces = [
   { binding = "INVITES", id = "57a39408dd6e4fbc91ae423b82293f43", preview_id = "6c947cbd83314bb1b648ea309a6e9854" }
 ]
-# Define secrets/vars needed by chus.me in Cloudflare dashboard or via `wrangler secret put`
-# [vars]
-# INVITE_TOKEN = "your_secret_token_here" # Example - SET VIA CLI OR DASHBOARD
 
-# Configuration specific to the chusme.social project environment
-# We use a different env name (e.g., production_social) to distinguish if needed,
-# but Pages projects often manage environments via branch deployments.
-# For Pages CLI commands, you often specify --project-name instead of relying on env here.
+# Worker configuration for holis.social
 [env.production_social]
-name = "chusme-social" # Should match the Cloudflare Pages project name
-# No KV needed for social page based on current code
-# [vars] # Define any vars needed by chusme.social
+name = "holis-social"
+main = "chusme.social/src/index.ts"

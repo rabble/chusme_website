@@ -5,7 +5,7 @@ import indexPage from './pages/index';
 import aboutPage from './pages/about';
 import contributePage from './pages/contribute';
 import howItWorksPage from './pages/how-it-works';
-import useChusmeApp from './pages/use-chusme';
+import useHolisApp from './pages/use-holis';
 import useCasesPage from './pages/use-cases';
 import tenantsPage from './pages/use-cases/tenants';
 import mutualAidPage from './pages/use-cases/mutual-aid';
@@ -31,7 +31,7 @@ interface PageMetadata {
 // Simple markdown to HTML converter
 function markdownToHtml(markdown: string): { content: string, metadata: PageMetadata } {
   const metadata: PageMetadata = {
-    title: "Chusme Social", // Default title
+    title: "Holis Social", // Default title
     description: "Authentic communities built on care and connection."
   };
 
@@ -202,13 +202,13 @@ function createPage(title: string, description: string, content: string, image?:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${title} - Chusme Social</title>
+  <title>${title} - Holis Social</title>
   <meta name="description" content="${description}">
   ${image ? `<meta property="og:image" content="${image}">` : ''}
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Chusme Social">
+  <meta property="og:site_name" content="Holis Social">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700;800&family=Crimson+Pro:wght@400;600;700&display=swap" rel="stylesheet">
@@ -336,12 +336,12 @@ function createPage(title: string, description: string, content: string, image?:
   <header class="header">
     <div class="container">
       <nav class="nav">
-        <a href="/" class="logo">Chusme</a> 
+        <a href="/" class="logo">Holis</a> 
         <ul class="nav-links">
           <li><a href="/about">About</a></li> 
           <li><a href="/community">Community</a></li>
           <li><a href="/design-principles">Design Principles</a></li>
-          <li><a href="https://chusme.app" target="_blank">Open App</a></li>
+          <li><a href="https://app.holis.social" target="_blank">Open App</a></li>
         </ul>
       </nav>
     </div>
@@ -357,7 +357,7 @@ function createPage(title: string, description: string, content: string, image?:
   
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Chusme.social · All rights reserved</p> 
+      <p>&copy; 2025 Holis.social · All rights reserved</p> 
       <p>
         <a href="/terms">Terms</a> · 
         <a href="/privacy">Privacy</a> · 
@@ -387,7 +387,7 @@ export default {
 
     // Redirects based on the hosting plan
     if (path === '/app') {
-        return Response.redirect('https://chusme.app', 301);
+        return Response.redirect('https://app.holis.social', 301);
     }
     if (path === '/join') {
         // Redirect to the shortlink service invite path
@@ -470,7 +470,7 @@ export default {
             
             <!-- App UI simulation -->
             <rect x="35" y="70" width="320" height="50" rx="8" ry="8" fill="#F7F7F7" stroke="#E5E5E5" stroke-width="1"/>
-            <text x="55" y="103" font-family="Arial" font-size="18" fill="#333333">Chusme</text>
+            <text x="55" y="103" font-family="Arial" font-size="18" fill="#333333">Holis</text>
             
             <!-- Simulate content -->
             <rect x="40" y="140" width="310" height="580" rx="8" ry="8" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1"/>
@@ -501,7 +501,7 @@ export default {
            ${fileName.replace(/[-_]/g, ' ').replace('.png', '')}
          </text>
          <text x="150" y="450" font-family="Arial" font-size="14" fill="${mainColor}" text-anchor="middle">
-           chusme.social
+           holis.social
          </text>
        </svg>`;
       
@@ -534,7 +534,7 @@ export default {
     if (path === '/about') return aboutPage(request);
     if (path === '/contribute') return contributePage(request);
     if (path === '/how-it-works') return howItWorksPage(request);
-    if (path === '/use-chusme') return useChusmeApp(request);
+    if (path === '/use-chusme' || path === '/use-holis') return useHolisApp(request);
     if (path === '/use-cases') return useCasesPage(request);
     if (path === '/use-cases/tenants') return tenantsPage(request);
     if (path === '/use-cases/mutual-aid') return mutualAidPage(request);

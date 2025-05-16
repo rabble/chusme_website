@@ -727,7 +727,7 @@ export function renderLayout({ title, description, content }: { title: string; d
       <a href="/how-it-works">How It Works</a> ·
       <a href="/pricing">Pricing</a> ·
       <a href="/contribute">Contribute</a> ·
-      <a href="https://chusme.app">App</a> ·
+      <a href="https://app.holis.social">App</a> ·
       <a href="/get-started">Get Started</a> ·
       <a href="/use-cases">Use Cases</a> ·
       <a href="https://github.com/verse-pbc/plur">GitHub</a> ·

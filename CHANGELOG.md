@@ -42,3 +42,5 @@
 - Update URLs and branding from `rabble.community` to `chus.me`, `chusme.social`, and `chusme.app`.
 - Improved image handling to use CDN URLs (https://files.chusme.social/assets/) for better performance.
 - Updated all references from "holis.app" to "chusme.app" for consistent branding.
+- Rebranded from "Chusme" to "Holis" across the entire codebase.
+- Updated all app URLs from "chusme.app" to "app.holis.social" for consistent branding.

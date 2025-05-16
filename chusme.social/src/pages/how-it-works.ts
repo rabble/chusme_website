@@ -2,9 +2,9 @@ import { renderLayout } from '../layout';
 
 export default async function handler(request: Request): Promise<Response> {
   const content = `
-    <h1>How Chusme Works</h1>
+    <h1>How Holis Works</h1>
     
-    <p>Chusme is a messaging and coordination platform for communities — built on <a href="https://nostr.com/">Nostr</a>, a decentralized protocol that gives you portability, privacy, and shared control.</p>
+    <p>Holis is a messaging and coordination platform for communities — built on <a href="https://nostr.com/">Nostr</a>, a decentralized protocol that gives you portability, privacy, and shared control.</p>
     
     <p>It's like email, but for groups.<br>
     It's like WordPress, but for social organizing.<br>
@@ -17,7 +17,7 @@ export default async function handler(request: Request): Promise<Response> {
     <div class="feature-section">
       <img src="/static/assets/ios/group_list.jpg" alt="Group list screen" class="mobile-screenshot">
       <div class="feature-content">
-        <p>Anyone can start a Chusme space. All you need is:</p>
+        <p>Anyone can start a Holis space. All you need is:</p>
 
         <ul>
           <li>A name for your group</li>
@@ -50,7 +50,7 @@ export default async function handler(request: Request): Promise<Response> {
           <li>Ask onboarding questions (like "where are you based?" or "how do you want to contribute?")</li>
         </ul>
 
-        <p>Chusme supports both informal hangouts and high-trust, role-based collaboration.</p>
+        <p>Holis supports both informal hangouts and high-trust, role-based collaboration.</p>
       </div>
       <img src="/static/assets/ios/user_profile.jpg" alt="User profile screen" class="mobile-screenshot">
     </div>
@@ -59,7 +59,7 @@ export default async function handler(request: Request): Promise<Response> {
     
     <h2>Coordinate Together</h2>
 
-    <p>Every Chusme group gets:</p>
+    <p>Every Holis group gets:</p>
 
     <ul>
       <li>📣 Message boards (chat + threaded replies)</li>
@@ -71,15 +71,15 @@ export default async function handler(request: Request): Promise<Response> {
 
     <div class="screenshot-grid">
       <div class="screenshot">
-        <img src="/static/assets/ios/posts_screen.jpg" alt="Chusme posts screen" class="mobile-screenshot" />
+        <img src="/static/assets/ios/posts_screen.jpg" alt="Holis posts screen" class="mobile-screenshot" />
         <p>Posts & Updates</p>
       </div>
       <div class="screenshot">
-        <img src="/static/assets/ios/chat.jpg" alt="Chusme chat interface" class="mobile-screenshot" />
+        <img src="/static/assets/ios/chat.jpg" alt="Holis chat interface" class="mobile-screenshot" />
         <p>Group Chat</p>
       </div>
       <div class="screenshot">
-        <img src="/static/assets/ios/events.jpg" alt="Chusme events calendar" class="mobile-screenshot" />
+        <img src="/static/assets/ios/events.jpg" alt="Holis events calendar" class="mobile-screenshot" />
         <p>Events Calendar</p>
       </div>
     </div>
@@ -125,7 +125,7 @@ export default async function handler(request: Request): Promise<Response> {
 
     <div class="feature-section">
       <div class="feature-content">
-        <p>Chusme is free to use — but you can <strong>crowdfund to unlock extra tools</strong>:</p>
+        <p>Holis is free to use — but you can <strong>crowdfund to unlock extra tools</strong>:</p>
 
         <table>
           <tr>
@@ -138,7 +138,7 @@ export default async function handler(request: Request): Promise<Response> {
           </tr>
           <tr>
             <td>🧑‍💼 Custom usernames</td>
-            <td>Create identities like <code>@sofia@mygroup.chusme.social</code></td>
+            <td>Create identities like <code>@sofia@mygroup.holis.social</code></td>
           </tr>
           <tr>
             <td>🌐 Public website</td>
@@ -187,7 +187,7 @@ export default async function handler(request: Request): Promise<Response> {
     
     <h2>Built on Open Protocols</h2>
     
-    <p>Chusme uses <a href="https://github.com/nostr-protocol/nostr">Nostr</a>, a decentralized messaging protocol. That means:</p>
+    <p>Holis uses <a href="https://github.com/nostr-protocol/nostr">Nostr</a>, a decentralized messaging protocol. That means:</p>
     
     <ul>
       <li>🛠️ Your group isn't trapped in our app</li>
@@ -204,7 +204,7 @@ export default async function handler(request: Request): Promise<Response> {
 
     <div class="feature-section">
       <div class="feature-content">
-        <p>Chusme offers:</p>
+        <p>Holis offers:</p>
 
         <ul>
           <li>🔐 End-to-end encryption (E2EE) for 1:1 messages</li>
@@ -242,13 +242,13 @@ export default async function handler(request: Request): Promise<Response> {
       <li>Designed for migration, autonomy, and resilience</li>
     </ul>
     
-    <p>Whether you're organizing for a season or a decade, Chusme gives you tools that <strong>don't disappear when the platform changes hands</strong>.</p>
+    <p>Whether you're organizing for a season or a decade, Holis gives you tools that <strong>don't disappear when the platform changes hands</strong>.</p>
     
     <hr>
     
     <h2>Start Building Your Space</h2>
     
-    <p>Chusme is already being used by:</p>
+    <p>Holis is already being used by:</p>
     
     <ul>
       <li>Tenant unions</li>
@@ -262,15 +262,15 @@ export default async function handler(request: Request): Promise<Response> {
     
     <p>
       ➡️ <a href="/get-started" class="btn">Get Started Guide</a><br>
-      ➡️ <a href="https://chusme.app">Launch the App → chusme.app</a><br>
+      ➡️ <a href="https://app.holis.social">Launch the App → app.holis.social</a><br>
       ➡️ <a href="/use-cases">Explore Use Cases</a><br>
       ➡️ <a href="https://rights.social">Read Our Commitment to Digital Rights</a>
     </p>
   `;
 
   const html = renderLayout({
-    title: "How Chusme Works",
-    description: "Learn how Chusme helps communities message, organize, and thrive on their own terms.",
+    title: "How Holis Works",
+    description: "Learn how Holis helps communities message, organize, and thrive on their own terms.",
     content
   });
 

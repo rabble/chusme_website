@@ -402,7 +402,7 @@ export function createWebInvitePage(invite: WebInviteData, code: string): string
         <a href="plur://join-community?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-primary" id="open-app">Open in Plur App</a>
         <a href="https://play.google.com/store/apps/details?id=app.holis.app" class="button-secondary" id="get-android">Get on Android</a>
         <a href="https://apps.apple.com/app/holis/id6738932333" class="button-secondary" id="get-ios">Get on iOS</a>
-        <a href="https://chusme.app/?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-secondary" id="open-web">Continue in Browser</a>
+        <a href="https://app.holis.social/?group-id=${invite.groupId}&code=${code}&relay=${encodeURIComponent(invite.relay)}" class="button-secondary" id="open-web">Continue in Browser</a>
         
         <small>Created on ${new Date(invite.createdAt).toLocaleDateString()}</small>
       </div>
