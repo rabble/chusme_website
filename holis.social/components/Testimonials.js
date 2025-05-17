@@ -6,7 +6,7 @@ const testimonials = [
         author: 'Cressida, community organizer',
     },
     {
-        quote: "We needed to alert students during an ICE raid. Facebook didn't reach them. Signal didn't scale. So we built Chusme.",
+        quote: "We needed to alert students during an ICE raid. Facebook didn't reach them. Signal didn't scale. So we built Holis.",
         author: '@rabble',
     },
     {

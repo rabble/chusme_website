@@ -1,4 +1,4 @@
-# Chusme Modular Site Testing Checklist
+# Holis Modular Site Testing Checklist
 
 _Last updated: 2025-05-11_
 
@@ -52,7 +52,7 @@ const routes = [
   '/use-cases/indigenous',
 ];
 
-describe('Chusme Modular Site', () => {
+describe('Holis Modular Site', () => {
   for (const route of routes) {
     test(`renders ${route}`, async ({ page }) => {
       await page.goto(`http://localhost:8787${route}`);

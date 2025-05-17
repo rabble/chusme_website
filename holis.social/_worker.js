@@ -3,7 +3,7 @@ import indexPage from './pages/index';
 import aboutPage from './pages/about';
 import contributePage from './pages/contribute';
 import howItWorksPage from './pages/how-it-works';
-import useHolisApp from './pages/use-chusme';
+import useHolisApp from './pages/use-holis';
 //import useHolkisApp from './pages/use-holis';
 import useCasesPage from './pages/use-cases';
 import tenantsPage from './pages/use-cases/tenants';
@@ -516,7 +516,7 @@ export default {
             return contributePage(request);
         if (path === '/how-it-works')
             return howItWorksPage(request);
-        if (path === '/use-chusme')
+        if (path === '/use-holis')
             return useHolisApp(request);
         if (path === '/use-cases')
             return useCasesPage(request);

@@ -119,8 +119,8 @@ export default async function handler(request) {
     <div class="cta-box">
       <h3>Want to collaborate on a pilot?</h3>
       <p>Work with us to build tools that fit your community's unique needs and values.</p>
-      <a href="mailto:team@chusme.social" class="btn">Contact the Holis Team</a>
-      <a href="https://chusme.app" class="btn">Launch the App</a>
+      <a href="mailto:team@Holis.social" class="btn">Contact the Holis Team</a>
+      <a href="https://Holis.app" class="btn">Launch the App</a>
     </div>
 
     <h2>Coming Soon</h2>
@@ -138,9 +138,9 @@ export default async function handler(request) {
         <span class="next-step-icon">📝</span>
         <span class="next-step-text">Read our values in the About section</span>
       </a>
-      <a href="https://chusme.app" class="next-step-item">
+      <a href="https://Holis.app" class="next-step-item">
         <span class="next-step-icon">🚀</span>
-        <span class="next-step-text">Start your own space via chusme.app</span>
+        <span class="next-step-text">Start your own space via Holis.app</span>
       </a>
     </div>
   `;

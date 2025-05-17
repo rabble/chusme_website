@@ -4,7 +4,7 @@ export default async function handler(request) {
     <div class="main-content">
       <h1>Pricing</h1>
 
-      <p><strong>Chusme isn't a SaaS product. It's a community-powered platform.</strong></p>
+      <p><strong>Holis isn't a SaaS product. It's a community-powered platform.</strong></p>
 
       <p>There's no paywall, no forced upgrade path, and no data monetization.<br>
       Instead, we follow a model rooted in <strong>solidarity, self-governance, and digital privacy</strong>.</p>
@@ -15,9 +15,9 @@ export default async function handler(request) {
 
       <hr>
 
-      <h2>💸 How Chusme Groups Fund Themselves</h2>
+      <h2>💸 How Holis Groups Fund Themselves</h2>
 
-      <p>Every group on Chusme has the option to raise funds together.<br>
+      <p>Every group on Holis has the option to raise funds together.<br>
       You can chip in to unlock tools, build shared infrastructure, and support the people doing the work.</p>
 
       <p>Funds are stored in a <strong>private, community-controlled wallet</strong> — using <a href="https://cashu.space">Cashu</a>, an open-source, privacy-preserving ecash protocol.</p>
@@ -70,7 +70,7 @@ export default async function handler(request) {
           <tr>
             <td>🧑‍💼 Custom usernames</td>
             <td>$5/month</td>
-            <td>Handles like <code>@sofia@yourgroup.chusme.social</code></td>
+            <td>Handles like <code>@sofia@yourgroup.holis.social</code></td>
           </tr>
           <tr>
             <td>🗳️ Proposal tools</td>
@@ -91,9 +91,9 @@ export default async function handler(request) {
 
       <h2>🤲 Voluntary, Not Mandatory</h2>
 
-      <p>You don't have to pay to join or keep using Chusme.</p>
+      <p>You don't have to pay to join or keep using Holis.</p>
 
-      <p><strong>If your community hosts your own relay, name server, and media server, you don't need to pay for any Chusme services.</strong> This is permissionless, free software — own your infrastructure, own your community.</p>
+      <p><strong>If your community hosts your own relay, name server, and media server, you don't need to pay for any Holis services.</strong> This is permissionless, free software — own your infrastructure, own your community.</p>
 
       <p>But if you believe in building alternatives to Big Tech —<br>
       if you want to support moderators, translators, and care workers —<br>
@@ -109,10 +109,10 @@ export default async function handler(request) {
       <ul>
         <li>The features your group unlocks</li>
         <li>Your own group's community fund (e.g. pay a steward, buy supplies, translate docs)</li>
-        <li>The broader Chusme ecosystem: development, hosting, support</li>
+        <li>The broader Holis ecosystem: development, hosting, support</li>
       </ul>
 
-      <p>This keeps Chusme:</p>
+      <p>This keeps Holis:</p>
       <ul>
         <li>Open source</li>
         <li>Community-driven</li>
@@ -134,7 +134,7 @@ export default async function handler(request) {
 
       <h2>Get Started</h2>
 
-      <p>You can try Chusme for free — right now.<br>
+      <p>You can try Holis for free — right now.<br>
       And when you're ready, unlock what you need, support your people, and keep your group sovereign.</p>
 
       <p>
@@ -146,7 +146,7 @@ export default async function handler(request) {
   `;
     const html = renderLayout({
         title: "Pricing",
-        description: "Chusme's community-driven funding model - no paywalls, no forced upgrades, just solidarity.",
+        description: "Holis's community-driven funding model - no paywalls, no forced upgrades, just solidarity.",
         content
     });
     return new Response(html, { headers: { 'Content-Type': 'text/html' } });

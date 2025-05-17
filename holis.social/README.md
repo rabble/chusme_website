@@ -1,6 +1,6 @@
-# Chusme.social Website
+# Holis.social Website
 
-This is the codebase for the Chusme Social website, a community-powered platform for messaging, planning, funding, and growing - without ads, algorithms, or fear of being shut down.
+This is the codebase for the Holis Social website, a community-powered platform for messaging, planning, funding, and growing - without ads, algorithms, or fear of being shut down.
 
 ## Features
 

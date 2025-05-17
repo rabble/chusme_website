@@ -1,9 +1,9 @@
 import { renderLayout } from '../layout';
 export default async function handler(request) {
     const content = `
-    <h1>Contribute to Chusme</h1>
+    <h1>Contribute to Holis</h1>
     
-    <p>Chusme isn't a startup.<br>
+    <p>Holis isn't a startup.<br>
     It's a commons — built with and for the organizers who use it.</p>
     
     <p>You can contribute by sharing feedback, funding your group's tools, helping improve the code, or running infrastructure to support others. Every contribution strengthens the ecosystem.</p>
@@ -12,7 +12,7 @@ export default async function handler(request) {
     
     <h2>🧑‍🤝‍🧑 Organizers: Help Shape the Platform</h2>
     
-    <p>We're building Chusme in close collaboration with mutual aid groups, tenant unions, cultural collectives, indigenous organizers, and volunteer communities.</p>
+    <p>We're building Holis in close collaboration with mutual aid groups, tenant unions, cultural collectives, indigenous organizers, and volunteer communities.</p>
     
     <p>You can contribute by:</p>
     <ul>
@@ -25,41 +25,41 @@ export default async function handler(request) {
     <p>This isn't just "user feedback" — it's co-design. We build what organizers ask for, not what a product team imagines.</p>
     
     <p>
-      ➡️ <a href="mailto:team@chusme.social">Talk to the Chusme team</a><br>
-      ➡️ <a href="https://app.holis.social/group/chusme-co-design">Join our co-design sessions</a>
+      ➡️ <a href="mailto:team@Holis.social">Talk to the Holis team</a><br>
+      ➡️ <a href="https://app.holis.social/group/Holis-co-design">Join our co-design sessions</a>
     </p>
     
     <hr>
     
     <h2>💸 Financial Contributions</h2>
     
-    <p>Chusme is free to use.<br>
+    <p>Holis is free to use.<br>
     But like a community radio station or food coop, we rely on voluntary contributions to sustain it.</p>
     
     <p>You can:</p>
     <ul>
-      <li>Contribute personally to Chusme's core development</li>
+      <li>Contribute personally to Holis's core development</li>
       <li>Donate to your group's community fund</li>
       <li>Help unlock features like video hosting, public websites, or encrypted tools</li>
       <li>Fund moderators, interpreters, facilitators, and group leaders</li>
     </ul>
     
-    <p>Every group on Chusme manages its own fund — and decides how to spend it together.</p>
+    <p>Every group on Holis manages its own fund — and decides how to spend it together.</p>
     
     <p>
       ➡️ <a href="https://app.holis.social/contribute">Support a Group</a><br>
-      ➡️ <a href="https://opencollective.com/aos-collective">Contribute to Chusme Development</a>
+      ➡️ <a href="https://opencollective.com/aos-collective">Contribute to Holis Development</a>
     </p>
     
     <hr>
     
     <h2>💻 Developers: Build With Us</h2>
     
-    <p>Chusme is <a href="https://github.com/verse-pbc/plur">open source</a> and built with interoperability in mind.</p>
+    <p>Holis is <a href="https://github.com/verse-pbc/plur">open source</a> and built with interoperability in mind.</p>
     
     <p>Ways to contribute:</p>
     <ul>
-      <li>Improve core Chusme components (messaging, UI, privacy features)</li>
+      <li>Improve core Holis components (messaging, UI, privacy features)</li>
       <li>Build custom onboarding flows, extensions, or bots</li>
       <li>Create tools for accessibility, moderation, or group governance</li>
       <li>File bugs, review issues, and help with documentation</li>
@@ -69,14 +69,14 @@ export default async function handler(request) {
     
     <p>
       ➡️ <a href="https://github.com/verse-pbc/plur">View the GitHub repo</a><br>
-      ➡️ <a href="https://app.holis.social/group/chusme-dev">Join the dev chat</a>
+      ➡️ <a href="https://app.holis.social/group/Holis-dev">Join the dev chat</a>
     </p>
     
     <hr>
     
     <h2>🌐 Host a Relay or Mirror</h2>
     
-    <p>Chusme uses <a href="https://nostr.com">Nostr</a> — an open protocol for distributed communication.</p>
+    <p>Holis uses <a href="https://nostr.com">Nostr</a> — an open protocol for distributed communication.</p>
     
     <p>This means:</p>
     <ul>
@@ -89,7 +89,7 @@ export default async function handler(request) {
     <ul>
       <li>We'll help you get started with open-source tools</li>
       <li>You can serve just your group or many</li>
-      <li>You'll be contributing to the resilience of the Chusme network</li>
+      <li>You'll be contributing to the resilience of the Holis network</li>
     </ul>
     
     <p>➡️ <a href="https://github.com/fiatjaf/relay29/blob/master/README.md">Relay Hosting Guide with NIP-29 Support</a></p>
@@ -131,7 +131,7 @@ export default async function handler(request) {
     
     <h2>✨ A Community-Owned Platform</h2>
     
-    <p>We're building Chusme so that it can't be bought, sold, or shut down.<br>
+    <p>We're building Holis so that it can't be bought, sold, or shut down.<br>
     The more we all contribute — time, insight, resources, code — the more resilient the ecosystem becomes.</p>
     
     <p>Whether you're starting a neighborhood group or helping shape internet protocols, there's a place for you here.</p>
@@ -142,8 +142,8 @@ export default async function handler(request) {
     </p>
   `;
     const html = renderLayout({
-        title: "Contribute to Chusme",
-        description: "Contribute to Chusme by sharing feedback, funding your group's tools, helping improve the code, or running infrastructure.",
+        title: "Contribute to Holis",
+        description: "Contribute to Holis by sharing feedback, funding your group's tools, helping improve the code, or running infrastructure.",
         content
     });
     return new Response(html, { headers: { 'Content-Type': 'text/html' } });

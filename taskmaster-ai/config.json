@@ -1,7 +1,7 @@
 {
   "project": "holis.social",
   "tasks": [
-    "Move to Holis from Chusme for the name and links"
+    "Move to Holis from Holis for the name and links"
   ],
   "owners": ["rabble"],
   "default_branch": "main"

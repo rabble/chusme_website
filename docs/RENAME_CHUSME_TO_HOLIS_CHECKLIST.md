@@ -1,11 +1,11 @@
-# Rename Checklist: Chusme to Holis
+# Rename Checklist: Holis to Holis
 
-This document outlines all tasks required to rename the app from Chusme to Holis and update the domains from chus.me/chusme.social to hol.is/holis.social.
+This document outlines all tasks required to rename the app from Holis to Holis and update the domains from chus.me/Holis.social to hol.is/holis.social.
 
 ## Domain Updates
 
 - [x] Update invite link service domain from `chus.me` to `hol.is`
-- [x] Update marketing site domain from `chusme.social` to `holis.social`
+- [x] Update marketing site domain from `Holis.social` to `holis.social`
 - [ ] Update Cloudflare configuration for new domains (outside scope of this task)
 
 ## Code Updates
@@ -19,7 +19,7 @@ This document outlines all tasks required to rename the app from Chusme to Holis
 - [x] Update domain references in invite-handler.ts
 - [ ] Update any tests that reference the domain
 
-### Marketing Site (chusme.social → holis.social)
+### Marketing Site (Holis.social → holis.social)
 - [x] Update site content with new app name "Holis"
 - [x] Update any hardcoded URLs that reference the old domains
 - [x] Update OpenGraph and metadata with new domains
@@ -45,8 +45,8 @@ This document outlines all tasks required to rename the app from Chusme to Holis
 The following changes have been made:
 1. Created this checklist document to track the rename process
 2. Updated all domain references in code from chus.me to hol.is
-3. Updated all domain references in code from chusme.social to holis.social
-4. Changed all app name occurrences from "Chusme" to "Holis"
+3. Updated all domain references in code from Holis.social to holis.social
+4. Changed all app name occurrences from "Holis" to "Holis"
 5. Updated wrangler.toml configurations with new domain names
 6. Updated documentation (README.md and CLAUDE.md) with new names
 7. Added npm script commands for the new domain names

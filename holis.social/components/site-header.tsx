@@ -9,7 +9,7 @@ export function SiteHeader() {
           <a href="/" className="flex items-center space-x-2">
             <span className="text-2xl">🗣️</span>
             <span className="hidden font-bold tracking-tight sm:inline-block">
-              Chusme
+              Holis
             </span>
           </a>
         </div>

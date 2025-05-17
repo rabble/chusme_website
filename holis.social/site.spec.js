@@ -9,7 +9,7 @@ const routes = [
     '/use-cases/artists',
     '/use-cases/indigenous',
 ];
-test.describe('Chusme Modular Site', () => {
+test.describe('Holis Modular Site', () => {
     for (const route of routes) {
         test(`renders ${route}`, async ({ page }) => {
             await page.goto(route);

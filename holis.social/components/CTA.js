@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-export function CTA({ heading = "Ready to organize your community?", description = "Start a space, invite your people, and unlock tools together. Chusme is free, open, and built for you.", buttonText = "Get Started", buttonHref = "https://app.holis.social" }) {
+export function CTA({ heading = "Ready to organize your community?", description = "Start a space, invite your people, and unlock tools together. Holis is free, open, and built for you.", buttonText = "Get Started", buttonHref = "https://app.holis.social" }) {
     return (React.createElement("section", { className: "section-padding" },
         React.createElement("div", { className: "container-narrow" },
             React.createElement(Card, { className: "border-border/15 bg-background-secondary" },

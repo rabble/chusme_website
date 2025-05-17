@@ -1,9 +1,9 @@
 import { renderLayout } from '../layout';
 export default async function handler(request) {
     const content = `
-    <h1>Get Started with Chusme</h1>
+    <h1>Get Started with Holis</h1>
     
-    <p>Chusme is built for organizers. Whether you're creating a local mutual aid group, a creative collective, or a movement space, you can start in minutes — and grow it over time.</p>
+    <p>Holis is built for organizers. Whether you're creating a local mutual aid group, a creative collective, or a movement space, you can start in minutes — and grow it over time.</p>
     
     <p>This guide walks you through how to launch a community, invite your people, and start building something powerful.</p>
     
@@ -12,11 +12,11 @@ export default async function handler(request) {
         <div class="step-number">Step 1</div>
         <div class="step-emoji">🧑‍💻</div>
         <h2>Download or Open the App</h2>
-        <p>You can use Chusme in your browser or on desktop.</p>
+        <p>You can use Holis in your browser or on desktop.</p>
         <div class="step-actions">
           <a href="https://app.holis.social" class="btn">Open the Web App</a>
-          <a href="https://downloads.chusme.social/Chusme.dmg">Download for macOS</a>
-          <a href="https://downloads.chusme.social/ChusmeSetup.exe">Download for Windows</a>
+          <a href="https://downloads.Holis.social/Holis.dmg">Download for macOS</a>
+          <a href="https://downloads.Holis.social/HolisSetup.exe">Download for Windows</a>
           <p><em>Mobile apps coming soon (iOS + Android)</em></p>
         </div>
       </div>
@@ -31,7 +31,7 @@ export default async function handler(request) {
           <li>Set your profile image (optional)</li>
           <li>Link to your preferred Nostr identity (or auto-generate one)</li>
         </ul>
-        <p>This identity is portable. It can be used across any Nostr-based app — not just Chusme.</p>
+        <p>This identity is portable. It can be used across any Nostr-based app — not just Holis.</p>
       </div>
       
       <div class="step-card">
@@ -108,7 +108,7 @@ export default async function handler(request) {
         <div class="step-number">Step 7</div>
         <div class="step-emoji">💡</div>
         <h2>Cultivate Your Culture</h2>
-        <p>Chusme is not just a chat tool. It's a community platform.</p>
+        <p>Holis is not just a chat tool. It's a community platform.</p>
         <p>Ways to cultivate your space:</p>
         <ul>
           <li>Rotate community roles like facilitator or greeter</li>
@@ -124,7 +124,7 @@ export default async function handler(request) {
         <p>Groups can crowdfund to unlock premium features like:</p>
         <ul>
           <li>Private video storage</li>
-          <li>Custom usernames (like <code>@sofia@mygroup.chusme.social</code>)</li>
+          <li>Custom usernames (like <code>@sofia@mygroup.Holis.social</code>)</li>
           <li>Public websites or join portals</li>
           <li>Voting and proposal tools</li>
         </ul>
@@ -135,28 +135,28 @@ export default async function handler(request) {
         <div class="step-number">Step 9</div>
         <div class="step-emoji">🛠️</div>
         <h2>Stay Flexible</h2>
-        <p>Chusme is built on <a href="https://nostr.com">Nostr</a>, a decentralized protocol. That means:</p>
+        <p>Holis is built on <a href="https://nostr.com">Nostr</a>, a decentralized protocol. That means:</p>
         <ul>
           <li>You can migrate to another server or app</li>
           <li>You can self-host if desired</li>
           <li>You can integrate with other Nostr-based tools over time</li>
         </ul>
-        <p>Chusme is a gateway — not a gatekeeper.</p>
+        <p>Holis is a gateway — not a gatekeeper.</p>
       </div>
     </div>
     
     <div class="help-section">
       <h2>Need Help?</h2>
       <div class="help-links">
-        <a href="https://github.com/verse/chusme/wiki" class="help-link">
+        <a href="https://github.com/verse/Holis/wiki" class="help-link">
           <span class="help-link-icon">📚</span>
           <span class="help-link-text">See the Docs</span>
         </a>
-        <a href="https://app.holis.social/group/chusme-support" class="help-link">
+        <a href="https://app.holis.social/group/Holis-support" class="help-link">
           <span class="help-link-icon">👥</span>
           <span class="help-link-text">Join the Help Group</span>
         </a>
-        <a href="mailto:team@chusme.social" class="help-link">
+        <a href="mailto:team@Holis.social" class="help-link">
           <span class="help-link-icon">✉️</span>
           <span class="help-link-text">Email Us</span>
         </a>
@@ -169,8 +169,8 @@ export default async function handler(request) {
     </div>
   `;
     const html = renderLayout({
-        title: "Get Started with Chusme",
-        description: "Learn how to get started with Chusme in just a few easy steps. Create your community, invite members, and start organizing on your own terms.",
+        title: "Get Started with Holis",
+        description: "Learn how to get started with Holis in just a few easy steps. Create your community, invite members, and start organizing on your own terms.",
         content
     });
     return new Response(html, { headers: { 'Content-Type': 'text/html' } });

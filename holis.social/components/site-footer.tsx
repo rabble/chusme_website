@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="container-narrow flex flex-col items-center justify-between gap-6 md:flex-row">
         <div className="flex flex-col items-center gap-4 md:flex-row md:gap-6">
           <p className="text-center text-sm leading-relaxed text-foreground/70 md:text-left">
-            &copy; {new Date().getFullYear()} Chusme Social. All rights reserved.
+            &copy; {new Date().getFullYear()} Holis Social. All rights reserved.
           </p>
         </div>
         <div className="flex gap-6">
@@ -29,7 +29,7 @@ export function SiteFooter() {
             Contact
           </a>
           <a
-            href="https://github.com/verse/chusme"
+            href="https://github.com/verse/holis"
             className="text-sm font-medium text-foreground/70 no-underline transition-colors hover:text-foreground"
             target="_blank"
             rel="noopener noreferrer"

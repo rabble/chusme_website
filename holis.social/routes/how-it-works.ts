@@ -174,13 +174,13 @@ export default async function handler(): Promise<Response> {
       <li>Designed for migration, autonomy, and resilience</li>
     </ul>
     
-    <p>Whether you're organizing for a season or a decade, Chusme gives you tools that <strong>don't disappear when the platform changes hands</strong>.</p>
+    <p>Whether you're organizing for a season or a decade, Holis gives you tools that <strong>don't disappear when the platform changes hands</strong>.</p>
     
     <hr>
     
     <h2>Start Building Your Space</h2>
     
-    <p>Chusme is already being used by:</p>
+    <p>Holis is already being used by:</p>
     
     <ul>
       <li>Tenant unions</li>
@@ -194,15 +194,15 @@ export default async function handler(): Promise<Response> {
     
     <p>
       ➡️ <a href="/get-started" class="btn">Get Started Guide</a><br>
-      ➡️ <a href="https://chusme.app">Launch the App → chusme.app</a><br>
+      ➡️ <a href="https://Holis.app">Launch the App → Holis.app</a><br>
       ➡️ <a href="/use-cases">Explore Use Cases</a><br>
       ➡️ <a href="https://rights.social">Read Our Commitment to Digital Rights</a>
     </p>
   `;
 
   const html = renderLayout({
-    title: "How Chusme Works",
-    description: "Learn how Chusme helps communities message, organize, and thrive on their own terms.",
+    title: "How Holis Works",
+    description: "Learn how Holis helps communities message, organize, and thrive on their own terms.",
     content
   });
 

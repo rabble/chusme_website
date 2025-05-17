@@ -1,4 +1,4 @@
-# Chusme Website Modularization & Migration Checklist
+# Holis Website Modularization & Migration Checklist
 
 _Last updated: 2025-05-11_
 

@@ -3,7 +3,7 @@ The editing tool I’d use to write directly into docs/plans.md is currently una
 ⸻
 
 
-# Chusme Website Planning & Refactor Blueprint
+# Holis Website Planning & Refactor Blueprint
 
 _Last updated: 2025-05-11_
 
@@ -11,7 +11,7 @@ _Last updated: 2025-05-11_
 
 ## ✨ Vision
 
-Chusme is a community platform for organizers — built on open protocols and community values. Our goal is to provide groups with tools to coordinate, communicate, and sustain themselves without relying on ad-driven, centralized platforms.
+Holis is a community platform for organizers — built on open protocols and community values. Our goal is to provide groups with tools to coordinate, communicate, and sustain themselves without relying on ad-driven, centralized platforms.
 
 ---
 
@@ -21,7 +21,7 @@ Chusme is a community platform for organizers — built on open protocols and co
 > **Organize your community. On your terms.**  
 > A community-powered platform to message, plan, fund, and grow — without ads, algorithms, or fear of being shut down.
 
-### Why Chusme
+### Why Holis
 > We built this because:
 > - Facebook deletes groups with no warning  
 > - Slack isn't designed for actual communities  
@@ -42,7 +42,7 @@ Chusme is a community platform for organizers — built on open protocols and co
 
 ### Testimonials
 > “Facebook deleted our 300,000-person group overnight.” — Cressida  
-> “Signal couldn’t scale to our needs. Chusme could.” — Rabble  
+> “Signal couldn’t scale to our needs. Holis could.” — Rabble  
 > “Feels like WhatsApp, but for community.” — Kaye-Maree
 
 ---
@@ -102,8 +102,8 @@ Markdown Renderer Stub
 
 function renderMarkdownPage(page: string): Response {
   const pages: Record<string, string> = {
-    index: '# Welcome to Chusme',
-    about: '# About Chusme',
+    index: '# Welcome to Holis',
+    about: '# About Holis',
     contribute: '# Contribute',
     'how-it-works': '# How It Works',
   };

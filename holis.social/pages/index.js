@@ -44,7 +44,7 @@ export default async function handler(request) {
     <hr>
     <h2>Ready to organize your community?</h2>
     <p>Start a space, invite your people, and unlock tools together. Holis is free, open, and built for you.</p>
-    <p><a href="/get-started" class="btn">Get Started</a> <a href="https://chusme.app">Launch the App</a></p>
+    <p><a href="/get-started" class="btn">Get Started</a> <a href="https://Holis.app">Launch the App</a></p>
   `;
     const html = renderLayout({
         title: "Organize your community. On your terms.",

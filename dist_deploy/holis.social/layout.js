@@ -705,7 +705,7 @@ export function renderLayout({ title, description, content }) {
 <body>
   <header>
     <nav>
-      <a href="/" class="logo"><img src="https://files.chusme.social/assets/holis_logo.png" alt="Holis logo" />Holis</a>
+      <a href="/" class="logo"><img src="https://files.holis.social/assets/holis_logo.png" alt="Holis logo" />Holis</a>
       <div class="nav-links">
         <a href="/about">About</a>
         <a href="/how-it-works">How It Works</a>
