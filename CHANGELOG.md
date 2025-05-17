@@ -42,5 +42,6 @@
 - Update URLs and branding from `rabble.community` to `hol.is`, `Holis.social`, and `Holis.app`.
 - Improved image handling to use CDN URLs (https://files.Holis.social/assets/) for better performance.
 - Updated all references from "holis.app" to "Holis.app" for consistent branding.
-- Rebranded from "Holis" to "Holis" across the entire codebase.
+- Rebranded from "Chusme" to "Holis" across the entire codebase.
 - Updated all app URLs from "Holis.app" to "app.holis.social" for consistent branding.
+- Updated the "Why Holis?" sections on homepage and about page to explain the meaning of "Holis" as a warm, friendly greeting in rioplatense Spanish.

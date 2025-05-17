@@ -51,22 +51,22 @@ export default async function handler(request: Request): Promise<Response> {
         <div class="sidebar-box">
           <h3>🗣️ Why "Holis"?</h3>
 
-          <p>The name Holis is a play on the Spanish word chisme, which means gossip — but not in a negative sense.</p>
+          <p>"Holis" is a warm, friendly way to say "hello" in rioplatense Spanish — particularly popular in Uruguay and Argentina.</p>
 
-          <p>In many communities, chisme is how news travels. It's how people look out for each other. It's the unofficial channel — where trust, curiosity, and care intersect.</p>
+          <p>This affectionate greeting perfectly represents our approach to community: welcoming, personal, and distinctly human. It's how friends greet each other, with warmth and familiarity.</p>
 
-          <p>We're reclaiming that idea:</p>
+          <p>We chose this name because:</p>
 
-          <p>Holis is the good kind of gossip. The kind that builds relationships, shares vital information, and connects people to what's happening around them.</p>
+          <p>Communities begin with a simple hello — an invitation to connect. Holis is that invitation, extended with care and authenticity.</p>
 
           <p>It's also:</p>
           <ul>
             <li>Easy to say in many languages</li>
             <li>Feels friendly and informal</li>
-            <li>Evokes storytelling, trust, and community rhythm</li>
+            <li>Evokes warmth, closeness, and community connection</li>
           </ul>
 
-          <p>Holis is what happens in line at the market, in group chats after a meeting, at the edge of a protest march — where real organizing takes place.</p>
+          <p>Holis represents the genuine, person-to-person connections that happen at community gatherings, in group chats, or at neighborhood events — where real organizing takes place.</p>
 
           <div class="sidebar-divider"></div>
         </div>

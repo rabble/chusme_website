@@ -31,6 +31,7 @@ export default async function handler(request: Request): Promise<Response> {
 
     <hr>
     <h2>Why Holis?</h2>
+    <p>"Holis" — a warm, friendly way to say "hello" in rioplatense Spanish — represents our approach to community.</p>
     <ul>
       <li>Facebook deletes groups with no warning</li>
       <li>Slack is built for companies, not communities</li>
