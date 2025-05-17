@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-const BASE_URL = 'https://chus.me';
+const BASE_URL = 'https://hol.is';
 const INVITE_TOKEN = process.env.INVITE_TOKEN; // Set this in your environment
 
 async function createInvite(groupId, relay) {

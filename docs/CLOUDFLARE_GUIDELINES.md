@@ -1,6 +1,6 @@
 # Cloudflare Development Guidelines
 
-This document outlines best practices and guidelines for working with Cloudflare services in the chus.me project, based on official Cloudflare recommendations.
+This document outlines best practices and guidelines for working with Cloudflare services in the hol.is project, based on official Cloudflare recommendations.
 
 ## Workers Code Style
 
@@ -125,7 +125,7 @@ The most common issue with our deployment is that KV namespace bindings specifie
 
 ```bash
 # Local development with KV enabled
-wrangler dev chus.me/src/index.ts --kv INVITES --port 8788
+wrangler dev hol.is/src/index.ts --kv INVITES --port 8788
 ```
 
 ### Build and Deploy
@@ -134,8 +134,8 @@ wrangler dev chus.me/src/index.ts --kv INVITES --port 8788
 # Build the project
 npm run build
 
-# Deploy chus.me to Cloudflare Pages
-wrangler pages deploy dist_final/chus.me --project-name=chus-me
+# Deploy hol.is to Cloudflare Pages
+wrangler pages deploy dist_final/hol.is --project-name=chus-me
 ```
 
 ### KV Management

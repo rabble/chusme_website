@@ -8,7 +8,7 @@ After applying the fix to add the `INVITES` KV namespace binding to the Cloudfla
 
 Visit the previously failing link directly:
 ```
-https://chus.me/i/ZHA65MN2
+https://hol.is/i/ZHA65MN2
 ```
 
 If the fix was successful, instead of seeing an error message about "KV namespace INVITES is not configured", you should either:
@@ -20,7 +20,7 @@ If the fix was successful, instead of seeing an error message about "KV namespac
 If you have access to the API token, you can test invite creation:
 
 ```bash
-curl -X POST https://chus.me/api/invites \
+curl -X POST https://hol.is/api/invites \
   -H "Authorization: Bearer YOUR_INVITE_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"groupId":"test-group","relay":"wss://relay.example.com"}'
@@ -30,7 +30,7 @@ A successful response should look like:
 ```json
 {
   "code": "ABCD1234",
-  "url": "https://chus.me/i/ABCD1234"
+  "url": "https://hol.is/i/ABCD1234"
 }
 ```
 
@@ -39,12 +39,12 @@ A successful response should look like:
 Create a test invite and then check if it can be retrieved:
 
 1. First create an invite using the API
-2. Then test accessing it: `https://chus.me/i/[CODE]`
+2. Then test accessing it: `https://hol.is/i/[CODE]`
 
 ### 4. Check Cloudflare Logs
 
 1. Log in to the [Cloudflare Dashboard](https://dash.cloudflare.com)
-2. Navigate to **Pages** > **chus-me**
+2. Navigate to **Pages** > **hol-is**
 3. Go to **Functions** > **Logs**
 4. Look for logs that contain:
    - "KV namespace INVITES is not configured" (should no longer appear)
@@ -63,7 +63,7 @@ Consider implementing these monitoring solutions to prevent future binding issue
 If you still encounter issues, remember you can always use the test invite creation endpoint for testing:
 
 ```
-https://chus.me/create-test-invite/{groupId}/{relay}
+https://hol.is/create-test-invite/{groupId}/{relay}
 ```
 
 This creates a functional deep link that works without requiring KV access, useful for development and debugging. 

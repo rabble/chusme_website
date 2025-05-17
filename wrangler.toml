@@ -6,7 +6,7 @@ account_id = "c84e7a9bf7ed99cb41b8e73566568c75"
 # Worker specific configuration for hol.is
 [env.production]
 name = "hol-is" 
-main = "chus.me/src/index.ts"
+main = "holis/src/index.ts"
 kv_namespaces = [
   { binding = "INVITES", id = "57a39408dd6e4fbc91ae423b82293f43", preview_id = "6c947cbd83314bb1b648ea309a6e9854" }
 ]
@@ -14,4 +14,4 @@ kv_namespaces = [
 # Worker configuration for holis.social
 [env.production_social]
 name = "holis-social"
-main = "chusme.social/src/index.ts"
+main = "holis.social/src/index.ts"

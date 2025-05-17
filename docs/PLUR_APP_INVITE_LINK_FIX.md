@@ -6,7 +6,7 @@ We've identified an issue with how the Plur app is generating invite links:
 
 1. The app is creating invite links that include the entire deep link URL in the invite code part, resulting in invalid URLs like:
    ```
-   https://chus.me/i/plur://join-community?group-id=4xwe6r2w0gm7&code=KUGM8S7Q&relay=wss%3A%2F%2Fcommunities.nos.social
+   https://hol.is/i/plur://join-community?group-id=4xwe6r2w0gm7&code=KUGM8S7Q&relay=wss%3A%2F%2Fcommunities.nos.social
    ```
 
 2. When this malformed URL is accessed, the server tries to look up an invite with the code "plur://join-community?group-id=...", which doesn't exist.
@@ -25,7 +25,7 @@ The incorrect code looks something like this:
 String generateInviteLink(String groupId, String code, String relay) {
   // INCORRECT - This embeds the entire deep link as part of the URL path
   String deepLink = "plur://join-community?group-id=$groupId&code=$code&relay=${Uri.encodeComponent(relay)}";
-  return "https://chus.me/i/$deepLink";
+  return "https://hol.is/i/$deepLink";
 }
 ```
 
@@ -34,7 +34,7 @@ Change it to:
 ```dart
 String generateInviteLink(String code) {
   // CORRECT - Only use the invite code
-  return "https://chus.me/i/$code";
+  return "https://hol.is/i/$code";
 }
 ```
 
@@ -43,23 +43,23 @@ String generateInviteLink(String code) {
 Ensure that when generating invite links for sharing:
 
 1. Your app first creates the invite through the server's API (which returns a code).
-2. Only share the URL format `https://chus.me/i/<CODE>` - not the deep link format.
+2. Only share the URL format `https://hol.is/i/<CODE>` - not the deep link format.
 
 ### 3. Fix Display in the UI
 
 The screenshots show the app displaying invite URLs like:
 ```
-https://chus.me/i/plur://join-community?group-id=4xwe6r2w0gm7&code=KUGM8S7Q&relay=wss%3A%2F%2Fcommunities.nos.social
+https://hol.is/i/plur://join-community?group-id=4xwe6r2w0gm7&code=KUGM8S7Q&relay=wss%3A%2F%2Fcommunities.nos.social
 ```
 
-Update the UI to show only the correct format: `https://chus.me/i/KUGM8S7Q`
+Update the UI to show only the correct format: `https://hol.is/i/KUGM8S7Q`
 
 ### 4. Test Your Changes
 
 After implementing these changes:
 
 1. Generate a new invite link
-2. Ensure it's in the format `https://chus.me/i/<CODE>` (just the code after the /i/)
+2. Ensure it's in the format `https://hol.is/i/<CODE>` (just the code after the /i/)
 3. Try clicking the link from a different device/browser
 4. It should successfully redirect to the app with the join information
 
@@ -72,7 +72,7 @@ For reference, here's how the invite system is meant to work:
    - This code maps to the group ID and relay in the database
 
 2. **Generating a shareable URL**:
-   - Format should be `https://chus.me/i/<CODE>` (e.g., `https://chus.me/i/KUGM8S7Q`)
+   - Format should be `https://hol.is/i/<CODE>` (e.g., `https://hol.is/i/KUGM8S7Q`)
    - This URL is what users share with others
 
 3. **When someone clicks the link**:

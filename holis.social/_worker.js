@@ -3,7 +3,8 @@ import indexPage from './pages/index';
 import aboutPage from './pages/about';
 import contributePage from './pages/contribute';
 import howItWorksPage from './pages/how-it-works';
-import useHolisApp from './pages/use-holis';
+import useHolisApp from './pages/use-chusme';
+//import useHolkisApp from './pages/use-holis';
 import useCasesPage from './pages/use-cases';
 import tenantsPage from './pages/use-cases/tenants';
 import mutualAidPage from './pages/use-cases/mutual-aid';
@@ -12,7 +13,6 @@ import indigenousPage from './pages/use-cases/indigenous';
 import designPrinciplesPage from './pages/design-principles';
 import getStartedPage from './pages/get-started';
 import pricingPage from './pages/pricing';
-import privacyPage from './pages/privacy';
 // Simple markdown to HTML converter
 function markdownToHtml(markdown) {
     const metadata = {
@@ -86,7 +86,7 @@ const STATIC_FILES = {
                 relation: ['delegate_permission/common.handle_all_urls'],
                 target: {
                     namespace: 'android_app',
-                    package_name: 'app.chusme.app', // Updated package name
+                    package_name: 'app.holis.social', // Updated package name
                     sha256_cert_fingerprints: ['YOUR_APP_FINGERPRINT_HERE'] // Needs actual fingerprint
                 }
             }]),
@@ -98,24 +98,24 @@ const STATIC_FILES = {
                 apps: [], // This should usually be empty
                 details: [{
                         // Assuming GZCZBKH7MY was a placeholder Team ID. Replace with actual.
-                        appID: 'GZCZBKH7MY.app.chusme.app', // Updated bundle ID with correct Team ID
+                        appID: 'GZCZBKH7MY.app.holis.social', // Updated bundle ID with correct Team ID
                         paths: [
                             '/i/*',
                             '/join/*',
                             '/join-community*',
                             '/g/*'
-                            // Potentially add paths relevant to chusme.app if needed for universal links
+                            // Potentially add paths relevant to app.holis.social if needed for universal links
                         ],
                         // Older format, sometimes needed for compatibility
-                        appIDs: ['GZCZBKH7MY.app.chusme.app'],
+                        appIDs: ['GZCZBKH7MY.app.holis.social'],
                         components: [
                             {
                                 "/": "/i/*",
-                                comment: "Matches invite links handled by chus.me or chusme.app"
+                                comment: "Matches invite links handled by holis or app.holis.social"
                             },
                             {
                                 "/": "/join/*",
-                                comment: "Matches web invite links handled by chus.me or chusme.app"
+                                comment: "Matches web invite links handled by holis or app.holis.social"
                             },
                             // Add other paths as needed
                         ]
@@ -123,7 +123,7 @@ const STATIC_FILES = {
             },
             webcredentials: {
                 // List the app bundle ID that can use web credentials associated with this domain
-                apps: ["GZCZBKH7MY.app.chusme.app"]
+                apps: ["GZCZBKH7MY.app.holis.social"]
             }
         }),
         contentType: 'application/json'
@@ -152,7 +152,7 @@ const STATIC_FILES = {
         contentType: 'application/json'
     }
 };
-// Design tokens and CSS variables (can be shared or customized for chusme.social)
+// Design tokens and CSS variables (can be shared or customized for holis.social)
 const DESIGN_TOKENS = {
     colors: {
         primary: "#000000", // Black (main color for woodcut style)
@@ -175,7 +175,7 @@ const DESIGN_TOKENS = {
 };
 // Create a page layout with the provided content
 function createPage(title, description, content, image) {
-    // Using chusme.social branding
+    // Using holis.social branding
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -336,7 +336,7 @@ function createPage(title, description, content, image) {
   
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2025 Holis.social · All rights reserved</p> 
+      <p>&copy; 2025 Rabble Labs Limited · All rights reserved</p> 
       <p>
         <a href="/terms">Terms</a> · 
         <a href="/privacy">Privacy</a> · 
@@ -347,7 +347,7 @@ function createPage(title, description, content, image) {
 </body>
 </html>`;
 }
-// Main worker for chusme.social (landing page, static files, markdown pages)
+// Main worker for holis.social (landing page, static files, markdown pages)
 export default {
     async fetch(request, env, ctx) {
         const url = new URL(request.url);
@@ -361,13 +361,14 @@ export default {
                 }
             });
         }
+        // Removed external CSS file dependency, styles are now inlined
         // Redirects based on the hosting plan
         if (path === '/app') {
             return Response.redirect('https://app.holis.social', 301);
         }
         if (path === '/join') {
             // Redirect to the shortlink service invite path
-            return Response.redirect('https://chus.me/invite', 301); // Assuming chus.me handles /invite
+            return Response.redirect('https://holis/invite', 301); // Assuming holis handles /invite
         }
         if (path === '/github') {
             // Redirect to your GitHub org or repo
@@ -376,11 +377,7 @@ export default {
         // Handle static asset paths (e.g., images)
         if (path.startsWith('/static/assets/')) {
             const fileName = path.split('/').pop() || '';
-            // Redirect to CDN for iOS screenshots
-            if (path.startsWith('/static/assets/ios/') && fileName.endsWith('.jpg')) {
-                return Response.redirect(`https://files.chusme.social/assets/ios/${fileName}`, 302);
-            }
-            // Map for Cloudflare Images if using them for non-screenshot assets
+            // Map for Cloudflare Images
             const cloudflareImagesMap = {
                 'community-focused.png': 'fc67aea6-a6c6-4cb9-8480-5db260218b00',
                 'user-control.png': '0de45bbc-c804-4ef1-9a5b-df668a4a1e00',
@@ -394,25 +391,33 @@ export default {
                 'posting_event.png': '2857264c-f538-492a-c0a3-657012ecb000',
                 'posts.png': '510cc54c-cd4a-40b2-bce3-effb502d2000'
             };
-            // For local development, generate SVG placeholders
-            if (request.url.includes('localhost') && path.startsWith('/static/assets/ios/')) {
-                const screenshotName = fileName.replace(/[-_]/g, ' ').replace('.jpg', '');
-                // Generate a unique color based on the filename for visual distinction
-                const getHashColor = (text) => {
-                    let hash = 0;
-                    for (let i = 0; i < text.length; i++) {
-                        hash = text.charCodeAt(i) + ((hash << 5) - hash);
-                    }
-                    let color = '#';
-                    for (let i = 0; i < 3; i++) {
-                        const value = (hash >> (i * 8)) & 0xFF;
-                        color += ('00' + value.toString(16)).substr(-2);
-                    }
-                    return color;
-                };
-                const bgColor = getHashColor(fileName);
-                // Create an SVG that looks like an iPhone with the screenshot name
-                const iphoneSvg = `<svg width="390" height="800" xmlns="http://www.w3.org/2000/svg">
+            // Check for iOS screenshots first (jpg files)
+            if (path.startsWith('/static/assets/ios/') && fileName.endsWith('.jpg')) {
+                const isProduction = !request.url.includes('localhost'); // Simple prod check
+                if (isProduction) {
+                    // In production, we would use Cloudflare images or another CDN
+                    return Response.redirect(`https://files.holis.social/assets/ios/${fileName}`, 302);
+                }
+                else {
+                    // For local development, we'll serve a more realistic iPhone mockup SVG
+                    // that shows the filename to simulate the actual screenshot
+                    const screenshotName = fileName.replace(/[-_]/g, ' ').replace('.jpg', '');
+                    // Generate a unique color based on the filename for visual distinction
+                    const getHashColor = (text) => {
+                        let hash = 0;
+                        for (let i = 0; i < text.length; i++) {
+                            hash = text.charCodeAt(i) + ((hash << 5) - hash);
+                        }
+                        let color = '#';
+                        for (let i = 0; i < 3; i++) {
+                            const value = (hash >> (i * 8)) & 0xFF;
+                            color += ('00' + value.toString(16)).substr(-2);
+                        }
+                        return color;
+                    };
+                    const bgColor = getHashColor(fileName);
+                    // Create an SVG that looks like an iPhone with the screenshot name
+                    const iphoneSvg = `<svg width="390" height="800" xmlns="http://www.w3.org/2000/svg">
             <!-- iPhone frame -->
             <rect width="390" height="800" rx="50" ry="50" fill="#111111"/>
             
@@ -444,21 +449,33 @@ export default {
             <!-- Simulate content -->
             <rect x="40" y="140" width="310" height="580" rx="8" ry="8" fill="#FFFFFF" stroke="#E5E5E5" stroke-width="1"/>
           </svg>`;
-                return new Response(iphoneSvg, {
-                    headers: {
-                        'Content-Type': 'image/svg+xml',
-                        'Cache-Control': 'public, max-age=3600'
-                    }
-                });
+                    return new Response(iphoneSvg, {
+                        headers: {
+                            'Content-Type': 'image/svg+xml',
+                            'Cache-Control': 'public, max-age=3600'
+                        }
+                    });
+                }
             }
-            // Redirect to CDN for PNG images
-            if (fileName.endsWith('.png')) {
-                return Response.redirect(`https://files.chusme.social/assets/${fileName}`, 302);
+            // If we have a Cloudflare Image, redirect to it
+            if (cloudflareImagesMap[fileName]) {
+                const isProduction = !request.url.includes('localhost'); // Simple prod check
+                if (isProduction) {
+                    const accountHash = 'U9c1NKydsjSHWVgWsUp4Yg'; // Your Cloudflare account hash
+                    const imageId = cloudflareImagesMap[fileName];
+                    const imageVariant = 'public';
+                    return Response.redirect(`https://imagedelivery.net/${accountHash}/${imageId}/${imageVariant}`, 302);
+                }
+                else {
+                    // In local dev, attempt to serve from a local path (requires separate handling)
+                    // return Response.redirect(`/local-assets/${fileName}`, 302); // Placeholder
+                }
             }
-            // Fallback for other images - generate SVG placeholders
+            // Fallback SVG placeholders for missing images
             const baseBgColor = '#5d4037';
             let icon = '🖼️'; // Generic image icon
             let mainColor = baseBgColor;
+            // ... (icon/color logic based on fileName - can keep or simplify)
             const svgPlaceholder = `<svg width="300" height="500" xmlns="http://www.w3.org/2000/svg">
          <rect width="100%" height="100%" fill="${mainColor}" opacity="0.1"/>
          <text x="150" y="250" font-family="Arial" font-size="72" text-anchor="middle" dominant-baseline="middle">${icon}</text>
@@ -466,7 +483,7 @@ export default {
            ${fileName.replace(/[-_]/g, ' ').replace('.png', '')}
          </text>
          <text x="150" y="450" font-family="Arial" font-size="14" fill="${mainColor}" text-anchor="middle">
-           holis.social
+           app.holis.social
          </text>
        </svg>`;
             return new Response(svgPlaceholder, {
@@ -499,7 +516,7 @@ export default {
             return contributePage(request);
         if (path === '/how-it-works')
             return howItWorksPage(request);
-        if (path === '/use-chusme' || path === '/use-holis')
+        if (path === '/use-chusme')
             return useHolisApp(request);
         if (path === '/use-cases')
             return useCasesPage(request);
@@ -517,8 +534,6 @@ export default {
             return getStartedPage(request);
         if (path === '/pricing')
             return pricingPage(request);
-        if (path === '/privacy')
-            return privacyPage(request);
         // If no handler found, return 404
         return new Response('Not Found', { status: 404 });
     },

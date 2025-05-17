@@ -14,7 +14,7 @@
 
 ### Added
 - Created `INVITE_LINK_SERVICE.md` to document the invite link service, deep linking mechanisms, and API details for Flutter app integration.
-- Configured the `chus.me` service (`chus.me/src/index.ts`) to serve `apple-app-site-association` for iOS Universal Links and `assetlinks.json` for Android App Links. Both are served from their respective `/.well-known/` paths with `application/json` content type.
+- Configured the `hol.is` service (`hol.is/src/index.ts`) to serve `apple-app-site-association` for iOS Universal Links and `assetlinks.json` for Android App Links. Both are served from their respective `/.well-known/` paths with `application/json` content type.
 - Added a test invite creation tool at `/create-test-invite/{groupId}/{relay}` that allows generating deep links for testing without requiring KV storage access.
 - Created `CLOUDFLARE_GUIDELINES.md` with comprehensive best practices for Cloudflare Workers development based on official recommendations.
 - Added a "Common Deployment Issues" section to `CLOUDFLARE_GUIDELINES.md` focusing on KV binding issues with Pages deployments.
@@ -26,20 +26,20 @@
 - Added privacy policy page with comprehensive data practices information.
 
 ### Fixed
-- Ensured `apple-app-site-association` is now correctly served from the `chus.me` domain, enabling Universal Links for `https://chus.me`.
+- Ensured `apple-app-site-association` is now correctly served from the `hol.is` domain, enabling Universal Links for `https://hol.is`.
 - Fixed the invite link handler to properly check for KV namespace existence before trying to access it, resolving "Cannot read properties of undefined" errors.
 - Added detection and improved error messages for malformed invite URLs where clients try to use the full deep link as the invite code.
 - Created `PLUR_APP_INVITE_LINK_FIX.md` to document the correct invite URL format and help resolve issues in the Flutter app.
-- Documented a solution for the "KV namespace INVITES is not configured" error affecting invite links like `https://chus.me/i/ZHA65MN2`.
+- Documented a solution for the "KV namespace INVITES is not configured" error affecting invite links like `https://hol.is/i/ZHA65MN2`.
 - Fixed image loading by implementing proper CDN URL redirection for all static assets.
 - Removed non-functional Windows download link from the use-chusme page.
 - Updated build process to correctly include static assets in deployment.
 
 ### Changed
-- Refactor invite gateway into separate `chus.me` (shortlinks/invites) and `chusme.social` (landing page) services.
+- Refactor invite gateway into separate `hol.is` (shortlinks/invites) and `chusme.social` (landing page) services.
 - Update build process (`package.json`, `tsconfig.json`) to handle separate service outputs.
 - Configure `wrangler.toml` for Cloudflare Pages deployment.
-- Update URLs and branding from `rabble.community` to `chus.me`, `chusme.social`, and `chusme.app`.
+- Update URLs and branding from `rabble.community` to `hol.is`, `chusme.social`, and `chusme.app`.
 - Improved image handling to use CDN URLs (https://files.chusme.social/assets/) for better performance.
 - Updated all references from "holis.app" to "chusme.app" for consistent branding.
 - Rebranded from "Chusme" to "Holis" across the entire codebase.

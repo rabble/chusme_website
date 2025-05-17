@@ -4,36 +4,36 @@ export default async function handler(request) {
     // we'll use the same approach as other pages with HTML content
     const content = `
     <h1>Organize your community. On your terms.</h1>
-    <p>Chusme is a community-powered platform to message, plan, fund, and grow — without ads, algorithms, or fear of being shut down.</p>
+    <p>Holis is a community-powered platform to message, plan, fund, and grow — without ads, algorithms, or fear of being shut down.</p>
     <p>We help groups unlock tools, coordinate with their members, and sustain themselves collectively.</p>
     <p><a href="https://chusme.app" class="btn">Launch the App</a> <a href="/how-it-works">Learn How It Works</a></p>
 
     <div class="screenshot-grid">
       <div class="screenshot">
-        <img src="/static/assets/ios/group_list.jpg" alt="Chusme groups" class="mobile-screenshot" />
+        <img src="/static/assets/ios/group_list.jpg" alt="Holis groups" class="mobile-screenshot" />
         <p>Community Spaces</p>
       </div>
       <div class="screenshot">
-        <img src="/static/assets/ios/posts_screen.jpg" alt="Chusme posts" class="mobile-screenshot" />
+        <img src="/static/assets/ios/posts_screen.jpg" alt="Holis posts" class="mobile-screenshot" />
         <p>Group Updates</p>
       </div>
       <div class="screenshot">
-        <img src="/static/assets/ios/events.jpg" alt="Chusme events" class="mobile-screenshot" />
+        <img src="/static/assets/ios/events.jpg" alt="Holis events" class="mobile-screenshot" />
         <p>Event Planning</p>
       </div>
     </div>
 
     <hr>
-    <h2>Why Chusme?</h2>
+    <h2>Why Holis?</h2>
     <ul>
       <li>Facebook deletes groups with no warning</li>
       <li>Slack is built for companies, not communities</li>
       <li>WhatsApp floods conversations with no structure</li>
       <li>Surveillance platforms monetize every message</li>
     </ul>
-    <p><strong>Chusme is different.</strong><br>We give you control, privacy, and a community fund you govern together.</p>
+    <p><strong>Holis is different.</strong><br>We give you control, privacy, and a community fund you govern together.</p>
     <hr>
-    <h2>What Makes Chusme Different</h2>
+    <h2>What Makes Holis Different</h2>
     <div class="grid-features">
       <div>
         <h3>🌱 Community-owned</h3>
@@ -74,11 +74,11 @@ export default async function handler(request) {
     <hr>
     <h2>Built for Organizers Like You</h2>
     <blockquote>"We had 300,000 people in our Facebook group. One day it was gone."<br>— Cressida, community organizer</blockquote>
-    <blockquote>"We needed to alert students during an ICE raid. Facebook didn't reach them. Signal didn't scale. So we built Chusme."<br>— @rabble</blockquote>
+    <blockquote>"We needed to alert students during an ICE raid. Facebook didn't reach them. Signal didn't scale. So we built Holis."<br>— @rabble</blockquote>
     <blockquote>"Feels like WhatsApp — but with community ownership and care."<br>— Kaye-Maree, Māori organizer</blockquote>
     <hr>
     <h2>Ready to organize your community?</h2>
-    <p>Start a space, invite your people, and unlock tools together. Chusme is free, open, and built for you.</p>
+    <p>Start a space, invite your people, and unlock tools together. Holis is free, open, and built for you.</p>
 
     <div class="feature-section">
       <div class="feature-content">
@@ -93,7 +93,7 @@ export default async function handler(request) {
   `;
     const html = renderLayout({
         title: "Organize your community. On your terms.",
-        description: "Chusme is a community-powered platform to message, plan, fund, and grow — without ads, algorithms, or fear of being shut down.",
+        description: "Holis is a community-powered platform to message, plan, fund, and grow — without ads, algorithms, or fear of being shut down.",
         content
     });
     return new Response(html, {

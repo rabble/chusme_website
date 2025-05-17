@@ -16,13 +16,13 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./chusme.social/*"]
+      "@/*": ["./holis.social/*"]
     }
   },
   "include": ["./**/*.ts", "./**/*.tsx"],
   "exclude": ["node_modules", "dist"],
   "scripts": {
-    "deploy:chusme": "npm run build && wrangler pages deploy dist_final/chus.me --project-name=chus-me",
-    "build:prepare": "rm -rf dist_final && mkdir -p dist_final/chus.me dist_final/chusme.social && mv dist/chus.me/src/index.js dist_final/chus.me/_worker.js && mv dist/chus.me/src/invite-handler.js dist_final/chus.me/invite-handler.js && mv dist/chusme.social/src/index.js dist_final/chusme.social/_worker.js"
+    "deploy:chusme": "npm run build && wrangler pages deploy dist_final/hol.is --project-name=chus-me",
+    "build:prepare": "rm -rf dist_final && mkdir -p dist_final/hol.is dist_final/chusme.social && mv dist/holis/src/index.js dist_final/hol.is/_worker.js && mv dist/holis/src/invite-handler.js dist_final/hol.is/invite-handler.js && mv dist/chusme.social/src/index.js dist_final/chusme.social/_worker.js"
   }
 } 

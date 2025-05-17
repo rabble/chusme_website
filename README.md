@@ -36,11 +36,11 @@ A Cloudflare Worker service that functions as both an invite gateway and website
    - Set the `INVITE_TOKEN` secret: `npx wrangler secret put INVITE_TOKEN`
 
 3. Configure DNS
-   - Point `chus.me` to Cloudflare
+   - Point `hol.is` to Cloudflare
 
 4. Configure App-Linking
-   - In iOS app: Enable Associated Domains with `applinks:rabble.community`
-   - In Android app: Add intent filters for `https://rabble.community/i/*`
+   - In iOS app: Enable Associated Domains with `applinks:hol.is`
+   - In Android app: Add intent filters for `https://hol.is/i/*`
    - Update values in the code:
      - Replace `YOUR_APP_FINGERPRINT_HERE` in assetlinks.json
      - Replace `YOUR_TEAM_ID` in apple-app-site-association

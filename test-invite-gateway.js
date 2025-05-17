@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * Test script for the Chus.me Invite Gateway
+ * Test script for the Hol.is Invite Gateway
  * 
- * This script tests the functionality of the Chus.me Invite Gateway
+ * This script tests the functionality of the Hol.is Invite Gateway
  * in both local development and production environments.
  * 
  * Usage:
@@ -11,7 +11,7 @@
  * 
  * Options:
  *   --env       Environment to test against (local or production), default: local
- *   --base-url  Base URL for the API, default: http://localhost:8788 for local, https://chus.me for production
+ *   --base-url  Base URL for the API, default: http://localhost:8788 for local, https://hol.is for production
  *   --token     API token for authorization, default: test_token123 for local
  * 
  * Examples:
@@ -33,7 +33,7 @@ const args = process.argv.slice(2).reduce((acc, arg) => {
 
 // Configuration
 const env = args.env || 'local';
-const baseUrl = args['base-url'] || (env === 'local' ? 'http://localhost:8788' : 'https://chus.me');
+const baseUrl = args['base-url'] || (env === 'local' ? 'http://localhost:8788' : 'https://hol.is');
 const token = args.token || (env === 'local' ? 'test_token123' : '');
 
 // Token is no longer required, even for production

@@ -1,9 +1,9 @@
 import { renderLayout } from '../layout';
 export default async function handler(request) {
     const content = `
-    <h1>Use the Holis App</h1>
+    <h1>Use the Chusme App</h1>
     
-    <p>Holis is available today on the web — and soon on desktop and mobile too. Whether you're organizing a grassroots campaign, a local club, or a global network, Holis gives you the tools to communicate, coordinate, and fund your community — on your own terms.</p>
+    <p>Chusme is available today on the web — and soon on desktop and mobile too. Whether you're organizing a grassroots campaign, a local club, or a global network, Chusme gives you the tools to communicate, coordinate, and fund your community — on your own terms.</p>
     
     <hr>
     
@@ -12,7 +12,7 @@ export default async function handler(request) {
     <p>You can use Chusme directly in your browser — no download required.</p>
 
     <p>
-      ➡️ <strong><a href="https://chusme.app">Launch the Web App → chusme.app</a></strong><br>
+      ➡️ <strong><a href="https://app.holis.social">Launch the Web App → app.holis.social</a></strong><br>
       ➡️ <strong><a href="/get-started">View the Get Started Guide</a></strong>
     </p>
 
@@ -52,40 +52,22 @@ export default async function handler(request) {
     </ul>
     
     <p>
-      ➡️ <strong>iOS TestFlight: <a href="https://testflight.apple.com/join/q7JHM4qg">Get Beta Access</a></strong><br>
-      ➡️ <strong>Join our <a href="https://chusme.social#waitlist">email waitlist</a></strong> for Android early access<br>
+      ➡️ <strong>Join our <a href="https://chusme.social#waitlist">email waitlist</a></strong> to get early access<br>
       ➡️ <strong>Follow <a href="https://social.nos.dev/@chusme">@chusme@social.nos.dev</a></strong> for development updates
     </p>
-
-    <div class="feature-section">
-      <div class="feature-content">
-        <h3>iOS Beta Testing</h3>
-        <p>Our iOS beta is available through TestFlight. Try out the native mobile experience with push notifications and optimized performance.</p>
-        <p><a href="https://testflight.apple.com/join/q7JHM4qg" class="btn">Join iOS TestFlight</a></p>
-      </div>
-      <img src="/static/assets/ios/group_list.jpg" alt="Chusme iOS interface" class="mobile-screenshot">
-    </div>
     
     <hr>
     
     <h2>🖥️ Desktop Apps</h2>
-
-    <p>Prefer a dedicated app on your computer? You can download the beta version for macOS:</p>
-
+    
+    <p>Prefer a dedicated app on your computer? You can download the beta versions for macOS and Windows:</p>
+    
     <p>
-      - <strong><a href="https://files.chusme.social/chusme.dmg">Download for macOS</a></strong>
+      - <strong><a href="https://downloads.chusme.social/Chusme.dmg">Download for macOS</a></strong><br>
+      - <strong><a href="https://downloads.chusme.social/ChusmeSetup.exe">Download for Windows</a></strong>
     </p>
-
-    <div class="feature-section">
-      <div class="feature-content">
-        <h3>Mac Beta Now Available</h3>
-        <p>Our macOS beta version is ready for testing! Download the DMG file and drag the app to your Applications folder to get started.</p>
-        <p><a href="https://files.chusme.social/chusme.dmg" class="btn">Download Mac Beta</a></p>
-      </div>
-      <img src="/static/assets/ios/posts_screen.jpg" alt="Chusme desktop interface" class="mobile-screenshot">
-    </div>
-
-    <p>These desktop apps offer:</p>
+    
+    <p>These apps offer:</p>
     <ul>
       <li>Notification support</li>
       <li>Local data caching</li>
@@ -108,14 +90,14 @@ export default async function handler(request) {
     <p>If you're having trouble accessing the app, installing software, or connecting to a group, check out our:</p>
     
     <p>
-      ➡️ <a href="https://github.com/verse-pbc/plur/wiki">Support & Docs</a><br>
-      ➡️ <a href="https://chusme.app/group/chusme-support">Community Chat</a><br>
+      ➡️ <a href="https://github.com/verse/chusme/wiki">Support & Docs</a><br>
+      ➡️ <a href="https://app.holis.social/group/chusme-support">Community Chat</a><br>
       ➡️ <a href="mailto:support@chusme.social">Contact Us</a>
     </p>
   `;
     const html = renderLayout({
-        title: "Use the Holis App",
-        description: "Download and use Holis on web, mobile, and desktop to organize, communicate, and fund your community.",
+        title: "Use the Chusme App",
+        description: "Download and use Chusme on web, mobile, and desktop to organize, communicate, and fund your community.",
         content
     });
     return new Response(html, {
