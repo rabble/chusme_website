@@ -3,7 +3,7 @@ import { renderLayout } from '../../layout';
 export default async function handler(request: Request): Promise<Response> {
   const content = `
     <h1>Use Case: Event & Artist Collectives</h1>
-    <p>Chusme enables artist and event collectives to plan, communicate, and fund projects together, all in a private and community-owned space.</p>
+    <p>Holis enables artist and event collectives to plan, communicate, and fund projects together, all in a private and community-owned space.</p>
     <hr>
     <h2>Example Collectives</h2>
     <ul>
@@ -15,8 +15,8 @@ export default async function handler(request: Request): Promise<Response> {
   `;
 
   const html = renderLayout({
-    title: "Use Case: Event & Artist Collectives - Chusme",
-    description: "Chusme enables artist and event collectives to plan, communicate, and fund projects together, all in a private and community-owned space.",
+    title: "Use Case: Event & Artist Collectives - Holis",
+    description: "Holis enables artist and event collectives to plan, communicate, and fund projects together, all in a private and community-owned space.",
     content
   });
 

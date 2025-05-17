@@ -1,15 +1,15 @@
 import { renderLayout } from '../layout';
 export default async function handler(request) {
     const content = `
-    <h1>Use the Chusme App</h1>
+    <h1>Use the Holis App</h1>
     
-    <p>Chusme is available today on the web — and soon on desktop and mobile too. Whether you're organizing a grassroots campaign, a local club, or a global network, Chusme gives you the tools to communicate, coordinate, and fund your community — on your own terms.</p>
+    <p>Holis is available today on the web — and soon on desktop and mobile too. Whether you're organizing a grassroots campaign, a local club, or a global network, Holis gives you the tools to communicate, coordinate, and fund your community — on your own terms.</p>
     
     <hr>
     
     <h2>🌐 Web App (Available Now)</h2>
 
-    <p>You can use Chusme directly in your browser — no download required.</p>
+    <p>You can use Holis directly in your browser — no download required.</p>
 
     <p>
       ➡️ <strong><a href="https://app.holis.social">Launch the Web App → app.holis.social</a></strong><br>
@@ -18,15 +18,15 @@ export default async function handler(request) {
 
     <div class="screenshot-grid">
       <div class="screenshot">
-        <img src="/static/assets/ios/posts_screen.jpg" alt="Chusme posts screen" class="mobile-screenshot" />
+        <img src="/static/assets/ios/posts_screen.jpg" alt="Holis posts screen" class="mobile-screenshot" />
         <p>Posts & Updates</p>
       </div>
       <div class="screenshot">
-        <img src="/static/assets/ios/chat.jpg" alt="Chusme chat interface" class="mobile-screenshot" />
+        <img src="/static/assets/ios/chat.jpg" alt="Holis chat interface" class="mobile-screenshot" />
         <p>Group Chat</p>
       </div>
       <div class="screenshot">
-        <img src="/static/assets/ios/events.jpg" alt="Chusme events calendar" class="mobile-screenshot" />
+        <img src="/static/assets/ios/events.jpg" alt="Holis events calendar" class="mobile-screenshot" />
         <p>Events Calendar</p>
       </div>
     </div>
@@ -52,8 +52,8 @@ export default async function handler(request) {
     </ul>
     
     <p>
-      ➡️ <strong>Join our <a href="https://chusme.social#waitlist">email waitlist</a></strong> to get early access<br>
-      ➡️ <strong>Follow <a href="https://social.nos.dev/@chusme">@chusme@social.nos.dev</a></strong> for development updates
+      ➡️ <strong>Join our <a href="https://holis.social#waitlist">email waitlist</a></strong> to get early access<br>
+      ➡️ <strong>Follow <a href="https://social.nos.dev/@holis">@holis@social.nos.dev</a></strong> for development updates
     </p>
     
     <hr>
@@ -63,8 +63,8 @@ export default async function handler(request) {
     <p>Prefer a dedicated app on your computer? You can download the beta versions for macOS and Windows:</p>
     
     <p>
-      - <strong><a href="https://downloads.chusme.social/Chusme.dmg">Download for macOS</a></strong><br>
-      - <strong><a href="https://downloads.chusme.social/ChusmeSetup.exe">Download for Windows</a></strong>
+      - <strong><a href="https://downloads.holis.social/Holis.dmg">Download for macOS</a></strong><br>
+      - <strong><a href="https://downloads.holis.social/HolisSetup.exe">Download for Windows</a></strong>
     </p>
     
     <p>These apps offer:</p>
@@ -78,7 +78,7 @@ export default async function handler(request) {
     
     <h2>Why We Offer Multiple Options</h2>
     
-    <p>Chusme is built on open protocols like <a href="https://nostr.com">Nostr</a>, so <strong>your group's data isn't tied to one app</strong>.<br>
+    <p>Holis is built on open protocols like <a href="https://nostr.com">Nostr</a>, so <strong>your group's data isn't tied to one app</strong>.<br>
     You can move between web, desktop, and mobile without losing your identity, messages, or connections.</p>
     
     <p>We believe community infrastructure should be <strong>flexible, portable, and user-owned</strong>.</p>
@@ -90,14 +90,14 @@ export default async function handler(request) {
     <p>If you're having trouble accessing the app, installing software, or connecting to a group, check out our:</p>
     
     <p>
-      ➡️ <a href="https://github.com/verse/chusme/wiki">Support & Docs</a><br>
-      ➡️ <a href="https://app.holis.social/group/chusme-support">Community Chat</a><br>
-      ➡️ <a href="mailto:support@chusme.social">Contact Us</a>
+      ➡️ <a href="https://github.com/verse/holis/wiki">Support & Docs</a><br>
+      ➡️ <a href="https://app.holis.social/group/holis-support">Community Chat</a><br>
+      ➡️ <a href="mailto:support@holis.social">Contact Us</a>
     </p>
   `;
     const html = renderLayout({
-        title: "Use the Chusme App",
-        description: "Download and use Chusme on web, mobile, and desktop to organize, communicate, and fund your community.",
+        title: "Use the Holis App",
+        description: "Download and use Holis on web, mobile, and desktop to organize, communicate, and fund your community.",
         content
     });
     return new Response(html, {

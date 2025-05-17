@@ -1,9 +1,9 @@
 import { renderLayout } from '../layout';
 export default async function handler(request) {
     const content = `
-    <h1>How Chusme Works</h1>
+    <h1>How Holis Works</h1>
     
-    <p>Chusme is a messaging and coordination platform for communities — built on <a href="https://nostr.com/">Nostr</a>, a decentralized protocol that gives you portability, privacy, and shared control.</p>
+    <p>Holis is a messaging and coordination platform for communities — built on <a href="https://nostr.com/">Nostr</a>, a decentralized protocol that gives you portability, privacy, and shared control.</p>
     
     <p>It's like email, but for groups.<br>
     It's like WordPress, but for social organizing.<br>

@@ -12,7 +12,7 @@ export default async function handler(request: Request): Promise<Response> {
     <h1>Organize your community. On your terms.</h1>
     <p>Holis is a community-powered platform to message, plan, fund, and grow — without ads, algorithms, or fear of being shut down.</p>
     <p>We help groups unlock tools, coordinate with their members, and sustain themselves collectively.</p>
-    <p><a href="https://chusme.app" class="btn">Launch the App</a> <a href="/how-it-works">Learn How It Works</a></p>
+    <p><a href="https://app.holis.social" class="btn">Launch the App</a> <a href="/how-it-works">Learn How It Works</a></p>
 
     <div class="screenshot-grid">
       <div class="screenshot">
@@ -95,7 +95,7 @@ export default async function handler(request: Request): Promise<Response> {
       <img src="/static/assets/ios/zaps.jpg" alt="Community fund interface" class="mobile-screenshot">
     </div>
 
-    <p><a href="/get-started" class="btn">Get Started</a> <a href="https://chusme.app">Launch the App</a></p>
+    <p><a href="/get-started" class="btn">Get Started</a> <a href="https://app.holis.social">Launch the App</a></p>
   `;
 
   const html = renderLayout({

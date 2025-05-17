@@ -62,6 +62,15 @@ npm run typecheck
 npm run deploy
 ```
 
+# Taskmaster-AI
+
+This directory contains configuration and scripts for managing project tasks with Taskmaster-AI.
+
+## Usage
+
+- Add tasks to `config.json`
+- Run `./taskmaster.js` to see current tasks
+
 ### Local Development Tips
 
 1. The local development server runs at `http://localhost:8787` by default

@@ -4,14 +4,14 @@ export default async function handler(request: Request): Promise<Response> {
   const content = `
     <h1>Use Cases</h1>
 
-    <p>Chusme is being co-designed with a wide range of community organizers who are testing it in early pilot phases. These collaborators are helping shape every part of the platform — from onboarding flows to moderation systems, from privacy features to fundraising tools.</p>
+    <p>Holis is being co-designed with a wide range of community organizers who are testing it in early pilot phases. These collaborators are helping shape every part of the platform — from onboarding flows to moderation systems, from privacy features to fundraising tools.</p>
 
     <p>They're not just early adopters.<br>
     They're co-creators of the digital infrastructure they want to use.</p>
 
     <div class="screenshot-grid">
       <div class="screenshot">
-        <img src="/static/assets/ios/group_list.jpg" alt="Chusme group list" class="mobile-screenshot" />
+        <img src="/static/assets/ios/group_list.jpg" alt="Holis group list" class="mobile-screenshot" />
         <p>Group Spaces</p>
       </div>
       <div class="screenshot">
@@ -72,7 +72,7 @@ export default async function handler(request: Request): Promise<Response> {
           </ul>
         </div>
         <div class="use-case-link">
-          <a href="/use-cases/artists">See how artists use Chusme →</a>
+          <a href="/use-cases/artists">See how artists use Holis →</a>
         </div>
       </div>
 
@@ -111,7 +111,7 @@ export default async function handler(request: Request): Promise<Response> {
 
     <div class="feature-section">
       <div class="feature-content">
-        <p>These use cases aren't hypothetical — they come from real-world organizers who are helping us test and shape Chusme in live pilot environments.</p>
+        <p>These use cases aren't hypothetical — they come from real-world organizers who are helping us test and shape Holis in live pilot environments.</p>
         <p>We're still in early development and learning fast.</p>
       </div>
       <img src="/static/assets/ios/asks_offers.jpg" alt="Asks and offers interface" class="mobile-screenshot">
@@ -120,13 +120,13 @@ export default async function handler(request: Request): Promise<Response> {
     <div class="cta-box">
       <h3>Want to collaborate on a pilot?</h3>
       <p>Work with us to build tools that fit your community's unique needs and values.</p>
-      <a href="mailto:team@chusme.social" class="btn">Contact the Chusme Team</a>
-      <a href="https://chusme.app" class="btn">Launch the App</a>
+      <a href="mailto:team@holis.social" class="btn">Contact the Holis Team</a>
+      <a href="https://app.holis.social" class="btn">Launch the App</a>
     </div>
 
     <h2>Coming Soon</h2>
 
-    <p>As the platform matures, we'll publish deeper stories about how groups are using Chusme to organize — anonymously when needed, and proudly when they choose.</p>
+    <p>As the platform matures, we'll publish deeper stories about how groups are using Holis to organize — anonymously when needed, and proudly when they choose.</p>
 
     <p>In the meantime, you can:</p>
 
@@ -139,16 +139,16 @@ export default async function handler(request: Request): Promise<Response> {
         <span class="next-step-icon">📝</span>
         <span class="next-step-text">Read our values in the About section</span>
       </a>
-      <a href="https://chusme.app" class="next-step-item">
+      <a href="https://app.holis.social" class="next-step-item">
         <span class="next-step-icon">🚀</span>
-        <span class="next-step-text">Start your own space via chusme.app</span>
+        <span class="next-step-text">Start your own space via app.holis.social</span>
       </a>
     </div>
   `;
 
   const html = renderLayout({
-    title: "Use Cases - Chusme",
-    description: "Explore how community organizers, tenant unions, mutual aid groups, and more are using Chusme to communicate, coordinate, and grow.",
+    title: "Use Cases - Holis",
+    description: "Explore how community organizers, tenant unions, mutual aid groups, and more are using Holis to communicate, coordinate, and grow.",
     content
   });
 

@@ -2,9 +2,9 @@ import { renderLayout } from '../src/layout';
 
 export default async function handler(): Promise<Response> {
   const content = `
-    <h1>How Chusme Works</h1>
+    <h1>How Holis Works</h1>
     
-    <p>Chusme is a messaging and coordination platform for communities — built on <a href="https://nostr.com/">Nostr</a>, a decentralized protocol that gives you portability, privacy, and shared control.</p>
+    <p>Holis is a messaging and coordination platform for communities — built on <a href="https://nostr.com/">Nostr</a>, a decentralized protocol that gives you portability, privacy, and shared control.</p>
     
     <p>It's like email, but for groups.<br>
     It's like WordPress, but for social organizing.<br>
@@ -14,7 +14,7 @@ export default async function handler(): Promise<Response> {
     
     <h2>Start a Space</h2>
     
-    <p>Anyone can start a Chusme space. All you need is:</p>
+    <p>Anyone can start a Holis space. All you need is:</p>
     
     <ul>
       <li>A name for your group</li>
@@ -42,13 +42,13 @@ export default async function handler(): Promise<Response> {
       <li>Ask onboarding questions (like "where are you based?" or "how do you want to contribute?")</li>
     </ul>
     
-    <p>Chusme supports both informal hangouts and high-trust, role-based collaboration.</p>
+    <p>Holis supports both informal hangouts and high-trust, role-based collaboration.</p>
     
     <hr>
     
     <h2>Coordinate Together</h2>
     
-    <p>Every Chusme group gets:</p>
+    <p>Every Holis group gets:</p>
     
     <ul>
       <li>📣 Message boards (chat + threaded replies)</li>
@@ -70,7 +70,7 @@ export default async function handler(): Promise<Response> {
     
     <h2>Unlock the Tools You Need</h2>
     
-    <p>Chusme is free to use — but you can <strong>crowdfund to unlock extra tools</strong>:</p>
+    <p>Holis is free to use — but you can <strong>crowdfund to unlock extra tools</strong>:</p>
     
     <table>
       <tr>
@@ -83,7 +83,7 @@ export default async function handler(): Promise<Response> {
       </tr>
       <tr>
         <td>🧑‍💼 Custom usernames</td>
-        <td>Create identities like <code>@sofia@mygroup.chusme.social</code></td>
+        <td>Create identities like <code>@sofia@mygroup.holis.social</code></td>
       </tr>
       <tr>
         <td>🌐 Public website</td>
@@ -124,7 +124,7 @@ export default async function handler(): Promise<Response> {
     
     <h2>Built on Open Protocols</h2>
     
-    <p>Chusme uses <a href="https://github.com/nostr-protocol/nostr">Nostr</a>, a decentralized messaging protocol. That means:</p>
+    <p>Holis uses <a href="https://github.com/nostr-protocol/nostr">Nostr</a>, a decentralized messaging protocol. That means:</p>
     
     <ul>
       <li>🛠️ Your group isn't trapped in our app</li>
@@ -139,7 +139,7 @@ export default async function handler(): Promise<Response> {
     
     <h2>Strong Privacy, Optional Encryption</h2>
     
-    <p>Chusme offers:</p>
+    <p>Holis offers:</p>
     
     <ul>
       <li>🔐 End-to-end encryption (E2EE) for 1:1 messages</li>

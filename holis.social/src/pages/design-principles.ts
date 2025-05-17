@@ -3,7 +3,7 @@ import { renderLayout } from '../layout';
 export default async function handler(request: Request): Promise<Response> {
   const content = `
     <h1>Design Principles</h1>
-    <p>Abstract guiding concepts that shape Chusme's development while being grounded in real community steward experiences.</p>
+    <p>Abstract guiding concepts that shape Holis's development while being grounded in real community steward experiences.</p>
 
     <div class="screenshot-grid">
       <div class="screenshot">
@@ -71,7 +71,7 @@ export default async function handler(request: Request): Promise<Response> {
     <p>Communities exist across different cultures, languages, internet speeds, and tech literacy levels. Tools need to be simple enough for casual users yet powerful for advanced organizers. Community leaders like Kaye-Maree emphasized the need for low-barrier, mobile-first solutions that work even in rural areas​.</p>
     <p>→ Prioritize inclusivity in technology, ensuring it works for both digital natives and those with limited tech access.</p>
     <h2>Non-Negotiables</h2>
-    <p>Based on extensive community steward research, the non-negotiable elements of Chusme align with the core values, needs, and frustrations expressed by community leaders. These elements ensure that Chusme respects user agency, fosters trust, and enables meaningful connections.</p>
+    <p>Based on extensive community steward research, the non-negotiable elements of Holis align with the core values, needs, and frustrations expressed by community leaders. These elements ensure that Holis respects user agency, fosters trust, and enables meaningful connections.</p>
 
     <div class="screenshot-grid">
       <div class="screenshot">
@@ -103,12 +103,12 @@ export default async function handler(request: Request): Promise<Response> {
     <p>Chronological + pinned content options, topic & tag-based organization, no engagement farming mechanics.</p>
     <h3>8. Interoperability & Open Ecosystem</h3>
     <p>API & integrations, federated identity options, exportability & backups.</p>
-    <h2>Conclusion: What Chusme Guarantees</h2>
-    <p>At its core, Chusme is community-owned, privacy-first, and adaptable. The non-negotiables are about giving control back to community leaders while ensuring privacy, sustainability, and resilience.</p>
+    <h2>Conclusion: What Holis Guarantees</h2>
+    <p>At its core, Holis is community-owned, privacy-first, and adaptable. The non-negotiables are about giving control back to community leaders while ensuring privacy, sustainability, and resilience.</p>
   `;
 
   const html = renderLayout({
-    title: "Design Principles - Chusme",
+    title: "Design Principles - Holis",
     description: "Abstract guiding concepts that can shape Plur's development while still being grounded in real community steward experiences.",
     content
   });

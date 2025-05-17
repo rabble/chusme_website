@@ -2,7 +2,7 @@ import { renderLayout } from '../../layout';
 export default async function handler(request) {
     const content = `
     <h1>Use Case: Tenant Unions & Housing Justice</h1>
-    <p>Chusme helps tenant unions and housing justice organizers coordinate, communicate securely, and pool resources for collective action.</p>
+    <p>Holis helps tenant unions and housing justice organizers coordinate, communicate securely, and pool resources for collective action.</p>
     <hr>
     <h2>Example Groups</h2>
     <ul>
@@ -13,8 +13,8 @@ export default async function handler(request) {
     <p>Organize for housing justice with privacy and digital sovereignty.</p>
   `;
     const html = renderLayout({
-        title: "Use Case: Tenant Unions & Housing Justice - Chusme",
-        description: "Chusme helps tenant unions and housing justice organizers coordinate, communicate securely, and pool resources for collective action.",
+        title: "Use Case: Tenant Unions & Housing Justice - Holis",
+        description: "Holis helps tenant unions and housing justice organizers coordinate, communicate securely, and pool resources for collective action.",
         content
     });
     return new Response(html, { headers: { 'Content-Type': 'text/html' } });
